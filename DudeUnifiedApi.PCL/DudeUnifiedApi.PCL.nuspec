@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DSI.SDK.UnifiedApi</id>
+    <title>Auto Generated Unified Api SDK</title>
+    <version>$version$</version>
+    <authors>Dude Solutions, Inc.</authors>
+    <owners>Dude Solutions, Inc.</owners>
+    <copyright>Copyright © 2015 Dude Solutions, Inc. - All Rights Reserved</copyright>
+     <projectUrl>https://code.dudesoln.com/projects/CORE/repos/domain/browse</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Auto Generated Unified API SDK</description>
+    <language>en-US</language>
+    <tags>sdk unified api</tags>
+    <dependencies>
+      <group targetFramework="net45">
+        <dependency id="DSI.Data" version="[1,2)" />
+        <dependency id="EnyimMemcached" version="2.12" />
+        <dependency id="EntityFramework" version="6.1.2" />
+        <dependency id="DSI" version="[1,2)" />
+        <dependency id="FluentValidation" version="5.5" />
+        <dependency id="LinqToQuerystring" version="0.7.0.8" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\DudeUnifiedApi.PCL.dll" target="lib\net45" />
+  </files>
+</package>
