@@ -14,16 +14,16 @@
     <tags>sdk unified api</tags>
     <dependencies>
       <group targetFramework="net45">
-        <dependency id="DSI.Data" version="[1,2)" />
-        <dependency id="EnyimMemcached" version="2.12" />
-        <dependency id="EntityFramework" version="6.1.2" />
-        <dependency id="DSI" version="[1,2)" />
-        <dependency id="FluentValidation" version="5.5" />
-        <dependency id="LinqToQuerystring" version="0.7.0.8" />
+		  <dependency id="Microsoft.Bcl" version="1.1.10" />
+		  <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
+		  <dependency id="Microsoft.Net.Http" version="2.2.29" />
+		  <dependency id="Newtonsoft.Json" version="6.0.8" />
+		  <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+		  <dependency id="Unirest-API" version="1.0.7.1" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\$configuration$\DudeUnifiedApi.PCL.dll" target="lib\net45" />
+    <file src="DudeUnifiedApi.PCL\bin\$configuration$\DudeUnifiedApi.PCL.dll" target="lib\net45" />
   </files>
 </package>
