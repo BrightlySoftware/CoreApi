@@ -7,7 +7,7 @@
     <authors>Dude Solutions, Inc.</authors>
     <owners>Dude Solutions, Inc.</owners>
     <copyright>Copyright © 2015 Dude Solutions, Inc. - All Rights Reserved</copyright>
-     <projectUrl>https://code.dudesoln.com/projects/CORE/repos/domain/browse</projectUrl>
+     <projectUrl>https://github.com/DudeSolutions/DudeUnifiedApi</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Auto Generated Unified API SDK</description>
     <language>en-US</language>
@@ -24,6 +24,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="DudeUnifiedApi.PCL\bin\$configuration$\DudeUnifiedApi.PCL.dll" target="lib\net45" />
+    <file src="code\DudeUnifiedApi.PCL\bin\$configuration$\DudeUnifiedApi.PCL.dll" target="lib\net45" />
   </files>
 </package>
