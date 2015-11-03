@@ -224,11 +224,12 @@ In Progress
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[object], required)
+        + `data` (array[Work Category Hierarchy], required)
 
 ### POST
 
 + Response 201 (application/json)
+    + Attributes (Work Category Hierarchy)
 
 ## Work Category Detail [/accounts/{accountId}/workcategories/{id}]
 
@@ -239,10 +240,12 @@ In Progress
 ### GET
 
 + Response 200 (application/json)
+    + Attributes (Work Category Hierarchy)
 
 ### PUT
 
 + Response 200 (application/json)
+    + Attributes (Work Category Hierarchy)
 
 ### DELETE
 
@@ -343,8 +346,6 @@ Any response that does not provide a ```200 OK``` response code should be treate
 # Data Structures
 
 ## Base Collection Response (object)
-
-### Properties
 + `page`: 1 (number, required) - The current page provided in the response data.
 + `pageSize`: 1000 (number, required) - The page size returned in the response data.
 + `dataSize`: 1000 (number, required) - The total records returned in the response.
@@ -363,9 +364,6 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `email`: john.smith@dudesolutions.io (string, required) - The email address of the user.
 
 ## Heartbeat (object)
-Represents a heartbeat response.
-
-### Properties
 + `applicationdbvitalCheck`: true (boolean, required) - Vital check to ensure the data store is online.
 + `cachevitalcheck`: true (boolean, required) - Vital check to ensure the cache store is online.
 
@@ -385,6 +383,14 @@ Represents a heartbeat response.
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
 
+## Work Category (Base Audit Object)
++ `id`: 1 (number, required) - The ID of the work category.
++ `value`: Environmental (string, required) - The description of the work category.
++ `isActive`: true (boolean, required) - Indicates if the work category is active.
+
+## Work Category Hierarchy (Work Category)
++ `parent` (Work Category, required) - The parent record for this work category.
++ `childCount`: 0 (number, required) - Indicates how many children the current work category has.
 
 ## Quantity (object)
 + `id`: 1 (number, required) - The ID of the quantity.
