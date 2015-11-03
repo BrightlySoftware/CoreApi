@@ -41,6 +41,9 @@ In Progress
 
 # Group Assets
 
+IN PROGRESS
+-----------
+
 ## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,page,pagesize,orderby}]
 
 + Parameters
@@ -299,11 +302,12 @@ In Progress
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[object], required)
+        + `data` (array[Work Order], required)
 
 ### POST
 
 + Response 201 (application/json)
+    + Attributes (Work Order)
 
 ## Work Order Detail [/accounts/{accountId}/workorders/{id}]
 
@@ -314,10 +318,13 @@ In Progress
 ### GET
 
 + Response 200 (application/json)
+    + Attributes (Work Order)
 
 ### PUT
 
 + Response 200 (application/json)
+
+    + Attributes (Work Order)
 
 ### DELETE
 
@@ -490,6 +497,34 @@ Any response that does not provide a ```200 OK``` response code should be treate
 ## Work Category Hierarchy (Work Category)
 + `parent` (Work Category, required) - The parent record for this work category.
 + `childCount`: 0 (number, required) - Indicates how many children the current work category has.
+
+## Work Order Location (object)
+`latitude`: 35.729235 (number, required) - The latitude of the location.
+`longitude`: -78.799214 (number, required) - The longitude of the location.
+`streetAddress`: 11000 Regency Parkway (string, required) - The primary street address of the location.
+`streetAddressLine2`: Suite 110 (string, required) - The secondary street address of the location.
+`city`: Cary (string, required) - The city of the location.
+`region`: North Carolina (string, required) - The primary region of the location.
+`postalCode`: 27518 (string, required) - The postal code of the location.
+`country`: USA (string, required) - The country of the location.
+`latLongMatchesAddress`: true (boolean, required) - Indicates if the location address matches the latitude and longitude coordinates.
+
+## Work Order (Base Audit Object)
++ `id`: 1 (number, required) - The unique identifier of the work order.
++ `displayId`: WO100 (string, required) - The display ID for the work order.
++ `description`: The chair is broken (string, optional) - Text that describes the work order.
++ `status`: 1 (number, required) - The status of a work order, in integer format.
++ `priority`: 2 (number, required) - The priority of a work order, in integer format.
++ `requestDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The requested date and time for the work order.
++ `completionDateTime`:  `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the work order was completed.
++ `actionTaken`: I replaced the bolt (string, optional) - Text that describes what was done to resolve the reported issue.
++ `attachmentCount`: 1 (number, optional) - A count of attachments associated with the work order.
++ `requestedBy` (Base User Object, required) - The user who requested the work order.
++ `purpose` (Purpose, optional) - The purpose assigned to the work order.
++ `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
++ `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
++ `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
++ `location` (Work Order Location, optional) - The location associated with this work order.
 
 ## Work Order Attachment (Base Audit Object)
 + `id`: 1 (number, required) - The ID of the work order attachment.
