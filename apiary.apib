@@ -221,10 +221,25 @@ In Progress
 ### GET
 
 + Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Labor Hour Type], required)
 
 ### POST
 
 + Response 201 (application/json)
+    + Attributes (Labor Hour Type)
+    
+## Labor Hour Types Detail [/accounts/{accountId}/laborhourtypes/{id}]
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Labor Hour Type)
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Labor Hour Type)
 
 # Group Work Categories
 
@@ -445,10 +460,27 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `hasChildren`: true (boolean, required) - Description
 + `updatedDateTime`: 2015-10-06T17:53:43.99Z (datetime, required) - Description
 
+## Quantity (object)
++ `id`: 1 (number, required) - The ID of the quantity.
++ `quantity`: Length (string, required) - The name of the quantity type.
+
+## Unit Of Measure (object)
++ `id`: 1 (number, required) - The ID of the unit of measure.
++ `unitKey`: feet (string, required) - The unit of measurement as a string.
++ `measurementSystem`: None (enum[string], required) - The measurement system this unit belongs to.
+        + `None` - Not associated with a given measurement system.
+        + `Metric` - Limit to Metric measurements.
+        + `Imperial`- Limit to Imperial measurements.
+
 ## Purpose (Base Audit Object)
 + `id`: 1 (number, required) - The ID of the purpose.
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
+
+## Labor Hour Type (Base Audit Object)
++ `id`: 1 (number, required) - The ID of the labor hour type.
++ `type`: Regular (string, required) - The name of the labor type.
++ `multiplier`: 1.0 (number, required) - The multiplier associated with the labor type.
 
 ## Work Category (Base Audit Object)
 + `id`: 1 (number, required) - The ID of the work category.
@@ -474,15 +506,3 @@ Any response that does not provide a ```200 OK``` response code should be treate
 ## Transaction Type (object)
 + `type`: Regular (string, required) - The type of transaction.
 + `cost`: 22.10 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
-
-## Quantity (object)
-+ `id`: 1 (number, required) - The ID of the quantity.
-+ `quantity`: Length (string, required) - The name of the quantity type.
-
-## Unit Of Measure (object)
-+ `id`: 1 (number, required) - The ID of the unit of measure.
-+ `unitKey`: feet (string, required) - The unit of measurement as a string.
-+ `measurementSystem`: None (enum[string], required) - The measurement system this unit belongs to.
-        + `None` - Not associated with a given measurement system.
-        + `Metric` - Limit to Metric measurements.
-        + `Imperial`- Limit to Imperial measurements.
