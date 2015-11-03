@@ -116,15 +116,54 @@ In Progress
 
 + Response 200 (application/json)
 
+# Group Quantities
+
+## Quantities [/quantities{?page,pagesize,orderby}]
+
+### GET
+
++ Parameters
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + data (required, array[Quantity]) - The Quantity response collection.
+
+## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?measurementsystem,page,pagesize,orderby}]
+
++ Parameters
+    + quantityTypeId: 12345 (required, number) - ID of the measurement type in the form on an integer
+    + measurementsystem: None (optional, enum[string]) - The measurement system to filter
+        + `None` - No filter specified
+        + `Metric` - Limit to Metric measurements
+        + `Imperial`- Limit to Imperial measurements
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + orderby: unitKey asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + data (required, array[Unit Of Measure]) - The Unit of Measure response collection.
+
+### POST
+
++ Response 201 (application/json)
+
 # Group Purposes
 
-## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby}]
+## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
     
 ### GET
 
@@ -169,42 +208,19 @@ In Progress
 + Response 200 (application/json)
     + Attributes (Purpose)
 
-# Group Quantities
+# Group Labor Hour Types
 
-## Quantities [/quantities{?page,pagesize,orderby}]
-
-### GET
+## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby}]
 
 + Parameters
+    + accountId: 1 (required, number) - ID of the account in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-
-+ Response 200 (application/json)
-    + Attributes (Base Collection Response)
-        + data (required, array[Quantity]) - The Quantity response collection.
-
-## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?measurementsystem,page,pagesize,orderby}]
-
-+ Parameters
-    + quantityTypeId: 12345 (required, number) - ID of the measurement type in the form on an integer
-    + measurementsystem: None (optional, enum[string]) - The measurement system to filter
-        + `None` - No filter specified
-        + `Metric` - Limit to Metric measurements
-        + `Imperial`- Limit to Imperial measurements
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
-    + orderby: unitKey asc (string, optional) - A string describing the ordering to perform on the collection.
-
+    
 ### GET
 
 + Response 200 (application/json)
-    + Attributes (Base Collection Response)
-        + data (required, array[Unit Of Measure]) - The Unit of Measure response collection.
-
-# Group Transactions
-
-## Purchase Transactions [/transactions/purchases]
 
 ### POST
 
@@ -212,13 +228,16 @@ In Progress
 
 # Group Work Categories
 
-## Work Category Collection [/accounts/{accountId}/workcategories{?page,pagesize,orderby}]
+## Work Category Collection [/accounts/{accountId}/workcategories{?page,pagesize,orderby,q,isactive,parentid}]
 
 + Parameters
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + parentid (number, optional) - Filter the list to get all children of a parent, when not set returns all.
     
 ### GET
 
@@ -297,7 +316,7 @@ In Progress
 
 + Response 200 (text/csv)
 
-## Work Order Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby}]
+## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby}]
 
 + Parameters
     + accountId: 1 (required, number) - ID of the account in the form of an integer
@@ -310,14 +329,55 @@ In Progress
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[object], required)
+        + `data` (array[Work Order Transaction], required)
 
 ### POST
 
 + Response 201 (application/json)
+    + Attributes (Work Order Transaction)
 
+## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}]
 
-## Work Order Attachment Detail [/accounts/{accountId}/workorders/{workOrderId}/attachments/{id}]
++ Parameters
+    + accountId: 1 (required, number) - ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
+    + id: 12345 (required, number) - ID of the transaction in the form of an integer
+    
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Work Order Transaction)
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Work Order Transaction)
+
+### DELETE
+
++ Response 204
+
+## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (required, number) - ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Attachment], required)
+
+### POST
+
++ Response 201 (application/json)
+    + Attributes (Work Order Attachment)
+
+## Attachment Detail [/accounts/{accountId}/workorders/{workOrderId}/attachments/{id}]
 
 + Parameters
     + accountId: 1 (required, number) - ID of the account in the form of an integer
@@ -327,6 +387,7 @@ In Progress
 ### GET
 
 + Response 200 (application/json)
+    + Attributes (Work Order Attachment)
 
 ### DELETE
 
@@ -397,6 +458,22 @@ Any response that does not provide a ```200 OK``` response code should be treate
 ## Work Category Hierarchy (Work Category)
 + `parent` (Work Category, required) - The parent record for this work category.
 + `childCount`: 0 (number, required) - Indicates how many children the current work category has.
+
+## Work Order Attachment (Base Audit Object)
++ `id`: 1 (number, required) - The ID of the work order attachment.
++ `name`: My File (string, required) - The display name for the work order attachment.
++ `fileApiId`: 123 (number, required) - The File Service ID for the attachment.
++ `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
+
+## Work Order Transaction (Base Audit Object)
++ `id`: 1 (number, required) - The ID of the work order attachment.
++ `description`: The technician did work (string, required) - A short description of the transaction.
++ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
++ `typeAttributes` (Transaction Type, required) - The details of the transaction.
+
+## Transaction Type (object)
++ `type`: Regular (string, required) - The type of transaction.
++ `cost`: 22.10 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
 
 ## Quantity (object)
 + `id`: 1 (number, required) - The ID of the quantity.
