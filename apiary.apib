@@ -354,14 +354,20 @@ Any response that does not provide a ```200 OK``` response code should be treate
 ## Base Audit Object (object)
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
 + `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Base User Object (object)
 + `id`: 1 (number, required) - The ID of the user.
 + `firstName`: John (string, required) - The first name of the user.
 + `lastName`: Smith (string, required) - The last name of the user.
 + `email`: john.smith@dudesolutions.io (string, required) - The email address of the user.
+
+## Base Client Object (object)
++ `id`: 1 (number, required) - The ID of the API client.
++ `clientId`: publicclient (string, required) - The client ID of the API client.
 
 ## Heartbeat (object)
 + `applicationdbvitalCheck`: true (boolean, required) - Vital check to ensure the data store is online.
