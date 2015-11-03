@@ -15,7 +15,7 @@ Where applicable this API uses the *JSON* media-type to represent resources.
 Requests and responses with a message-body use plain JSON to set or update resources.
 
 ## Error States
-The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used throughout this API.
+Common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used throughout this API.
 
 In addition to standard response codes the response object returned from the server during an exception event may contain additional information in the following JSON format:
 
@@ -125,11 +125,12 @@ In Progress
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[object], required)
+        + `data` (array[Purpose], required)
 
 ### POST
 
 + Response 201 (application/json)
+    + Attributes (Purpose)
 
 ## Purpose Detail [/accounts/{accountId}/purposes/{id}]
 
@@ -140,10 +141,12 @@ In Progress
 ### GET
 
 + Response 200 (application/json)
+    + Attributes (Purpose)
 
 ### PUT
 
 + Response 200 (application/json)
+    + Attributes (Purpose)
 
 ### DELETE
 
@@ -159,6 +162,7 @@ In Progress
 ### PUT
 
 + Response 200 (application/json)
+    + Attributes (Purpose)
 
 # Group Quantities
 
@@ -341,6 +345,18 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `dataSize`: 1000 (number, required) - The total records returned in the response.
 + `total`: 2000 (number, required) - The total number of records available in the collection.
 
+## Base Audit Object (object)
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
+
+## Base User Object (object)
++ `id`: 1 (number, required) - The ID of the user.
++ `firstName`: John (string, required) - The first name of the user.
++ `lastName`: Smith (string, required) - The last name of the user.
++ `email`: john.smith@dudesolutions.io (string, required) - The email address of the user.
+
 ## Heartbeat (object)
 Represents a heartbeat response.
 
@@ -358,6 +374,12 @@ Represents a heartbeat response.
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
 + `updatedDateTime`: 2015-10-06T17:53:43.99Z (datetime, required) - Description
+
+## Purpose (Base Audit Object)
++ `id`: 1 (number, required) - The ID of the purpose.
++ `value`: General Maintenance (string, required) - The description of the purpose.
++ `isActive`: true (boolean, required) - Indicates if the purpose is active.
+
 
 ## Quantity (object)
 + `id`: 1 (number, required) - The ID of the quantity.
