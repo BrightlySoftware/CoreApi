@@ -430,12 +430,10 @@ IN PROGRESS
 
 + Response 204
 
-## Work Order Template Collection [/accounts/{accountId}/workordertemplates{?page,pagesize,orderby}]
+## Work Order Template Collection [/accounts/{accountId}/workordertemplates]
 
 + Parameters
     + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
 
 ### POST
 
@@ -444,6 +442,10 @@ IN PROGRESS
 
 + Response 201 (application/json)
     + Attributes (Work Order Template)
+    
+### DELETE
+
++ Response 204
 
 ## Work Order Template Detail [/accounts/{accountId}/workordertemplates/{id}]
 
