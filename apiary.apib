@@ -430,6 +430,66 @@ IN PROGRESS
 
 + Response 204
 
+## Work Order Template Collection [/accounts/{accountId}/workordertemplates{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (required, number) - ID of the account in the form of an integer
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+
+### POST
+
++ Request (application/json)
+    + Attributes (Work Order Template Create)
+
++ Response 201 (application/json)
+    + Attributes (Work Order Template)
+
+## Work Order Template Detail [/accounts/{accountId}/workordertemplates/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the work order in the form of an integer
+    
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Work Order Template)
+
+### PUT
+
++ Request (application/json)
+    + Attributes (Work Order Template Update)
+
++ Response 200 (application/json)
+
+    + Attributes (Work Order)
+
+## Assignee Collection [/accounts/{accountId}/workordertemplates{workOrderTemplateId}/assignees{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (number, required) - ID of the account in the form of an integer
+    + workOrderTemplateId: 1 (number, required) - ID of the work order template object who's collection is being referenced
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Base User Object], required)
+        
+## Assignee Collection Detail [/accounts/{accountId}/workordertemplates{workOrderTemplateId}/assignees/{id}]
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Base User Object)
+    
+### DELETE
+
++ Response 204
+
 # Group Health
 
 ## Heartbeat [/heartbeat]
@@ -540,6 +600,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
++ `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
 
 ## Work Order Attachment (Base Audit Object)
 + `id`: 1 (number, required) - The ID of the work order attachment.
@@ -556,3 +617,24 @@ Any response that does not provide a ```200 OK``` response code should be treate
 ## Transaction Type (object)
 + `type`: Regular (string, required) - The type of transaction.
 + `cost`: 22.10 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
+
+## Work Order Template Create (object)
++ `description`: The chair is broken (string, optional) - Text that describes the work order.
++ `priority`: 2 (number, required) - The priority of a work order, in integer format.
++ `purpose` (Purpose, optional) - The purpose assigned to the work order.
++ `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
++ `location` (Work Order Location, optional) - The location associated with this work order.
++ `dudeDateOffset`: 1 (number, optional) - The number of days out to set the dudeDateTime
+
+## Work Order Template Update (Work Order Template Create)
++ `id`: 1 (number, required) - The unique identifier of the work order order template.
+
+## Work Order Template (Work Order Template Update)
++ `assigneeCount`: 1 (number, required) The number of assignees that exists for the template
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
