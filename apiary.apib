@@ -579,11 +579,14 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Business Asset Type Create (object)
++ `description`: Bridge (string, required) - The name of the asset type
 
 ## Business Asset Type Update (Business Asset Type Create)
 + `id`: 1 (number, required) - The ID of the object
 
 ## Business Asset Type (Business Asset Type Update)
++ `isDudeAssetType`: true (boolean, required) - Indicates if this is a common platform asset type
++ `businessAssetAttributeTypeCount`: 4 (number, required) - The number of attributes on this asset type
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
