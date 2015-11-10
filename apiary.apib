@@ -596,12 +596,23 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Business Asset Attribute Type Create (object)
 + `key`: length (string, required) - The name of the attribute type
++ `valueType`: date (enum[string], required) - 
+    + `date` - Represents a date/time
+    + `double` - Represents a floating point value
+    + `integer` - Represents a whole number
+    + `money` - Represents a floating point number greater than 0 and two decimal places
+    + `string` - Represents a series of characters
+    + `boolean` - Represents a true/false value
 + `isActive`: true (boolean, required) - Indicates if the attribute type is active
++ `fieldLength`: 125 (number, optional) - The number of characters allowed for the attribute
++ `quantity` (Quantity Reference, required) - The quantity type
++ `businessAssetAttributeTypeCodes` (array[Business Asset Attribute Type Code], optional) - The type codes
 
 ## Business Asset Attribute Type Update (Business Asset Attribute Type Create)
 + `id`: 1 (number, required) - The ID of the object
 
 ## Business Asset Attribute Type (Business Asset Attribute Type Update)
++ `quantity` (Quantity, required) - The quantity type
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
@@ -609,9 +620,19 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
-## Quantity (object)
+## Business Asset Attribute Type Code (object)
++ `id`: 1 (number, required) - The ID of the object
++ `keyCode`: yes (string, required) - The string representation
++ `valueCode`: Yes Sir (string, required) - The display representation of the type code
+
+## Quantity Create (object)
++ `quantity`: Length (string, required) - The name of the quantity type
+
+## Quantity (Quantity Create)
 + `id`: 1 (number, required) - The ID of the quantity.
-+ `quantity`: Length (string, required) - The name of the quantity type.
+
+## Quantity Reference (object)
++ `id`: 1 (number, required) - The ID of the quantity.
 
 ## Unit Of Measure (object)
 + `id`: 1 (number, required) - The ID of the unit of measure.
