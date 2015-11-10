@@ -75,7 +75,11 @@ IN PROGRESS
 
 ### POST
 
++ Request
+    + Attributes (Business Asset Create)
+    
 + Response 201 (application/json)
+    + Attributes (Business Asset)
 
 ## Business Asset Detail [/accounts/{accountId}/businessassets/{id}]
 
@@ -86,10 +90,15 @@ IN PROGRESS
 ### GET
 
 + Response 200 (application/json)
+    + Attributes (Business Asset)
 
 ### PUT
 
++ Request
+    + Attributes (Business Asset Update)
+    
 + Response 200 (application/json)
+    + Attributes (Business Asset)
 
 ### DELETE
 
@@ -107,11 +116,15 @@ IN PROGRESS
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[object], required)
+        + `data` (array[Business Asset Type], required)
 
 ### POST
 
++ Request
+    + Attributes (Business Asset Type Create)
+    
 + Response 201 (application/json)
+    + Attributes (Business Asset Type)
 
 ## Business Asset Type Detail [/accounts/{accountId}/businessassettypes/{id}]
 
@@ -122,10 +135,15 @@ IN PROGRESS
 ### GET
 
 + Response 200 (application/json)
+    + Attributes (Business Asset Type)
 
 ### PUT
 
++ Request
+    + Attributes (Business Asset Type Update)
+    
 + Response 200 (application/json)
+    + Attributes (Business Asset Type)
 
 # Group Quantities
 
@@ -535,22 +553,56 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Base Client Object (object)
 + `id`: 1 (number, required) - The ID of the API client.
-+ `clientId`: publicclient (string, required) - The client ID of the API client.
 
 ## Heartbeat (object)
 + `applicationdbvitalCheck`: true (boolean, required) - Vital check to ensure the data store is online.
 + `cachevitalcheck`: true (boolean, required) - Vital check to ensure the cache store is online.
 
-## Business Asset (object)
-+ `id`: 1, (number, required) - Description
+## Business Asset Create (object)
 + `name`: Main Government Campus (string, required) - Description
 + `description`: The big government campus (string, optional) - Description
 + `notes`: Some notes would go here (string, optional) - Description
 + `isActive`: true (boolean, required) - Description
+
+## Business Asset Update (Business Asset Create)
++ `id`: 1 (number, required) - The ID of the object
+
+## Business Asset (Business Asset Update)
 + `ancestorIdPath`: Sample (string, required) - Description
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
-+ `updatedDateTime`: 2015-10-06T17:53:43.99Z (datetime, required) - Description
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
+## Business Asset Type Create (object)
+
+## Business Asset Type Update (Business Asset Type Create)
++ `id`: 1 (number, required) - The ID of the object
+
+## Business Asset Type (Business Asset Type Update)
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
+## Business Asset Attribute Type Create (object)
+
+## Business Asset Attribute Type Update (Business Asset Attribute Type Create)
++ `id`: 1 (number, required) - The ID of the object
+
+## Business Asset Attribute Type (Business Asset Attribute Type Update)
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Quantity (object)
 + `id`: 1 (number, required) - The ID of the quantity.
