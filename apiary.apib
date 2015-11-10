@@ -225,17 +225,6 @@ IN PROGRESS
 
 + Response 204
 
-## Purpose Detail Status [/accounts/{accountId}/purposes/{id}/active/{status}]
-
-+ Parameters
-    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the purpose in the form of an integer
-    + status: true (required, boolean) - The boolean to change the status of the purpose, either true or false
-
-### PUT
-
-+ Response 200 (application/json)
-    + Attributes (Purpose)
 
 # Group Labor Hour Types
 
@@ -563,11 +552,13 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `description`: The big government campus (string, optional) - Description
 + `notes`: Some notes would go here (string, optional) - Description
 + `isActive`: true (boolean, required) - Description
++ `parent` (Business Asset Reference, optional)
 
 ## Business Asset Update (Business Asset Create)
 + `id`: 1 (number, required) - The ID of the object
 
 ## Business Asset (Business Asset Update)
++ `parent` (Business Asset Lite) - Describes the initial parent
 + `ancestorIdPath`: Sample (string, required) - Description
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
@@ -577,6 +568,14 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
+## Business Asset Reference (object)
++ `id`: 1 (number, required) - The ID of the object
+
+## Business Asset Lite (Business Asset Reference)
++ `name`: pump (string, required) - The name of the asset
++ `description`: outside pump (string, required) - The description of the asset
++ `isActive`: true (boolean, required) - Indicates if the asset is active
 
 ## Business Asset Type Create (object)
 + `description`: Bridge (string, required) - The name of the asset type
