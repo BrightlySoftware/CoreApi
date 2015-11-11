@@ -144,6 +144,21 @@ IN PROGRESS
     
 + Response 200 (application/json)
     + Attributes (Business Asset Type)
+    
+## Business Asset Attribute Type Collection [/accounts/{accountId}/businessassettypes/{businessAssetTypeId}/businessassetattributetypes{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
+    + businessAssetTypeId: 12345 (required, number) - ID of the business asset type in the form on an integer
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Attribute Type], required)
 
 # Group Quantities
 
