@@ -200,6 +200,35 @@ IN PROGRESS
 
 + Response 201 (application/json)
 
+# Group PM Schedules
+
+## PM Schedules Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[PmSchedule], required)
+
+## Pm Schedule Detail [/accounts/{accountId}/pmschedules/{id}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+
 # Group Purposes
 
 ## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive}]
@@ -736,4 +765,34 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
+## Recurrence Pattern (object)
++ `time`: `03:00:00` (string, optional) - The time of the recurrence
++ `dayOfMonth`: 24 (number, optional) - The day of the month that applies to the recurrence
++ `daysOfWeek` (array[number], optional) - The days of week that the recurrence applies to
++ `every`: 2 (number, optional) - How often it repeats
++ `month`: 12 (number, optional) - The month that the pattern recurs
++ `period`: `Day` (string, optional) - The period
++ `ordinal`: `1` (string, optional) - The integer value relating to an ordinal number (eg: 1 for 1st)
++ `startDateTime`: "2015-10-01T00:00:00Z" (string, optional) - The date/time that the recurrence pattern starts
++ `endDateTime`: "2016-10-01T00:00:00Z" (string, optional) - The date/time that the recurrence pattern terminates
++ `targetDate`: "2016-10-01T00:00:00Z" (string, optional) - The target generation date for the recurrence pattern
++ `cronex`: "0 0 12 * * ?" (string, optional) - The cron expression. This is a system generated expression based on the recurrence pattern.
+
+## PmSchedule (object)
++ `id`: 1 (number, required) - the ID for the schedule object
++ `title`: `Pm Schedule` (string, required) - the title for the schedule object
++ `workOrderTemplateId`: 1 (number, required) - the integer id associated with the work order template for this schedule
++ `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
++ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
++ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
++ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
++ `isActive`: 1 (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
 
