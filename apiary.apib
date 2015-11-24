@@ -63,7 +63,7 @@ IN PROGRESS
     + parentid: 1 (number, optional) - The ID of the parent as a long.
     + name: Facility (string, optional) - The name of the asset.
     + description: Big Building (string, optional) - The description of the asset.
-    + isactive: true (boolean, optional) - Return active or inactive assets?
+    + isactive: true (string, optional) - Return active or inactive assets?
     + businessassettypeid: 1 (number, optional) - Return assets that match a specific asset type.
     + includedescendants: true (boolean, optional) - Include descendant assets or just the current level?
     + page: 1 (number, optional) - The page to request from the collection.
@@ -205,12 +205,12 @@ IN PROGRESS
 ## PM Schedules Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive}]
 
 + Parameters
-    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
+    + accountId: 1234567890 (number, required) - ID of the account in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
-    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + isactive (string, optional) - Filter the list by active or inactive items, when not set returns all.
     
 ### GET
 
@@ -239,7 +239,7 @@ IN PROGRESS
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
-    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + isactive (string, optional) - Filter the list by active or inactive items, when not set returns all.
     
 ### GET
 
@@ -296,6 +296,10 @@ IN PROGRESS
     
 ## Labor Hour Types Detail [/accounts/{accountId}/laborhourtypes/{id}]
 
++ Parameters
+    + accountId: 1 (required, number) - ID of the account in the form of an integer
+    + id: 1 (required, number) - The ID of the labor type
+
 ### GET
 
 + Response 200 (application/json)
@@ -316,8 +320,8 @@ IN PROGRESS
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
-    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
-    + parentid (number, optional) - Filter the list to get all children of a parent, when not set returns all.
+    + isactive: true (string, optional) - Filter the list by active or inactive items, when not set returns all.
+    + parentid: 3 (string, optional) - Filter the list to get all children of a parent, when not set returns all.
     
 ### GET
 
@@ -409,7 +413,9 @@ IN PROGRESS
 
 ## Work Order Export [/accounts/{accountId}/workorders/{id}/ascsv]
 
-*Deprecated*
++ Parameters
+    + accountId: 1 (required, number) - ID of the account in the form of an integer
+    + id: 1 (required, number) - The ID of the workorder
 
 ### As CSV [GET]
 
@@ -536,6 +542,7 @@ IN PROGRESS
     + workOrderTemplateId: 1 (number, required) - ID of the work order template object who's collection is being referenced
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     
 ### GET
 
@@ -544,6 +551,11 @@ IN PROGRESS
         + `data` (array[Base User Object], required)
         
 ## Assignee Collection Detail [/accounts/{accountId}/workordertemplates{workOrderTemplateId}/assignees/{id}]
+
++ Parameters
+    + accountId: 1 (number, required) - ID of the account in the form of an integer
+    + workOrderTemplateId: 1 (number, required) - ID of the work order template object who's collection is being referenced
+    + id: 1 (number, required) - The User ID of the assignee
 
 ### PUT
 
