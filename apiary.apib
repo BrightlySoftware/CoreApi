@@ -36,7 +36,7 @@ In addition to standard response codes the response object returned from the ser
             "dudeReferenceId": "3523845A-4729-4CCB-9E16-01DEADF6C2DF",
             "stackTrace": "Null, Typically"
         }
-        
+
 ## Data Restriction
 Depending on the access level granted to the calling client certain data elements throughout this API will be removed and not returned.
 
@@ -70,7 +70,7 @@ IN PROGRESS
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -81,7 +81,7 @@ IN PROGRESS
 
 + Request
     + Attributes (Business Asset Create)
-    
+
 + Response 201 (application/json)
     + Attributes (Business Asset)
 
@@ -100,7 +100,7 @@ IN PROGRESS
 
 + Request
     + Attributes (Business Asset Update)
-    
+
 + Response 200 (application/json)
     + Attributes (Business Asset)
 
@@ -115,7 +115,7 @@ IN PROGRESS
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -126,7 +126,7 @@ IN PROGRESS
 
 + Request
     + Attributes (Business Asset Type Create)
-    
+
 + Response 201 (application/json)
     + Attributes (Business Asset Type)
 
@@ -135,7 +135,7 @@ IN PROGRESS
 + Parameters
     + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the business asset type in the form on an integer
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -145,10 +145,10 @@ IN PROGRESS
 
 + Request
     + Attributes (Business Asset Type Update)
-    
+
 + Response 200 (application/json)
     + Attributes (Business Asset Type)
-    
+
 ## Business Asset Attribute Type Collection [/accounts/{accountId}/businessassettypes/{businessAssetTypeId}/businessassetattributetypes{?page,pagesize,orderby}]
 
 + Parameters
@@ -157,7 +157,7 @@ IN PROGRESS
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -212,12 +212,25 @@ IN PROGRESS
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive (string, optional) - Filter the list by active or inactive items, when not set returns all.
-    
+
 ### GET
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
         + `data` (array[PmSchedule], required)
+
+## Schedule Create [/accounts/{accountId}/pmschedules]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
+
+### POST
+
++ Request
+    + Attributes (Base PmSchedule)
+
++ Response 201 (application/json)
+    + Attributes (PmSchedule)
 
 ## Pm Schedule Detail [/accounts/{accountId}/pmschedules/{id}]
 
@@ -241,7 +254,7 @@ IN PROGRESS
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive (string, optional) - Filter the list by active or inactive items, when not set returns all.
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -283,7 +296,7 @@ IN PROGRESS
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -294,7 +307,7 @@ IN PROGRESS
 
 + Response 201 (application/json)
     + Attributes (Labor Hour Type)
-    
+
 ## Labor Hour Types Detail [/accounts/{accountId}/laborhourtypes/{id}]
 
 + Parameters
@@ -323,7 +336,7 @@ IN PROGRESS
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive: true (string, optional) - Filter the list by active or inactive items, when not set returns all.
     + parentid: 3 (string, optional) - Filter the list to get all children of a parent, when not set returns all.
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -340,7 +353,7 @@ IN PROGRESS
 + Parameters
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the work category in the form of an integer
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -379,7 +392,7 @@ IN PROGRESS
     + status: 1 (array[number], optional) - Filter by the work order status.
     + workcategory: 1 (array[number], optional) - Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -396,7 +409,7 @@ IN PROGRESS
 + Parameters
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the work order in the form of an integer
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -430,7 +443,7 @@ IN PROGRESS
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -448,7 +461,7 @@ IN PROGRESS
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
     + id: 12345 (required, number) - ID of the transaction in the form of an integer
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -471,7 +484,7 @@ IN PROGRESS
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -489,7 +502,7 @@ IN PROGRESS
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
     + id: 12345 (required, number) - ID of the attachment in the form of an integer
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -511,7 +524,7 @@ IN PROGRESS
 
 + Response 201 (application/json)
     + Attributes (Work Order Template)
-    
+
 ### DELETE
 
 + Response 204
@@ -521,7 +534,7 @@ IN PROGRESS
 + Parameters
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the work order in the form of an integer
-    
+
 ### GET
 
 + Response 200 (application/json)
@@ -544,13 +557,13 @@ IN PROGRESS
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+
 ### GET
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
         + `data` (array[Base User Object], required)
-        
+
 ## Assignee Collection Detail [/accounts/{accountId}/workordertemplates{workOrderTemplateId}/assignees/{id}]
 
 + Parameters
@@ -562,7 +575,7 @@ IN PROGRESS
 
 + Response 200 (application/json)
     + Attributes (Base User Object)
-    
+
 ### DELETE
 
 + Response 204
@@ -655,7 +668,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Business Asset Attribute Type Create (object)
 + `key`: length (string, required) - The name of the attribute type
-+ `valueType`: date (enum[string], required) - 
++ `valueType`: date (enum[string], required) -
     + `date` - Represents a date/time
     + `double` - Represents a floating point value
     + `integer` - Represents a whole number
@@ -792,20 +805,20 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `targetDate`: "2016-10-01T00:00:00Z" (string, optional) - The target generation date for the recurrence pattern
 + `cronex`: "0 0 12 * * ?" (string, optional) - The cron expression. This is a system generated expression based on the recurrence pattern.
 
-## PmSchedule (object)
-+ `id`: 1 (number, required) - the ID for the schedule object
-+ `title`: `Pm Schedule` (string, required) - the title for the schedule object
+## Base PmSchedule (object)
 + `workOrderTemplateId`: 1 (number, required) - the integer id associated with the work order template for this schedule
 + `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
++ `isActive`: 1 (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
+
+## PmSchedule (Base PmSchedule)
++ `id`: 1 (number, required) - the ID for the schedule object
++ `title`: `Pm Schedule` (string) - the title for the schedule object
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
-+ `isActive`: 1 (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
 + `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
-
-
