@@ -252,7 +252,7 @@ IN PROGRESS
 ### PUT
 
 + Request
-    + Attributes (Schedule Data)
+    + Attributes (Update PmSchedule Run Dates)
 
 + Response 200 (application/json)
     + Attributes (PmSchedule)
@@ -837,11 +837,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
-## Base Schedule Data (object)
-+ `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
-+ `isActive`: 1 (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
-
-## Schedule Data (Base Schedule Data)
+## Update PmSchedule Run Dates (object)
 + `id`: 1 (number, required) - The ID for the object
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
