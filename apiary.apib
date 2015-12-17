@@ -243,7 +243,11 @@ IN PROGRESS
 + Response 200 (application/json)
     + Attributes (PmSchedule)
 
-### PUT [/rundates]
+### PUT [/accounts/{accountId}/pmschedules/{id}/rundates]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule in the form of an integer
 
 + Response 200 (application/json)
     + Attributes (PmSchedule)
