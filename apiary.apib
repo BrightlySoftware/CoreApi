@@ -65,7 +65,7 @@ IN PROGRESS
     + parentid: 1 (number, optional) - #INT The ID of the parent as a long.
     + name: Facility (string, optional) - The name of the asset.
     + description: Big Building (string, optional) - The description of the asset.
-    + isactive: true (boolean, optional) - Return active or inactive assets?
+    + isactive: true (string, optional) - Return active or inactive assets?
     + businessassettypeid: 1 (number, optional) - #INT Return assets that match a specific asset type.
     + includedescendants: true (boolean, optional) - Include descendant assets or just the current level?
     + page: 1 (number, optional) - #INT The page to request from the collection.
@@ -212,7 +212,7 @@ IN PROGRESS
     + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
-    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
 
 ### GET
 
@@ -299,7 +299,7 @@ IN PROGRESS
     + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
-    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
 
 ### GET
 
