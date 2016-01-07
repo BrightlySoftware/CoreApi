@@ -776,6 +776,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
++ `workOrderTemplateId`: `1` (number, optional) - #INT the id of the work order template that this work order was generated from, if applicable
 
 ## Work Order Attachment (Base Audit Object)
 + `id`: 1 (number, required) - The ID of the work order attachment.
