@@ -387,24 +387,24 @@ IN PROGRESS
 ## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) -  #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) -  #INT The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - A free form filter mechanism.
     + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
     + assignees: 1 (array[number], optional) - Filter by assignees.
     + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
-    + createdby: 1 (number, optional) - Filter by the user who created the work order.
+    + createdby: 1 (number, optional) -  #INT Filter by the user who created the work order.
     + displayid: WO123 (string, optional) - Filter by the display ID of the work order.
-    + priority: 1 (array[number], optional) - Filter by the priority of work orders.
-    + purpose: 1 (array[number], optional) - Filter by the purpose of work orders.
+    + priority: 1 (array[number], optional) -  #INT Filter by the priority of work orders.
+    + purpose: 1 (array[number], optional) -  #INT Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
-    + requestedby: 1 (array[number], optional) - Filter by the work order requester.
-    + status: 1 (array[number], optional) - Filter by the work order status.
-    + workcategory: 1 (array[number], optional) - Filter by the work category assigned to the work order.
+    + requestedby: 1 (array[number], optional) -  #INT Filter by the work order requester.
+    + status: 1 (array[number], optional) -  #INT Filter by the work order status.
+    + workcategory: 1 (array[number], optional) -  #INT Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
 
 ### GET
@@ -413,16 +413,23 @@ IN PROGRESS
     + Attributes (Base Collection Response)
         + `data` (array[Work Order], required)
 
+## Work Order Create [/accounts/{accountId}/workorders]
+
++ Parameters
+	+ accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+
 ### POST
 
++ Request
+  + Attributes (Work Order)
 + Response 201 (application/json)
     + Attributes (Work Order)
 
 ## Work Order Detail [/accounts/{accountId}/workorders/{id}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the work order in the form of an integer
+    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+    + id: 12345 (required, number) - #INT ID of the work order in the form of an integer
 
 ### GET
 
@@ -754,6 +761,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Work Order (Base Audit Object)
 + `id`: 1 (number, required) - The unique identifier of the work order.
++ `workOrderTemplate` (Work Order Template, optional) - the work order template that this work order was generated from, if applicable
 + `displayId`: WO100 (string, required) - The display ID for the work order.
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `status`: 1 (number, required) - The status of a work order, in integer format.
