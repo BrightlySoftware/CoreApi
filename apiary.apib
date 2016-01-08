@@ -271,7 +271,7 @@ IN PROGRESS
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[Business Asset Update], required)
+        + `data` (array[Business Asset Lite], required)
 
 ## PM Schedules Business Asset Collection Detail [/accounts/{accountId}/pmschedules{pmScheduleId}/businessassets/{id}]
 
@@ -283,7 +283,7 @@ IN PROGRESS
 ### PUT
 
 + Response 200 (application/json)
-    + Attributes (Business Asset Update)
+    + Attributes (Business Asset Lite)
 
 ### DELETE
 
@@ -695,6 +695,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `name`: pump (string, required) - The name of the asset
 + `description`: outside pump (string, required) - The description of the asset
 + `isActive`: true (boolean, required) - Indicates if the asset is active
++ `hasChildren`: true (boolean, required) - Description
++ `notes`: Some notes would go here (string, optional) - Description
 
 ## Business Asset Type Create (object)
 + `description`: Bridge (string, required) - The name of the asset type
