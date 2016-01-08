@@ -445,10 +445,18 @@ IN PROGRESS
     + Attributes (Base Collection Response)
         + `data` (array[Work Order], required)
 
+## Work Order Create [/accounts/{accountId}/workorders]
+
++ Parameters
+	+ accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+
 ### POST
 
++ Request
+  + Attributes (Work Order)
 + Response 201 (application/json)
     + Attributes (Work Order)
+
 
 ## Work Order Detail [/accounts/{accountId}/workorders/{id}]
 
@@ -788,6 +796,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Work Order (Base Audit Object)
 + `id`: 1 (number, required) - #INT The unique identifier of the work order.
++ `workOrderTemplate` (Work Order Template, optional) - the work order template that this work order was generated from, if applicable
 + `displayId`: WO100 (string, required) - The display ID for the work order.
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `status`: 1 (number, required) - #INT The status of a work order, in integer format.
