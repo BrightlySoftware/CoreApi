@@ -237,7 +237,7 @@ IN PROGRESS
 
 + Parameters
     + accountId: 1234567890 (required, number) - #INT ID of the account in the form of an integer
-    + id: 12345 (required, number) - #INT ID of the pm schedule in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule
 
 ### GET
 
@@ -248,7 +248,7 @@ IN PROGRESS
 
 + Parameters
     + accountId: 1234567890 (required, number) - #INT ID of the account in the form of an integer
-    + id: 12345 (required, number) - #INT ID of the pm schedule in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule
 
 ### PUT
 
@@ -262,7 +262,7 @@ IN PROGRESS
 
 + Parameters
     + accountId: 1 (number, required) - #INT ID of the account in the form of an integer
-    + pmScheduleId: 1 (number, required) - #INT ID of the work order template object who's collection is being referenced
+    + pmScheduleId: 1 (number, required) - ID of the work order template object who's collection is being referenced
     + page: 1 (number, optional) - #INT The page to request from the collection.
     + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
@@ -277,7 +277,7 @@ IN PROGRESS
 
 + Parameters
     + accountId: 1 (number, required) - #INT ID of the account in the form of an integer
-    + pmScheduleId: 1 (number, required) - #INT ID of the work order template object who's collection is being referenced
+    + pmScheduleId: 1 (number, required) - ID of the work order template object who's collection is being referenced
     + id: 1 (number, required) - #INT The ID of the Business Asset
 
 ### PUT
@@ -868,7 +868,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
 
 ## PmSchedule (Base PmSchedule)
-+ `id`: 1 (number, required) - #INT the ID for the schedule object
++ `id`: 1 (number, required) - the ID for the schedule object
 + `title`: `Pm Schedule` (string) - the title for the schedule object
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
@@ -882,7 +882,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Update PmSchedule Run Dates (object)
-+ `id`: 1 (number, required) - #INT The ID for the object
++ `id`: 1 (number, required) - The ID for the object
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
