@@ -597,7 +597,7 @@ IN PROGRESS
 ### PUT
 
 + Request (application/json)
-    + Attributes (Work Order Template Update)
+    + Attributes (Work Order Template)
 
 + Response 200 (application/json)
 
@@ -796,8 +796,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Work Order (Base Audit Object)
 + `id`: 1 (number, required) - #INT The unique identifier of the work order.
-+ `workOrderTemplate` (Work Order Template, optional) - the work order template that this work order was generated from, if applicable
-+ `pmSchedule` (PmSchedule, optional) - the PM Schedule that defined when this work order was generated
++ `workOrderTemplate` (Work Order Template Reference, optional) - the work order template that this work order was generated from, if applicable
++ `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
 + `displayId`: WO100 (string, required) - The display ID for the work order.
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `status`: 1 (number, required) - #INT The status of a work order, in integer format.
@@ -830,6 +830,9 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `type`: Regular (string, required) - The type of transaction.
 + `cost`: 22.10 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
 
+## Work Order Template Reference (object)
++ `id`: 1 (number, required) - #INT The unique identifier of the work order order template.
+
 ## Work Order Template Create (object)
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `priority`: 2 (number, required) - #INT The priority of a work order, in integer format.
@@ -838,10 +841,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dudeDateOffset`: 1 (number, optional) - #INT The number of days out to set the dudeDateTime
 
-## Work Order Template Update (Work Order Template Create)
+## Work Order Template (Work Order Template Create)
 + `id`: 1 (number, required) - #INT The unique identifier of the work order order template.
-
-## Work Order Template (Work Order Template Update)
 + `assigneeCount`: 1 (number, required) - #INT The number of assignees that exists for the template
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
@@ -863,6 +864,9 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `targetDate`: "2016-10-01T00:00:00Z" (string, optional) - The target generation date for the recurrence pattern
 + `cronex`: "0 0 12 * * ?" (string, optional) - The cron expression. This is a system generated expression based on the recurrence pattern.
 
+## PmSchedule Reference (object)
++ `id`: 1 (number, required) - the ID for the schedule object
+
 ## Base PmSchedule (object)
 + `workOrderTemplateId`: 1 (number, required) - #INT the integer id associated with the work order template for this schedule
 + `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
@@ -882,7 +886,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
-## Update PmSchedule Run Dates (object)
+## Update PmSchedule Run Dates (PmSchedule Reference)
 + `id`: 1 (number, required) - The ID for the object
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
