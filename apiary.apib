@@ -430,7 +430,7 @@ IN PROGRESS
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
     + createdby: 1 (number, optional) -  #INT Filter by the user who created the work order.
     + displayid: WO123 (string, optional) - Filter by the display ID of the work order.
-    + priority: 1 (array[number], optional) - #INT Filter by the priority of work orders.
+    + priority: 1 (array[string], optional) - Filter by the priority of work orders.
     + purpose: 1 (array[number], optional) - #INT Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
@@ -801,7 +801,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `displayId`: WO100 (string, required) - The display ID for the work order.
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `status`: 1 (number, required) - #INT The status of a work order, in integer format.
-+ `priority`: 2 (number, required) - #INT The priority of a work order, in integer format.
++ `priority`: Low (string, required) - The priority of a work order, in string format.
 + `requestDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The requested date and time for the work order.
 + `completionDateTime`:  `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the work order was completed.
 + `actionTaken`: I replaced the bolt (string, optional) - Text that describes what was done to resolve the reported issue.
@@ -835,7 +835,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Work Order Template Create (object)
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
-+ `priority`: 2 (number, required) - #INT The priority of a work order, in integer format.
++ `priority`: Low (string, required) - The priority of a work order, in string format.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
