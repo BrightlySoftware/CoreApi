@@ -430,12 +430,12 @@ IN PROGRESS
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
     + createdby: 1 (number, optional) -  #INT Filter by the user who created the work order.
     + displayid: WO123 (string, optional) - Filter by the display ID of the work order.
-    + priority: Low (array[string], optional) - Filter by the priority of work orders.
+    + priority: Low (array[Priority], optional) - Filter by the priority of work orders.
     + purpose: 1 (array[number], optional) - #INT Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
     + requestedby: 1 (array[number], optional) - #INT Filter by the work order requester.
-    + status: NewRequest (array[string], optional) - Filter by the work order status.
+    + status: NewRequest (array[Work Order Status], optional) - Filter by the work order status.
     + workcategory: 1 (array[number], optional) - #INT Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - #INT Filter by the business asset assigned to the work order.
 
@@ -800,8 +800,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
 + `displayId`: WO100 (string, required) - The display ID for the work order.
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
-+ `status`: NewRequest (string, required) - The status of a work order, in string format.
-+ `priority`: Low (string, required) - The priority of a work order, in string format.
++ `status`: NewRequest (Work Order Status, required) - The status of a work order.
++ `priority`: Low (Priority, required) - The priority of a work order.
 + `requestDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The requested date and time for the work order.
 + `completionDateTime`:  `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the work order was completed.
 + `actionTaken`: I replaced the bolt (string, optional) - Text that describes what was done to resolve the reported issue.
@@ -835,7 +835,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Work Order Template Create (object)
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
-+ `priority`: Low (string, required) - The priority of a work order, in string format.
++ `priority`: Low (Priority, required) - The priority of a work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
@@ -891,3 +891,15 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
+
+## Work Order Status (enum)
++ NewRequest (string)
++ WorkInProgress (string)
++ Completed (string)
++ Void (string)
+
+## Priority (enum)
++ Low (string)
++ Medium (string)
++ High (string)
++ Emergency (string)
