@@ -634,6 +634,38 @@ IN PROGRESS
 
 + Response 204
 
+# Group Order
+
+## Order Create [/accounts/{accountId}/orders]
+
++ Parameters
+    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+
+### POST
+
++ Request
+  + Attributes (Order)
++ Response 201 (application/json)
+    + Attributes (Order)
+
+
+## Order Detail [/accounts/{accountId}/orders/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+    + id: 12345 (required, number) - #INT ID of the order in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Order)
+
+### PUT
+
++ Response 200 (application/json)
+
+    + Attributes (Order)
+
 # Group Health
 
 ## Heartbeat [/heartbeat]
@@ -903,3 +935,54 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Medium (string)
 + High (string)
 + Emergency (string)
+
+## Order Status (enum)
++ Approved (string)
++ Canceled (string)
++ Closed (string)
++ Denied (string)
++ Fulfillment (string)
++ New (string)
++ PendingAproval (string)
++ Received (string)
++ ReturnedToSubmitter (string)
++ Shipped (string)
+
+## Order Line Item Detail (object)
++ `title`: `Grainger Item #3EB46` (string, required) - The title of the order line item.
++ `description`: `Paper Towel Roll, enMotion, 800 ft., PK6` (string, required) - The description of the order line item.
++ `brandName`: `enMotion` (string, optional) - The brand name of the order line item.
++ `manufacturer`: `Georgia-Pacific` (string, optional) - The manufacturer of the order line item.
++ `universalProductCode`: `123456789012` (string, optional) - The universal product code of the order line item.
++ `stockKeepingUnit`: `123456` (string, optional) - The stock keeping code of the order line item.
++ `itemLink`: `http://www.grainger.com/product/GEORGIA-PACIFIC-Paper-Towel-Roll-3EB46"` (string, optional) - The link to the order line item.
+
+
+## Order Line (object)
++ `id`: 1 (number, required) - The ID for the object
++ `orderLineNumber`: 1 (number, required) - The line number for the order line item
++ `workOrderid`: 1 (number, optional) - The ID for the work order.
++ `quantity`: 1 (number, required) - The quantity for the object.
++ `purchaseOrderNumber`: `12345ABCD` (string, optional) - The purchase order number assigned to the order line item.
++ `quantityUnit`: `EA` (string, optional) - The quantity unit of the order line item.
++ `unitPrice` : 22.10 (number, optional) - The unit price of the order line item.
++ `taxCost` : 22.10 (number, optional) - The tax cost of the order line item.
++ `shippingCost` : 22.10 (number, optional) - The shipping cost of the order line item.
++ `itemDetail` (Order Line Item Detail, required) - The item details of the order line item.
+
+## Order (Base Audit Object)
++ `id`: 1 (number, required) - the ID for the schedule object.
++ `orderStatus`: `Approved` (Order Status, required) - The order status assigned to the order.
++ `supplierName`: `Grainger` (string,required) - The supplier name assigned to the order.
++ `supplierOrderNumber`: `12345ABCD` (string, required) - The supplier order number assigned to the order.
++ `supplierOrderLink`: `https://grainger.com/orders/12345ABCD` (string, optional) - The supplier order link assigned to the order.
++ `supplierInvoiceNumber`: `12345ABCD` (string, optional) - The supplier invoice number to the order.
++ `supplierOrderLastUpdatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the supplier order was last updated.
++ `supplierOrderCreatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the supplier order was created.
++ `purchaseOrderNumber` : `12345ABCD` (string, optional) - The purchase order number assigned to the order.
++ `orderCreatedByUserId` : 12345 (number, optional) - The ID for the user that created the order.
++ `orderSubTotal` : 22.10 (number, optional) - The sub total of the order.
++ `orderTaxTotal` : 22.10 (number, optional) - The tax total of the order.
++ `orderShippingTotal` : 22.10 (number, optional) - The shipping total of the order.
++ `orderGrandTotal` : 22.10 (number, optional) - The grand total of the order.
++ `orderLines` (array[Order Line], required) - The line items on the order.
