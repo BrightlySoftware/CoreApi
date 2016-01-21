@@ -600,7 +600,6 @@ IN PROGRESS
     + Attributes (Work Order Template)
 
 + Response 200 (application/json)
-
     + Attributes (Work Order)
 
 ## Assignee Collection [/accounts/{accountId}/workordertemplates/{workOrderTemplateId}/assignees{?page,pagesize,orderby}]
@@ -646,24 +645,6 @@ IN PROGRESS
 + Request
   + Attributes (Order)
 + Response 201 (application/json)
-    + Attributes (Order)
-
-
-## Order Detail [/accounts/{accountId}/orders/{id}]
-
-+ Parameters
-    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
-    + id: 12345 (required, number) - #INT ID of the order in the form of an integer
-
-### GET
-
-+ Response 200 (application/json)
-    + Attributes (Order)
-
-### PUT
-
-+ Response 200 (application/json)
-
     + Attributes (Order)
 
 # Group Health
@@ -981,8 +962,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `supplierOrderCreatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the supplier order was created.
 + `purchaseOrderNumber` : `12345ABCD` (string, optional) - The purchase order number assigned to the order.
 + `orderCreatedByUserId` : 12345 (number, optional) - The ID for the user that created the order.
-+ `orderSubTotal` : 22.10 (number, optional) - The sub total of the order.
-+ `orderTaxTotal` : 22.10 (number, optional) - The tax total of the order.
-+ `orderShippingTotal` : 22.10 (number, optional) - The shipping total of the order.
-+ `orderGrandTotal` : 22.10 (number, optional) - The grand total of the order.
++ `orderSubTotal` : 22.10 (Currency, optional) - The sub total of the order.
++ `orderTaxTotal` : 22.10 (Currency, optional) - The tax total of the order.
++ `orderShippingTotal` : 22.10 (Currency, optional) - The shipping total of the order.
++ `orderGrandTotal` : 22.10 (Currency, optional) - The grand total of the order.
 + `orderLines` (array[Order Line], required) - The line items on the order.
+
+## Curency (object)
++ `value` : 22.10 (number, required) - The currency value.
++ `unit` : `USD` (string, required) - The currency unit.
