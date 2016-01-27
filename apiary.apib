@@ -244,6 +244,14 @@ IN PROGRESS
 + Response 200 (application/json)
     + Attributes (PmSchedule)
 
+### PUT
+
++ Request
+    + Attributes (PmSchedule)
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+
 ## Pm Schedule Run Dates [/accounts/{accountId}/pmschedules/{id}/rundates]
 
 + Parameters
@@ -331,6 +339,67 @@ IN PROGRESS
 ### DELETE
 
 + Response 204
+
+######################################
+# Group Task Books
+
+## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q}]
+
++ Parameters
+    + accountId: 1234567890 (number, required) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[PmSchedule], required)
+
+## Schedule Create [/accounts/{accountId}/pmschedules]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - #INT ID of the account in the form of an integer
+
+### POST
+
++ Request
+    + Attributes (Base PmSchedule)
+
++ Response 201 (application/json)
+    + Attributes (PmSchedule)
+
+## Pm Schedule Detail [/accounts/{accountId}/pmschedules/{id}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - #INT ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+
+## Pm Schedule Run Dates [/accounts/{accountId}/pmschedules/{id}/rundates]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - #INT ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule
+
+### PUT
+
++ Request
+    + Attributes (Update PmSchedule Run Dates)
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+#######################################
+
+
+
+
 
 
 # Group Labor Hour Types
@@ -904,6 +973,9 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
+
+## Base TaskBook (object)
++ `bookTitle`: `Oil Change`
 
 ## Work Order Status (enum)
 + NewRequest (string)
