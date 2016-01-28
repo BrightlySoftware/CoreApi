@@ -946,9 +946,9 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `quantity`: 1 (number, required) - The quantity of the object.
 + `purchaseOrderNumber`: `12345ABCD` (string, optional) - The purchase order number assigned to the order line item.
 + `quantityUnit`: `EA` (string, optional) - The quantity unit of the order line item.
-+ `unitPrice` : 22.10 (Currency, optional) - The unit price of the order line item.
-+ `taxCost` : 22.10 (Currency, optional) - The tax cost of the order line item.
-+ `shippingCost` : 22.10 (Currency, optional) - The shipping cost of the order line item.
++ `unitPrice` (Currency, optional) - The unit price of the order line item.
++ `taxCost` (Currency, optional) - The tax cost of the order line item.
++ `shippingCost` (Currency, optional) - The shipping cost of the order line item.
 + `itemDetail` (Order Line Item Detail, required) - The item details of the order line item.
 
 ## Order (Base Audit Object)
@@ -962,10 +962,10 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `supplierOrderCreatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the supplier order was created.
 + `purchaseOrderNumber` : `12345ABCD` (string, optional) - The purchase order number assigned to the order.
 + `orderCreatedByUserId` : 12345 (number, optional) - The ID for the user that created the order.
-+ `orderSubTotal` : 22.10 (Currency, optional) - The sub total of the order.
-+ `orderTaxTotal` : 22.10 (Currency, optional) - The tax total of the order.
-+ `orderShippingTotal` : 22.10 (Currency, optional) - The shipping total of the order.
-+ `orderGrandTotal` : 22.10 (Currency, optional) - The grand total of the order.
++ `orderSubTotal` (Currency, optional) - The sub total of the order.
++ `orderTaxTotal` (Currency, optional) - The tax total of the order.
++ `orderShippingTotal` (Currency, optional) - The shipping total of the order.
++ `orderGrandTotal` (Currency, optional) - The grand total of the order.
 + `orderLines` (array[Order Line], required) - The line items on the order.
 
 ## Currency (object)
