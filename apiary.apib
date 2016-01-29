@@ -297,6 +297,33 @@ IN PROGRESS
 
 + Response 204
 
+## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q,ismaster}]
+
++ Parameters
+    + accountId: 1234567890 (number, required) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + ismaster: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Task Book], required)
+
+## Task Book Detail [/accounts/{accountId}/taskbooks/{id}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - #INT ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the task book
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Task Book)
+
 # Group Purposes
 
 ## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive}]
@@ -911,6 +938,11 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
+
+## Task Book (Base Audit Object)
++ `id`: 1 (number, required) - #INT The ID of the purpose.
++ `title`: Oil Change (string, required) - The title of the task book.
++ `isMaster`: true (boolean, required) - Indicates if the task book is a master template.
 
 ## Work Order Status (enum)
 + NewRequest (string)
