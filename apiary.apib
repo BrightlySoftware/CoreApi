@@ -942,7 +942,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `id`: 1 (number, required) - the ID for the schedule object
 
 ## Base PmSchedule (object)
-+ `workOrderTemplateId`: 1 (number, required) - #INT the integer id associated with the work order template for this schedule
++ `workOrderTemplateId`: 1 (number, required) - {int} The integer id associated with the work order template for this schedule
++ `taskBookId`: (number, optional) - {int} The integer id associated with the task book for this schedule
 + `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
 + `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
 
