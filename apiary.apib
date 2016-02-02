@@ -351,6 +351,34 @@ IN PROGRESS
 
 + Response 204
 
+## Tasks Collection [/accounts/{accountId}/taskbooks/{taskBookid}/tasks{?page,pagesize,orderby,q}]
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Task], required)
+
+## Task Detail [/accounts/{accountId}/taskbooks/{taskBookId}/tasks/{id}]
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the task
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Task)
+
 # Group Purposes
 
 ## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive}]
@@ -942,8 +970,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `id`: 1 (number, required) - the ID for the schedule object
 
 ## Base PmSchedule (object)
-+ `workOrderTemplateId`: 1 (number, required) - {int} The integer id associated with the work order template for this schedule
-+ `taskBookId`: (number, optional) - {int} The integer id associated with the task book for this schedule
++ `workOrderTemplateId`: 1 (number, required) - {INT} The integer id associated with the work order template for this schedule
++ `taskBookId`: (number, optional) - {INT} The integer id associated with the task book for this schedule
 + `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
 + `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
 
@@ -968,9 +996,15 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
 
 ## Task Book (Base Audit Object)
-+ `id`: 1 (number, required) - #INT The ID of the purpose.
++ `id`: 1 (number, required) - {INT} The ID of the task book.
 + `title`: Oil Change (string, required) - The title of the task book.
 + `isMaster`: true (boolean, required) - Indicates if the task book is a master template.
+
+## Task (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the task.
++ `title`: Drain oil (string, required) - The title of the task.
++ `procedure`: Steps to complete this task (string, optional) - The detailed instructions for how to complete the task.
++ `order` : 1 (number, required) - {INT} The order in which the task should be completed.
 
 ## Work Order Status (enum)
 + NewRequest (string)
