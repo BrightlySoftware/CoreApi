@@ -351,7 +351,7 @@ IN PROGRESS
 
 + Response 204
 
-## Tasks Collection [/accounts/{accountId}/taskbooks/{taskBookId}/tasks{?page,pagesize,orderby,q}]
+## Task Summary Collection [/accounts/{accountId}/taskbooks/{taskBookId}/tasks{?page,pagesize,orderby,q}]
 
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
@@ -365,9 +365,9 @@ IN PROGRESS
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[Task], required)
+        + `data` (array[Task Summary], required)
 
-## Task Detail [/accounts/{accountId}/taskbooks/{taskBookId}/tasks/{id}]
+## Task Summary Detail [/accounts/{accountId}/taskbooks/{taskBookId}/tasks/{id}]
 
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
@@ -377,7 +377,7 @@ IN PROGRESS
 ### GET
 
 + Response 200 (application/json)
-    + Attributes (Task)
+    + Attributes (Task Summary)
 
 # Group Purposes
 
@@ -1000,7 +1000,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `title`: Oil Change (string, required) - The title of the task book.
 + `isMaster`: true (boolean, required) - Indicates if the task book is a master template.
 
-## Task (Base Audit Object)
+## Task Summary (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the task.
 + `title`: Drain oil (string, required) - The title of the task.
 + `procedure`: Steps to complete this task (string, optional) - The detailed instructions for how to complete the task.
