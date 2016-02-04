@@ -681,10 +681,25 @@ IN PROGRESS
 
 + Response 204
 
-## Work Order Template Collection [/accounts/{accountId}/workordertemplates]
+## Work Order Template Collection [/accounts/{accountId}/workordertemplates{?page,pagesize,orderby,purpose}]
 
 + Parameters
-    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + purpose: 1 (number, optional) - {INT} The ID of a purpose to filter the collection
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Template], required)
+
+## Work Order Template Create [/accounts/{accountId}/workordertemplates]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
 
 ### POST
 
@@ -693,10 +708,6 @@ IN PROGRESS
 
 + Response 201 (application/json)
     + Attributes (Work Order Template)
-
-### DELETE
-
-+ Response 204
 
 ## Work Order Template Detail [/accounts/{accountId}/workordertemplates/{id}]
 
@@ -716,6 +727,10 @@ IN PROGRESS
 
 + Response 200 (application/json)
     + Attributes (Work Order)
+
+### DELETE
+
++ Response 204
 
 ## Assignee Collection [/accounts/{accountId}/workordertemplates/{workOrderTemplateId}/assignees{?page,pagesize,orderby}]
 
@@ -997,7 +1012,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Base PmSchedule (object)
 + `workOrderTemplateId`: 1 (number, required) - {INT} The integer id associated with the work order template for this schedule
-+ `taskBookId`: (number, optional) - {INT} The integer id associated with the task book for this schedule
++ `taskBookId`: 1 (number, optional) - {INT} The integer id associated with the task book for this schedule
 + `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
 + `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
 
