@@ -367,6 +367,20 @@ IN PROGRESS
     + Attributes (Base Collection Response)
         + `data` (array[Task Summary], required)
 
+## Task Summary Create [/accounts/{accountId}/taskbooks/{taskBookId}/tasks]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
+
+### POST
+
++ Request
+    + Attributes (Task Summary)
+
++ Response 201 (application/json)
+    + Attributes (Task Summary)
+
 ## Task Summary Detail [/accounts/{accountId}/taskbooks/{taskBookId}/tasks/{id}]
 
 + Parameters
@@ -378,6 +392,18 @@ IN PROGRESS
 
 + Response 200 (application/json)
     + Attributes (Task Summary)
+
+### PUT
+
++ Request
+    + Attributes (Task Summary)
+
++ Response 200 (application/json)
+    + Attributes (Task Summary)
+
+### DELETE
+
++ Response 204
 
 # Group Purposes
 
