@@ -681,6 +681,38 @@ IN PROGRESS
 
 + Response 204
 
+## Work Order Task Collection [/accounts/{accountId}/workorders/{workOrderId}/tasks{?page,pagesize,orderby}]
+
++ Parameters
+	+ accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - #INT ID of the work order in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+	
+### GET
+
++ Response 200 (application/json)
+	+ Attributes (Base Collection Response)
+		+ `data` (array[Work Order Task], required)
+		
+### POST
+
++ Response 201 (application/json)
+	+ Attributes (Work Order Task)
+	
+## Work Order Task Detail [/accounts/{accountId}/workorders/{workOrderId}/tasks/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - #INT ID of the work order in the form of an integer
+    + id: 12345 (required, number) - #INT ID of the attachment in the form of an integer
+	
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Work Order Task)
+
 ## Work Order Template Collection [/accounts/{accountId}/workordertemplates{?page,pagesize,orderby,purpose}]
 
 + Parameters
@@ -1113,3 +1145,14 @@ Any response that does not provide a ```200 OK``` response code should be treate
 ## Currency (object)
 + `value` : 22.10 (number, required) - The currency value.
 + `unit` : `USD` (string, required) - The ISO 4217 currency code.
+
+## Work Order Task (Base Audit Object)
+
++ `id`: 1 (number, required) - #INT The ID of the task.
++ `title`: `Drain Oil` (string, required) - The title of the task.
++ `procedure`: `Steps to complete this task` (string, optional) - The detailed instructions for how to complete the task.
++ `order` : 1 (number, required) - #INT The order in which the task should be completed.
++ `notes` : `Drained 1L of oil` (string, optional) - The notes for the task.
++ `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - The date and time the task was completed.
++ `completedByUser` : (Base User Object, optional) - The ID for the user that completed the task.
++ `isCompleted` : true (boolean, required) - Indicates is the task has been completed.
