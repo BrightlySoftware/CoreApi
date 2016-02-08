@@ -684,7 +684,7 @@ IN PROGRESS
 ## Work Order Task Collection [/accounts/{accountId}/workorders/{workOrderId}/tasks{?page,pagesize,orderby}]
 
 + Parameters
-	+ accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - #INT ID of the work order in the form of an integer
     + page: 1 (number, optional) - #INT The page to request from the collection.
     + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
@@ -693,13 +693,13 @@ IN PROGRESS
 ### GET
 
 + Response 200 (application/json)
-	+ Attributes (Base Collection Response)
-		+ `data` (array[Work Order Task], required)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Task], required)
 		
 ### POST
 
 + Response 201 (application/json)
-	+ Attributes (Work Order Task)
+    + Attributes (Work Order Task)
 	
 ## Work Order Task Detail [/accounts/{accountId}/workorders/{workOrderId}/tasks/{id}]
 
