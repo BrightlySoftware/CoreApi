@@ -711,7 +711,7 @@ IN PROGRESS
 ### PUT
 
 + Response 200 (application/json)
-    + Attributes (Work Order Task)
+    + Attributes (Work Order Task Lite)
 
 ## Work Order Template Collection [/accounts/{accountId}/workordertemplates{?page,pagesize,orderby,purpose}]
 
@@ -1155,3 +1155,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - The date and time the task was completed.
 + `completedByUser` : (Base User Object, optional) - The ID for the user that completed the task.
 + `isCompleted` : true (boolean, required) - Indicates is the task has been completed.
+
+## Work Order Task Lite (object)
++ `id`: 1 (number, required) - #INT The ID of the task.
++ `isCompleted` : true (boolean, required) - Indicates is the task has been completed.
+
