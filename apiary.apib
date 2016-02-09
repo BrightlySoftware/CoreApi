@@ -1147,10 +1147,10 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `unit` : `USD` (string, required) - The ISO 4217 currency code.
 
 ## Work Order Task (Base Audit Object)
-+ `id`: 1 (number, required) - #INT The ID of the task.
++ `id`: 1 (number, required) - {INT} The ID of the task.
 + `title`: `Drain Oil` (string, required) - The title of the task.
 + `procedure`: `Steps to complete this task` (string, optional) - The detailed instructions for how to complete the task.
-+ `order` : 1 (number, required) - #INT The order in which the task should be completed.
++ `order` : 1 (number, required) - {INT} The order in which the task should be completed.
 + `notes` : `Drained 1L of oil` (string, optional) - The notes for the task.
 + `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - The date and time the task was completed.
 + `completedByUser` : (Base User Object, optional) - The ID for the user that completed the task.
