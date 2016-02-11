@@ -787,7 +787,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 200 (application/json)
     + Attributes (Heartbeat)
-	
+
 # System Information
 
 ## System Information [/]
@@ -795,9 +795,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 ### GET
 
 + Response 200 (application/json)
-	+ Attributes (System Information)
-		+ `vitals` (Heartbeat)
-		+ `links` (array[System Links])
+    + Attributes (System Information)
 
 # Data Structures
 
@@ -805,6 +803,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `application`: `Dude Unified Api` (string, required) - The name of the application.
 + `version` : `1.0.0.0` (string, required) - The assembly version.
 + `apiVersion` : `1.0.0.0` (string, required) - The API version.
++ `vitals` (Heartbeat, required) - The state of the system dependencies.
++ `links` (array[System Links], required) - The API routes.
 
 ## System Links (object)
 + `endpoint` : `WorkOrder` (string, required) - The name of the endpoint.
