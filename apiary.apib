@@ -47,6 +47,29 @@ None at this time
 ## Documentation Notes
 In Progress
 
+<<<<<<< Updated upstream
+=======
+# Group System Information
+
+## System Information [/]
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (System Information)
+
+# Group Health
+
+## Heartbeat [/heartbeat]
+The heartbeat is exposed and provided to check for availability of the service.
+Any response that does not provide a ```200 OK``` response code should be treated as an error.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Heartbeat)
+
+>>>>>>> Stashed changes
 # Group Assets
 
 IN PROGRESS
@@ -55,6 +78,7 @@ IN PROGRESS
 ## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,page,pagesize,orderby}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer.
     + q: Sample (string, optional) - Custom query object.
     + parentid: 1 (number, optional) - The ID of the parent as a long.
@@ -65,6 +89,18 @@ IN PROGRESS
     + includedescendants: true (boolean, optional) - Include descendant assets or just the current level?
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
+    + q: Sample (string, optional) - Custom query object.
+    + parentid: 1 (number, optional) - {INT} The ID of the parent as a long.
+    + name: Facility (string, optional) - The name of the asset.
+    + description: Big Building (string, optional) - The description of the asset.
+    + isactive: true (string, optional) - Return active or inactive assets?
+    + businessassettypeid: 1 (number, optional) - {INT} Return assets that match a specific asset type.
+    + includedescendants: true (boolean, optional) - Include descendant assets or just the current level?
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+>>>>>>> Stashed changes
     + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
     
 ### GET
@@ -80,8 +116,13 @@ IN PROGRESS
 ## Business Asset Detail [/accounts/{accountId}/businessassets/{id}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the business asset in the form on an integer
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset in the form on an integer
+>>>>>>> Stashed changes
 
 ### GET
 
@@ -98,9 +139,15 @@ IN PROGRESS
 ## Business Asset Type Collection [/accounts/{accountId}/businessassettypes{?page,pagesize,orderby}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+=======
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+>>>>>>> Stashed changes
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     
 ### GET
@@ -116,15 +163,41 @@ IN PROGRESS
 ## Business Asset Type Detail [/accounts/{accountId}/businessassettypes/{id}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the business asset type in the form on an integer
     
+=======
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset type in the form on an integer
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
 
 ### PUT
 
+<<<<<<< Updated upstream
+=======
++ Request
+    + Attributes (Business Asset Type Update)
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Type)
+
+## Business Asset Attribute Type Collection [/accounts/{accountId}/businessassettypes/{businessAssetTypeId}/businessassetattributetypes{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + businessAssetTypeId: 12345 (required, number) - {INT} ID of the business asset type in the form on an integer
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
+>>>>>>> Stashed changes
 + Response 200 (application/json)
 
 # Group Quantities
@@ -134,8 +207,13 @@ IN PROGRESS
 ### GET
 
 + Parameters
+<<<<<<< Updated upstream
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+=======
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+>>>>>>> Stashed changes
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
 
 + Response 200 (application/json)
@@ -145,13 +223,22 @@ IN PROGRESS
 ## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?measurementsystem,page,pagesize,orderby}]
 
 + Parameters
+<<<<<<< Updated upstream
     + quantityTypeId: 12345 (required, number) - ID of the measurement type in the form on an integer
+=======
+    + quantityTypeId: 12345 (required, number) - {INT} ID of the measurement type in the form on an integer
+>>>>>>> Stashed changes
     + measurementsystem: None (optional, enum[string]) - The measurement system to filter
         + `None` - No filter specified
         + `Metric` - Limit to Metric measurements
         + `Imperial`- Limit to Imperial measurements
+<<<<<<< Updated upstream
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+=======
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+>>>>>>> Stashed changes
     + orderby: unitKey asc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
@@ -169,9 +256,15 @@ IN PROGRESS
 ## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+=======
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+>>>>>>> Stashed changes
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
@@ -180,7 +273,164 @@ IN PROGRESS
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
+<<<<<<< Updated upstream
         + `data` (array[Purpose], required)
+=======
+        + `data` (array[PmSchedule], required)
+
+## Schedule Create [/accounts/{accountId}/pmschedules]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+
+### POST
+
++ Request
+    + Attributes (Base PmSchedule)
+
++ Response 201 (application/json)
+    + Attributes (PmSchedule)
+
+## Pm Schedule Detail [/accounts/{accountId}/pmschedules/{id}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+
+### PUT
+
++ Request
+    + Attributes (PmSchedule)
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+
+## Pm Schedule Run Dates [/accounts/{accountId}/pmschedules/{id}/rundates]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule
+
+### PUT
+
++ Request
+    + Attributes (Update PmSchedule Run Dates)
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+
+## PM Schedules Business Asset Collection [/accounts/{accountId}/pmschedules/{pmScheduleId}/businessassets{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + pmScheduleId: 1 (number, required) - ID of the work order template object who's collection is being referenced
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Lite], required)
+
+## PM Schedules Business Asset Collection Detail [/accounts/{accountId}/pmschedules/{pmScheduleId}/businessassets/{id}]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + pmScheduleId: 1 (number, required) - ID of the work order template object who's collection is being referenced
+    + id: 1 (number, required) - {INT} The ID of the Business Asset
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Lite)
+
+### DELETE
+
++ Response 204
+
+# Group Task Books
+
+## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q,ismaster}]
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Title asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + ismaster: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Task Book], required)
+
+## Task Book Create [/accounts/{accountId}/taskbooks]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+
+### POST
+
++ Request
+    + Attributes (Task Book)
+
++ Response 201 (application/json)
+    + Attributes (Task Book)
+
+## Task Book Detail [/accounts/{accountId}/taskbooks/{id}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the task book
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Task Book)
+
+### PUT
+
++ Request
+    + Attributes (Task Book)
+
++ Response 200 (application/json)
+    + Attributes (Task Book)
+
+### DELETE
+
++ Response 204
+
+## Task Summary Collection [/accounts/{accountId}/taskbooks/{taskBookId}/tasks{?page,pagesize,orderby,q}]
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Order asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Task Summary], required)
+
+## Task Summary Create [/accounts/{accountId}/taskbooks/{taskBookId}/tasks]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
+>>>>>>> Stashed changes
 
 ### POST
 
@@ -207,12 +457,48 @@ IN PROGRESS
 
 + Response 204
 
+<<<<<<< Updated upstream
 ## Purpose Detail Status [/accounts/{accountId}/purposes/{id}/active/{status}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the purpose in the form of an integer
     + status: true (required, boolean) - The boolean to change the status of the purpose, either true or false
+=======
+# Group Purposes
+
+## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Purpose], required)
+
+### POST
+
++ Response 201 (application/json)
+    + Attributes (Purpose)
+
+## Purpose Detail [/accounts/{accountId}/purposes/{id}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the purpose in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Purpose)
+>>>>>>> Stashed changes
 
 ### PUT
 
@@ -224,9 +510,15 @@ IN PROGRESS
 ## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+>>>>>>> Stashed changes
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     
 ### GET
@@ -242,6 +534,13 @@ IN PROGRESS
     
 ## Labor Hour Types Detail [/accounts/{accountId}/laborhourtypes/{id}]
 
+<<<<<<< Updated upstream
+=======
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 1 (required, number) - {INT} The ID of the labor type
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
@@ -257,6 +556,7 @@ IN PROGRESS
 ## Work Category Collection [/accounts/{accountId}/workcategories{?page,pagesize,orderby,q,isactive,parentid}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
@@ -265,6 +565,16 @@ IN PROGRESS
     + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
     + parentid (number, optional) - Filter the list to get all children of a parent, when not set returns all.
     
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + parentid: 3 (string, optional) - {INT} Filter the list to get all children of a parent, when not set returns all.
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
@@ -279,9 +589,15 @@ IN PROGRESS
 ## Work Category Detail [/accounts/{accountId}/workcategories/{id}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the work category in the form of an integer
     
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the work category in the form of an integer
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
@@ -301,6 +617,7 @@ IN PROGRESS
 ## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
@@ -321,12 +638,42 @@ IN PROGRESS
     + workcategory: 1 (array[number], optional) - Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
     
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - A free form filter mechanism.
+    + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
+    + assignees: 1 (array[number], optional) - {INT} Filter by assignees.
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
+    + createdby: 1 (number, optional) -  {INT} Filter by the user who created the work order.
+    + displayid: WO123 (string, optional) - Filter by the display ID of the work order.
+    + priority: Low (array[Priority], optional) - Filter by the priority of work orders.
+    + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
+    + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
+    + status: NewRequest (array[Work Order Status], optional) - Filter by the work order status.
+    + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
+    + businessasset: 1 (array[number], optional) - {INT} Filter by the business asset assigned to the work order.
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
         + `data` (array[Work Order], required)
 
+<<<<<<< Updated upstream
+=======
+## Work Order Create [/accounts/{accountId}/workorders]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+
+>>>>>>> Stashed changes
 ### POST
 
 + Response 201 (application/json)
@@ -335,9 +682,15 @@ IN PROGRESS
 ## Work Order Detail [/accounts/{accountId}/workorders/{id}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the work order in the form of an integer
     
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
@@ -355,7 +708,13 @@ IN PROGRESS
 
 ## Work Order Export [/accounts/{accountId}/workorders/{id}/ascsv]
 
+<<<<<<< Updated upstream
 *Deprecated*
+=======
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 1 (required, number) - {INT} The ID of the workorder
+>>>>>>> Stashed changes
 
 ### As CSV [GET]
 
@@ -364,10 +723,17 @@ IN PROGRESS
 ## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+>>>>>>> Stashed changes
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     
 ### GET
@@ -384,10 +750,17 @@ IN PROGRESS
 ## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
     + id: 12345 (required, number) - ID of the transaction in the form of an integer
     
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the transaction in the form of an integer
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
@@ -405,10 +778,17 @@ IN PROGRESS
 ## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+>>>>>>> Stashed changes
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     
 ### GET
@@ -425,10 +805,17 @@ IN PROGRESS
 ## Attachment Detail [/accounts/{accountId}/workorders/{workOrderId}/attachments/{id}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
     + id: 12345 (required, number) - ID of the attachment in the form of an integer
     
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
@@ -438,10 +825,75 @@ IN PROGRESS
 
 + Response 204
 
+<<<<<<< Updated upstream
 ## Work Order Template Collection [/accounts/{accountId}/workordertemplates]
 
 + Parameters
     + accountId: 1 (required, number) - ID of the account in the form of an integer
+=======
+## Work Order Task Collection [/accounts/{accountId}/workorders/{workOrderId}/tasks{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Task], required)
+
+## Work Order Task Create [/accounts/{accountId}/workorders/{workOrderId}/tasks]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+
+### POST
+
++ Request (application/json)
+    + Attributes (Work Order Task)
+
++ Response 201 (application/json)
+    + Attributes (Work Order Task)
+
+## Work Order Task Detail [/accounts/{accountId}/workorders/{workOrderId}/tasks/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Work Order Task)
+
+# Group Work Order Templates
+
+## Work Order Template Collection [/accounts/{accountId}/workordertemplates{?page,pagesize,orderby,purpose}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id asc (string, optional) - A string describing the ordering to perform on the collection.
+    + purpose: 1 (number, optional) - {INT} The ID of a purpose to filter the collection
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Template], required)
+
+## Work Order Template Create [/accounts/{accountId}/workordertemplates]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+>>>>>>> Stashed changes
 
 ### POST
 
@@ -458,9 +910,15 @@ IN PROGRESS
 ## Work Order Template Detail [/accounts/{accountId}/workordertemplates/{id}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (required, number) - ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the work order in the form of an integer
     
+=======
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
@@ -478,18 +936,37 @@ IN PROGRESS
 ## Assignee Collection [/accounts/{accountId}/workordertemplates{workOrderTemplateId}/assignees{?page,pagesize,orderby}]
 
 + Parameters
+<<<<<<< Updated upstream
     + accountId: 1 (number, required) - ID of the account in the form of an integer
     + workOrderTemplateId: 1 (number, required) - ID of the work order template object who's collection is being referenced
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
     
+=======
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + workOrderTemplateId: 1 (number, required) - {INT} ID of the work order template object who's collection is being referenced
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+>>>>>>> Stashed changes
 ### GET
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
         + `data` (array[Base User Object], required)
+<<<<<<< Updated upstream
         
 ## Assignee Collection Detail [/accounts/{accountId}/workordertemplates{workOrderTemplateId}/assignees/{id}]
+=======
+
+## Assignee Collection Detail [/accounts/{accountId}/workordertemplates/{workOrderTemplateId}/assignees/{id}]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + workOrderTemplateId: 1 (number, required) - {INT} ID of the work order template object who's collection is being referenced
+    + id: 1 (number, required) - {INT} The User ID of the assignee
+>>>>>>> Stashed changes
 
 ### PUT
 
@@ -502,9 +979,14 @@ IN PROGRESS
 
 # Group Health
 
+<<<<<<< Updated upstream
 ## Heartbeat [/heartbeat]
 The heartbeat is exposed and provided to check for availability of the service.
 Any response that does not provide a ```200 OK``` response code should be treated as an error.
+=======
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+>>>>>>> Stashed changes
 
 ### GET
 
@@ -514,10 +996,17 @@ Any response that does not provide a ```200 OK``` response code should be treate
 # Data Structures
 
 ## Base Collection Response (object)
+<<<<<<< Updated upstream
 + `page`: 1 (number, required) - The current page provided in the response data.
 + `pageSize`: 1000 (number, required) - The page size returned in the response data.
 + `dataSize`: 1000 (number, required) - The total records returned in the response.
 + `total`: 2000 (number, required) - The total number of records available in the collection.
+=======
++ `page`: 1 (number, required) - {INT} The current page provided in the response data.
++ `pageSize`: 1000 (number, required) - {INT} The page size returned in the response data.
++ `dataSize`: 1000 (number, required) - {INT} The total records returned in the response.
++ `total`: 2000 (number, required) - {INT} The total number of records available in the collection.
+>>>>>>> Stashed changes
 
 ## Base Audit Object (object)
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
@@ -528,14 +1017,22 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Base User Object (object)
+<<<<<<< Updated upstream
 + `id`: 1 (number, required) - The ID of the user.
+=======
++ `id`: 1 (number, required) - {INT} The ID of the user.
+>>>>>>> Stashed changes
 + `firstName`: John (string, required) - The first name of the user.
 + `lastName`: Smith (string, required) - The last name of the user.
 + `email`: john.smith@dudesolutions.io (string, required) - The email address of the user.
 
 ## Base Client Object (object)
+<<<<<<< Updated upstream
 + `id`: 1 (number, required) - The ID of the API client.
 + `clientId`: publicclient (string, required) - The client ID of the API client.
+=======
++ `id`: 1 (number, required) - {INT} The ID of the API client.
+>>>>>>> Stashed changes
 
 ## Heartbeat (object)
 + `applicationdbvitalCheck`: true (boolean, required) - Vital check to ensure the data store is online.
@@ -547,6 +1044,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `description`: The big government campus (string, optional) - Description
 + `notes`: Some notes would go here (string, optional) - Description
 + `isActive`: true (boolean, required) - Description
+<<<<<<< Updated upstream
 + `ancestorIdPath`: Sample (string, required) - Description
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
@@ -558,6 +1056,87 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Unit Of Measure (object)
 + `id`: 1 (number, required) - The ID of the unit of measure.
+=======
++ `parent` (Business Asset Reference, optional)
+
+## Business Asset Update (Business Asset Create)
++ `id`: 1 (number, required) - {INT} The ID of the object
+
+## Business Asset (Business Asset Update)
++ `parent` (Business Asset Lite) - Describes the initial parent
++ `ancestorIdPath`: Sample (string, required) - Description
++ `ancestorNamePath`: Sample (string, required) - Description
++ `hasChildren`: true (boolean, required) - Description
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
+## Business Asset Reference (object)
++ `id`: 1 (number, required) - {INT} The ID of the object
+
+## Business Asset Lite (Business Asset Reference)
++ `name`: pump (string, required) - The name of the asset
++ `description`: outside pump (string, required) - The description of the asset
++ `isActive`: true (boolean, required) - Indicates if the asset is active
++ `hasChildren`: true (boolean, required) - Description
++ `notes`: Some notes would go here (string, optional) - Description
+
+## Business Asset Type Create (object)
++ `description`: Bridge (string, required) - The name of the asset type
+
+## Business Asset Type Update (Business Asset Type Create)
++ `id`: 1 (number, required) - {INT} The ID of the object
+
+## Business Asset Type (Business Asset Type Update)
++ `isDudeAssetType`: true (boolean, required) - Indicates if this is a common platform asset type
++ `businessAssetAttributeTypeCount`: 4 (number, required) - {INT} The number of attributes on this asset type
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
+## Business Asset Attribute Type Create (object)
++ `key`: length (string, required) - The name of the attribute type
++ `valueType`: date (enum[string], required) -
+    + `date` - Represents a date/time
+    + `double` - Represents a floating point value
+    + `integer` - Represents a whole number
+    + `money` - Represents a floating point number greater than 0 and two decimal places
+    + `string` - Represents a series of characters
+    + `boolean` - Represents a true/false value
++ `isActive`: true (boolean, required) - Indicates if the attribute type is active
++ `fieldLength`: 125 (number, optional) - {INT} The number of characters allowed for the attribute
++ `quantity` (Quantity Reference, required) - The quantity type
++ `businessAssetAttributeTypeCodes` (array[Business Asset Attribute Type Code], optional) - The type codes
+
+## Business Asset Attribute Type Update (Business Asset Attribute Type Create)
++ `id`: 1 (number, required) - {INT} The ID of the object
+
+## Business Asset Attribute Type (Business Asset Attribute Type Update)
++ `quantity` (Quantity, required) - The quantity type
+
+## Business Asset Attribute Type Code (object)
++ `id`: 1 (number, required) - {INT} The ID of the object
++ `keyCode`: yes (string, required) - The string representation
++ `valueCode`: Yes Sir (string, required) - The display representation of the type code
+
+## Quantity Create (object)
++ `quantity`: Length (string, required) - The name of the quantity type
+
+## Quantity (Quantity Create)
++ `id`: 1 (number, required) - {INT} The ID of the quantity.
+
+## Quantity Reference (object)
++ `id`: 1 (number, required) - {INT} The ID of the quantity.
+
+## Unit Of Measure (object)
++ `id`: 1 (number, required) - {INT} The ID of the unit of measure.
+>>>>>>> Stashed changes
 + `unitKey`: feet (string, required) - The unit of measurement as a string.
 + `measurementSystem`: None (enum[string], required) - The measurement system this unit belongs to.
         + `None` - Not associated with a given measurement system.
@@ -565,17 +1144,29 @@ Any response that does not provide a ```200 OK``` response code should be treate
         + `Imperial`- Limit to Imperial measurements.
 
 ## Purpose (Base Audit Object)
+<<<<<<< Updated upstream
 + `id`: 1 (number, required) - The ID of the purpose.
+=======
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
+>>>>>>> Stashed changes
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
 
 ## Labor Hour Type (Base Audit Object)
+<<<<<<< Updated upstream
 + `id`: 1 (number, required) - The ID of the labor hour type.
+=======
++ `id`: 1 (number, required) - {INT} The ID of the labor hour type.
+>>>>>>> Stashed changes
 + `type`: Regular (string, required) - The name of the labor type.
 + `multiplier`: 1.0 (number, required) - The multiplier associated with the labor type.
 
 ## Work Category (Base Audit Object)
+<<<<<<< Updated upstream
 + `id`: 1 (number, required) - The ID of the work category.
+=======
++ `id`: 1 (number, required) - {INT} The ID of the work category.
+>>>>>>> Stashed changes
 + `value`: Environmental (string, required) - The description of the work category.
 + `isActive`: true (boolean, required) - Indicates if the work category is active.
 
@@ -595,7 +1186,13 @@ Any response that does not provide a ```200 OK``` response code should be treate
 `latLongMatchesAddress`: true (boolean, required) - Indicates if the location address matches the latitude and longitude coordinates.
 
 ## Work Order (Base Audit Object)
+<<<<<<< Updated upstream
 + `id`: 1 (number, required) - The unique identifier of the work order.
+=======
++ `id`: 1 (number, required) - {INT} The unique identifier of the work order.
++ `workOrderTemplate` (Work Order Template Reference, optional) - the work order template that this work order was generated from, if applicable
++ `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
+>>>>>>> Stashed changes
 + `displayId`: WO100 (string, required) - The display ID for the work order.
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `status`: 1 (number, required) - The status of a work order, in integer format.
@@ -603,7 +1200,11 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `requestDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The requested date and time for the work order.
 + `completionDateTime`:  `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the work order was completed.
 + `actionTaken`: I replaced the bolt (string, optional) - Text that describes what was done to resolve the reported issue.
+<<<<<<< Updated upstream
 + `attachmentCount`: 1 (number, optional) - A count of attachments associated with the work order.
+=======
++ `attachmentCount`: 1 (number, optional) - {INT} A count of attachments associated with the work order.
+>>>>>>> Stashed changes
 + `requestedBy` (Base User Object, required) - The user who requested the work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
@@ -613,6 +1214,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
 
 ## Work Order Attachment (Base Audit Object)
+<<<<<<< Updated upstream
 + `id`: 1 (number, required) - The ID of the work order attachment.
 + `name`: My File (string, required) - The display name for the work order attachment.
 + `fileApiId`: 123 (number, required) - The File Service ID for the attachment.
@@ -620,6 +1222,15 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Work Order Transaction (Base Audit Object)
 + `id`: 1 (number, required) - The ID of the work order attachment.
+=======
++ `id`: 1 (number, required) - {INT} The ID of the work order attachment.
++ `name`: My File (string, required) - The display name for the work order attachment.
++ `fileApiId`: 123 (number, required) - {INT} The File Service ID for the attachment.
++ `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
+
+## Work Order Transaction (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the work order attachment.
+>>>>>>> Stashed changes
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
 + `typeAttributes` (Transaction Type, required) - The details of the transaction.
@@ -628,12 +1239,19 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `type`: Regular (string, required) - The type of transaction.
 + `cost`: 22.10 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
 
+<<<<<<< Updated upstream
+=======
+## Work Order Template Reference (object)
++ `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
+
+>>>>>>> Stashed changes
 ## Work Order Template Create (object)
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `priority`: 2 (number, required) - The priority of a work order, in integer format.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
+<<<<<<< Updated upstream
 + `dudeDateOffset`: 1 (number, optional) - The number of days out to set the dudeDateTime
 
 ## Work Order Template Update (Work Order Template Create)
@@ -641,6 +1259,49 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Work Order Template (Work Order Template Update)
 + `assigneeCount`: 1 (number, required) The number of assignees that exists for the template
+=======
++ `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime
+
+## Work Order Template (Work Order Template Create)
++ `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
++ `assigneeCount`: 1 (number, required) - {INT} The number of assignees that exists for the template
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
+## Recurrence Pattern (object)
++ `time`: `03:00:00` (string, optional) - The time of the recurrence
++ `dayOfMonth`: 24 (number, optional) - {INT} The day of the month that applies to the recurrence
++ `daysOfWeek` (array[number], optional) - {INT} The days of week that the recurrence applies to
++ `every`: 2 (number, optional) - {INT} How often it repeats
++ `month`: 12 (number, optional) - {INT} The month that the pattern recurs
++ `period`: `Day` (string, optional) - The period
++ `ordinal`: `1` (string, optional) - The integer value relating to an ordinal number (eg: 1 for 1st)
++ `startDateTime`: "2015-10-01T00:00:00Z" (string, optional) - The date/time that the recurrence pattern starts
++ `endDateTime`: "2016-10-01T00:00:00Z" (string, optional) - The date/time that the recurrence pattern terminates
++ `targetDate`: "2016-10-01T00:00:00Z" (string, optional) - The target generation date for the recurrence pattern
++ `cronex`: "0 0 12 * * ?" (string, optional) - The cron expression. This is a system generated expression based on the recurrence pattern.
+
+## PmSchedule Reference (object)
++ `id`: 1 (number, required) - the ID for the schedule object
+
+## Base PmSchedule (object)
++ `workOrderTemplateId`: 1 (number, required) - {INT} The integer id associated with the work order template for this schedule
++ `taskBookId`: 1 (number, optional) - {INT} The integer id associated with the task book for this schedule
++ `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
++ `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
+
+## PmSchedule (Base PmSchedule)
++ `id`: 1 (number, required) - the ID for the schedule object
++ `title`: `Pm Schedule` (string) - the title for the schedule object
++ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
++ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
++ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
++ `businessAssetCount`: 0 (number, required) - {INT} The number of business assets attached to the schedule
+>>>>>>> Stashed changes
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
