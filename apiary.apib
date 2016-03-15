@@ -882,17 +882,17 @@ IN PROGRESS
 + `cachevitalcheck`: true (boolean, required) - Vital check to ensure the cache store is online.
 
 ## Business Asset Create (object)
-+ `name`: Main Government Campus (string, required) - Description
-+ `description`: The big government campus (string, optional) - Description
-+ `notes`: Some notes would go here (string, optional) - Description
-+ `isActive`: true (boolean, required) - Description
-+ `parent` (Business Asset Reference, optional)
++ `name`: Main Government Campus (string, required) - The name of the asset
++ `description`: The big government campus (string, optional) - The description of the asset
++ `notes`: Some notes would go here (string, optional) - Notes about the asset
++ `isActive`: true (boolean, required) - Indicates if the asset is active
++ `parent` (Business Asset Reference, optional) - Describes the parent asset
++ `businessAssetType` (Business Asset Type Update, required) - Describes the type of the asset.
 
 ## Business Asset Update (Business Asset Create)
 + `id`: 1 (number, required) - {INT} The ID of the object
 
 ## Business Asset (Business Asset Update)
-+ `parent` (Business Asset Lite) - Describes the initial parent
 + `ancestorIdPath`: Sample (string, required) - Description
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
