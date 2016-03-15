@@ -107,7 +107,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {INT} ID of the business asset in the form on an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
 
 ### GET
 
@@ -155,7 +155,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + businessAssetId: 1 (required, number) - {INT} ID of the asset in the form of an integer
-    + id: 12345 (required, number) - {INT} ID of the business asset in the form on an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
 
 ### PUT
 
@@ -192,7 +192,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {INT} ID of the business asset type in the form on an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset type in the form of an integer
 
 ### GET
 
@@ -211,7 +211,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + businessAssetTypeId: 12345 (required, number) - {INT} ID of the business asset type in the form on an integer
+    + businessAssetTypeId: 12345 (required, number) - {INT} ID of the business asset type in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
@@ -240,7 +240,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 ## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?measurementsystem,page,pagesize,orderby}]
 
 + Parameters
-    + quantityTypeId: 12345 (required, number) - {INT} ID of the measurement type in the form on an integer
+    + quantityTypeId: 12345 (required, number) - {INT} ID of the measurement type in the form of an integer
     + measurementsystem: None (optional, enum[string]) - The measurement system to filter
         + `None` - No filter specified
         + `Metric` - Limit to Metric measurements
