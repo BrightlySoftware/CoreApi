@@ -74,9 +74,6 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Assets
 
-IN PROGRESS
------------
-
 ## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,page,pagesize,orderby}]
 
 + Parameters
@@ -110,7 +107,7 @@ IN PROGRESS
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {INT} ID of the business asset in the form on an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
 
 ### GET
 
@@ -128,6 +125,46 @@ IN PROGRESS
 ### DELETE
 
 + Response 204
+
+## Business Asset Attribute Collection [/accounts/{accountId}/businessassets/{businessAssetId}/businessassetattributes{?q,page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
+    + businessAssetId: 1 (required, number) - {INT} ID of the asset in the form of an integer.
+    + q: Sample (string, optional) - Custom query object.
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Attribute], required)
+
+### POST
+
++ Request
+    + Attributes (Business Asset Attribute Create)
+
++ Response 201 (application/json)
+    + Attributes (Business Asset Attribute)
+
+## Business Asset Attribute Detail [/accounts/{accountId}/businessassets/{businessAssetId}/businessassetattributes/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + businessAssetId: 1 (required, number) - {INT} ID of the asset in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
+
+### PUT
+
++ Request
+    + Attributes (Business Asset Attribute)
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Attribute)
+
 
 ## Business Asset Type Collection [/accounts/{accountId}/businessassettypes{?page,pagesize,orderby}]
 
@@ -155,7 +192,7 @@ IN PROGRESS
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {INT} ID of the business asset type in the form on an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset type in the form of an integer
 
 ### GET
 
@@ -174,7 +211,7 @@ IN PROGRESS
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + businessAssetTypeId: 12345 (required, number) - {INT} ID of the business asset type in the form on an integer
+    + businessAssetTypeId: 12345 (required, number) - {INT} ID of the business asset type in the form of an integer
     + page: 1 (number, optional) - The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
@@ -203,7 +240,7 @@ IN PROGRESS
 ## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?measurementsystem,page,pagesize,orderby}]
 
 + Parameters
-    + quantityTypeId: 12345 (required, number) - {INT} ID of the measurement type in the form on an integer
+    + quantityTypeId: 12345 (required, number) - {INT} ID of the measurement type in the form of an integer
     + measurementsystem: None (optional, enum[string]) - The measurement system to filter
         + `None` - No filter specified
         + `Metric` - Limit to Metric measurements
@@ -893,7 +930,9 @@ IN PROGRESS
 + `id`: 1 (number, required) - {INT} The ID of the object
 
 ## Business Asset (Business Asset Update)
-+ `ancestorIdPath`: Sample (string, required) - Description
++ `parent` (Business Asset Lite) - Describes the initial parent
++ `businessAssetAttributeCount`: 4 (number, optional) - The number of attributes associated with this business asset
++ `ancestorIdPath`: Sample (string, required) - Provides the ancestor IDs starting at root to the current parent node.
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
@@ -905,6 +944,14 @@ IN PROGRESS
 
 ## Business Asset Reference (object)
 + `id`: 1 (number, required) - {INT} The ID of the object
+
+## Business Asset Attribute Create (object)
++ `value`: 1200 (string, required) - The value of the asset attribute instance
++ `businessAssetAttributeType` (Business Asset Attribute Type, required) - The type of the asset attribute instance
++ `unitOfMeasure` (Unit Of Measure, required) - The unit of measure associated with the asset attribute instance
+
+## Business Asset Attribute (Business Asset Attribute Create)
++ `id`: 1 (number, required) - {INT} The ID of the asset attribute instance
 
 ## Business Asset Lite (Business Asset Reference)
 + `name`: pump (string, required) - The name of the asset
@@ -921,7 +968,7 @@ IN PROGRESS
 
 ## Business Asset Type (Business Asset Type Update)
 + `isDudeAssetType`: true (boolean, required) - Indicates if this is a common platform asset type
-+ `businessAssetAttributeTypeCount`: 4 (number, required) - {INT} The number of attributes on this asset type
++ `businessAssetAttributeTypeCount`: 4 (number, required) - {INT} The number of attributes associated with this asset type
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
