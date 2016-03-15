@@ -919,12 +919,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `cachevitalcheck`: true (boolean, required) - Vital check to ensure the cache store is online.
 
 ## Business Asset Create (object)
-+ `name`: Main Government Campus (string, required) - Name of the asset
-+ `description`: The big government campus (string, optional) - Description of the asset
++ `name`: Main Government Campus (string, required) - The name of the asset
++ `description`: The big government campus (string, optional) - The description of the asset
 + `notes`: Some notes would go here (string, optional) - Notes about the asset
 + `isActive`: true (boolean, required) - Indicates if the asset is active
-+ `parent` (Business Asset Reference, optional) - Indicates the ID of the parent asset within the hierarchy
-+ `businessAssetType` (Business Asset Type, required) - Describes the type of asset
++ `parent` (Business Asset Reference, optional) - Describes the parent asset
++ `businessAssetType` (Business Asset Type Update, required) - Describes the type of the asset.
 
 ## Business Asset Update (Business Asset Create)
 + `id`: 1 (number, required) - {INT} The ID of the object
@@ -1067,6 +1067,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
++ `downtimeTracking` (Downtime Tracking, optional) - The downtime tracking assigned to the work order.
 
 ## Work Order Attachment (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the work order attachment.
@@ -1093,7 +1094,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
-+ `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime
++ `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime. 1 = today, 2 = tomorrow, etc.
 
 ## Work Order Template (Work Order Template Create)
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
@@ -1157,6 +1158,16 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `title`: Drain oil (string, required) - The title of the task.
 + `procedure`: Steps to complete this task (string, optional) - The detailed instructions for how to complete the task.
 + `order` : 1 (number, required) - {INT} The order in which the task should be completed.
+
+## Downtime Tracking (Base Audit Object)
++ `duration`: 850000000 (number, optional) - The downtime milliseconds recorded.
++ `cost`: 1028.50 (number, optional) - The entered cost for this workorder's downtime.
++ `failureReason` (Failure Reason, optional) - The failure reason assigned to this workorder's downtime.
+
+## Failure Reason (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the failure reason.
++ `name`: Accidental Damage (string, required) - The name of the failure reason.
++ `isActive`: true (boolean, required) - Indicates if the failure reason is active.
 
 ## Work Order Status (enum)
 + NewRequest (string)
