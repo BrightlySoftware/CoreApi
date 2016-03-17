@@ -165,6 +165,41 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 200 (application/json)
     + Attributes (Business Asset Attribute)
 
+## Business Asset Attachment Collection [/accounts/{accountId}/businessassets/{businessAssetId}/attachments{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + businessAssetId: 12345 (required, number) - {INT} ID of the work order in the form of a long
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Attachment], required)
+
+### POST
+
++ Response 201 (application/json)
+    + Attributes (Business Asset Attachment)
+
+## Business Asset Attachment Detail [/accounts/{accountId}/businessassets/{businessAssetId}/attachments/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + businessAssetId: 12345 (required, number) - {INT} ID of the work order in the form of a long
+    + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Attachment)
+
+### DELETE
+
++ Response 204
 
 ## Business Asset Type Collection [/accounts/{accountId}/businessassettypes{?page,pagesize,orderby}]
 
@@ -960,6 +995,9 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `hasChildren`: true (boolean, required) - Description
 + `notes`: Some notes would go here (string, optional) - Description
 
+## Business Asset Attachment (Attachment)
++ `id`: 1 (number, required) - {INT} The ID of the business asset attachment.
+
 ## Business Asset Type Create (object)
 + `description`: Bridge (string, required) - The name of the asset type
 
@@ -1069,9 +1107,11 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
 + `downtimeTracking` (Downtime Tracking, optional) - The downtime tracking assigned to the work order.
 
-## Work Order Attachment (Base Audit Object)
+## Work Order Attachment (Attachment)
 + `id`: 1 (number, required) - {INT} The ID of the work order attachment.
-+ `name`: My File (string, required) - The display name for the work order attachment.
+
+## Attachment (Base Audit Object)
++ `name`: My File (string, required) - The display name for the attachment.
 + `fileApiId`: 123 (number, required) - {INT} The File Service ID for the attachment.
 + `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
 
