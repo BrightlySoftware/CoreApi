@@ -74,7 +74,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Assets
 
-## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,page,pagesize,orderby}]
+## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
@@ -88,6 +88,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -103,11 +104,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Business Asset)
 
-## Business Asset Detail [/accounts/{accountId}/businessassets/{id}]
+## Business Asset Detail [/accounts/{accountId}/businessassets/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -126,7 +128,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 204
 
-## Business Asset Attribute Collection [/accounts/{accountId}/businessassets/{businessAssetId}/businessassetattributes{?q,page,pagesize,orderby}]
+## Business Asset Attribute Collection [/accounts/{accountId}/businessassets/{businessAssetId}/businessassetattributes{?q,page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
@@ -135,6 +137,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -150,12 +153,13 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Business Asset Attribute)
 
-## Business Asset Attribute Detail [/accounts/{accountId}/businessassets/{businessAssetId}/businessassetattributes/{id}]
+## Business Asset Attribute Detail [/accounts/{accountId}/businessassets/{businessAssetId}/businessassetattributes/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + businessAssetId: 1 (required, number) - {INT} ID of the asset in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### PUT
 
@@ -165,7 +169,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 200 (application/json)
     + Attributes (Business Asset Attribute)
 
-## Business Asset Attachment Collection [/accounts/{accountId}/businessassets/{businessAssetId}/attachments{?page,pagesize,orderby}]
+## Business Asset Attachment Collection [/accounts/{accountId}/businessassets/{businessAssetId}/attachments{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -173,6 +177,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -188,12 +193,13 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Business Asset Attachment)
 
-## Business Asset Attachment Detail [/accounts/{accountId}/businessassets/{businessAssetId}/attachments/{id}]
+## Business Asset Attachment Detail [/accounts/{accountId}/businessassets/{businessAssetId}/attachments/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + businessAssetId: 12345 (required, number) - {INT} ID of the business asset in the form of a long
     + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -204,13 +210,14 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 204
 
-## Business Asset Type Collection [/accounts/{accountId}/businessassettypes{?page,pagesize,orderby}]
+## Business Asset Type Collection [/accounts/{accountId}/businessassettypes{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -226,11 +233,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Business Asset Type)
 
-## Business Asset Type Detail [/accounts/{accountId}/businessassettypes/{id}]
+## Business Asset Type Detail [/accounts/{accountId}/businessassettypes/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the business asset type in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -299,7 +307,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group PM Schedules
 
-## PM Schedules Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive}]
+## PM Schedules Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive,includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
@@ -308,6 +316,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -315,10 +324,11 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Base Collection Response)
         + `data` (array[PmSchedule], required)
 
-## Schedule Create [/accounts/{accountId}/pmschedules]
+## Schedule Create [/accounts/{accountId}/pmschedules{?includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### POST
 
@@ -328,11 +338,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (PmSchedule)
 
-## Pm Schedule Detail [/accounts/{accountId}/pmschedules/{id}]
+## Pm Schedule Detail [/accounts/{accountId}/pmschedules/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the pm schedule
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -394,7 +405,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Task Books
 
-## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q,ismaster}]
+## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q,ismaster,includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
@@ -403,6 +414,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + orderby: Title asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + ismaster: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -410,10 +422,11 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Base Collection Response)
         + `data` (array[Task Book], required)
 
-## Task Book Create [/accounts/{accountId}/taskbooks]
+## Task Book Create [/accounts/{accountId}/taskbooks{?includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### POST
 
@@ -423,11 +436,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Task Book)
 
-## Task Book Detail [/accounts/{accountId}/taskbooks/{id}]
+## Task Book Detail [/accounts/{accountId}/taskbooks/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
     + id: 12345 (required, number) - ID of the task book
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -446,7 +460,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 204
 
-## Task Summary Collection [/accounts/{accountId}/taskbooks/{taskBookId}/tasks{?page,pagesize,orderby,q}]
+## Task Summary Collection [/accounts/{accountId}/taskbooks/{taskBookId}/tasks{?page,pagesize,orderby,q,includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
@@ -455,6 +469,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Order asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -462,11 +477,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Base Collection Response)
         + `data` (array[Task Summary], required)
 
-## Task Summary Create [/accounts/{accountId}/taskbooks/{taskBookId}/tasks]
+## Task Summary Create [/accounts/{accountId}/taskbooks/{taskBookId}/tasks{?includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
     + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### POST
 
@@ -476,12 +492,13 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Task Summary)
 
-## Task Summary Detail [/accounts/{accountId}/taskbooks/{taskBookId}/tasks/{id}]
+## Task Summary Detail [/accounts/{accountId}/taskbooks/{taskBookId}/tasks/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
     + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the task
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -502,7 +519,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Purposes
 
-## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive}]
+## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive,includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
@@ -511,6 +528,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -523,11 +541,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Purpose)
 
-## Purpose Detail [/accounts/{accountId}/purposes/{id}]
+## Purpose Detail [/accounts/{accountId}/purposes/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the purpose in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -545,13 +564,14 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Labor Hour Types
 
-## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby}]
+## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -564,11 +584,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Labor Hour Type)
 
-## Labor Hour Types Detail [/accounts/{accountId}/laborhourtypes/{id}]
+## Labor Hour Types Detail [/accounts/{accountId}/laborhourtypes/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + id: 1 (required, number) - {INT} The ID of the labor type
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -582,7 +603,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Work Categories
 
-## Work Category Collection [/accounts/{accountId}/workcategories{?page,pagesize,orderby,q,isactive,parentid}]
+## Work Category Collection [/accounts/{accountId}/workcategories{?page,pagesize,orderby,q,isactive,parentid,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -592,6 +613,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
     + parentid: 3 (string, optional) - {INT} Filter the list to get all children of a parent, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -604,11 +626,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Work Category Hierarchy)
 
-## Work Category Detail [/accounts/{accountId}/workcategories/{id}]
+## Work Category Detail [/accounts/{accountId}/workcategories/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the work category in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -626,7 +649,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Work Orders
 
-## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset}]
+## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -648,6 +671,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + status: NewRequest (array[Work Order Status], optional) - Filter by the work order status.
     + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - {INT} Filter by the business asset assigned to the work order.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -655,10 +679,11 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Base Collection Response)
         + `data` (array[Work Order], required)
 
-## Work Order Create [/accounts/{accountId}/workorders]
+## Work Order Create [/accounts/{accountId}/workorders{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### POST
 
@@ -668,11 +693,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Work Order)
 
 
-## Work Order Detail [/accounts/{accountId}/workorders/{id}]
+## Work Order Detail [/accounts/{accountId}/workorders/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -699,7 +725,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 200 (text/csv)
 
-## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby}]
+## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -707,6 +733,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -719,12 +746,13 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Work Order Transaction)
 
-## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}]
+## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the transaction in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -740,7 +768,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 204
 
-## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby}]
+## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -748,6 +776,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -763,12 +792,13 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Work Order Attachment)
 
-## Attachment Detail [/accounts/{accountId}/workorders/{workOrderId}/attachments/{id}]
+## Attachment Detail [/accounts/{accountId}/workorders/{workOrderId}/attachments/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -779,7 +809,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 204
 
-## Work Order Task Collection [/accounts/{accountId}/workorders/{workOrderId}/tasks{?page,pagesize,orderby}]
+## Work Order Task Collection [/accounts/{accountId}/workorders/{workOrderId}/tasks{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -787,6 +817,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -794,11 +825,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Base Collection Response)
         + `data` (array[Work Order Task], required)
 
-## Work Order Task Create [/accounts/{accountId}/workorders/{workOrderId}/tasks]
+## Work Order Task Create [/accounts/{accountId}/workorders/{workOrderId}/tasks{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### POST
 
@@ -808,12 +840,13 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Work Order Task)
 
-## Work Order Task Detail [/accounts/{accountId}/workorders/{workOrderId}/tasks/{id}]
+## Work Order Task Detail [/accounts/{accountId}/workorders/{workOrderId}/tasks/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### PUT
 
@@ -822,7 +855,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Work Order Templates
 
-## Work Order Template Collection [/accounts/{accountId}/workordertemplates{?page,pagesize,orderby,purpose}]
+## Work Order Template Collection [/accounts/{accountId}/workordertemplates{?page,pagesize,orderby,purpose,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -830,6 +863,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id asc (string, optional) - A string describing the ordering to perform on the collection.
     + purpose: 1 (number, optional) - {INT} The ID of a purpose to filter the collection
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -837,10 +871,11 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Base Collection Response)
         + `data` (array[Work Order Template], required)
 
-## Work Order Template Create [/accounts/{accountId}/workordertemplates]
+## Work Order Template Create [/accounts/{accountId}/workordertemplates{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### POST
 
@@ -850,11 +885,12 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 201 (application/json)
     + Attributes (Work Order Template)
 
-## Work Order Template Detail [/accounts/{accountId}/workordertemplates/{id}]
+## Work Order Template Detail [/accounts/{accountId}/workordertemplates/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -906,10 +942,11 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Order
 
-## Order Create [/accounts/{accountId}/orders]
+## Order Create [/accounts/{accountId}/orders{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### POST
 
