@@ -281,6 +281,20 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Base Collection Response)
         + `data` (array[Business Asset Type Group], required)
 
+## Business Asset Type Group Attribute Type Collection [/businessassettypegroups/{businessAssetTypeGroupId}/businessassetattributetypes{?page,pagesize,orderby,includeAudit}]
+
++ Parameters
+    + businessAssetTypeGroupId: 12345 (required, number) - {INT} ID of the business asset type group in the form of an integer.
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Attribute Type], required)
+
 # Group Quantities
 
 ## Quantities [/quantities{?page,pagesize,orderby}]
@@ -1096,14 +1110,14 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `keyCode`: yes (string, required) - The string representation
 + `valueCode`: Yes Sir (string, required) - The display representation of the type code
 
-## Business Asset Type Group
+## Business Asset Type Group (Base Audit Object)
 A business asset type group. Used to classify a business asset type and apply base business asset attribute types.
 
 ### Properties
 + `id`: 1 (number, required) - {INT} The ID of the group
 + `name`: Other (string, required) - The name of the group
 + `description`: Other (string, optional) - The description of the group
-+ `businessAssetAttributeTypes` (array[Business Asset Attribute Type], optional) - The business asset attributes in the group.
++ `businessAssetAttributeTypeCount`: 4 (number, optional) - The number of attribute types associated with this business asset type group
 
 ## Quantity Create (object)
 + `quantity`: Length (string, required) - The name of the quantity type
