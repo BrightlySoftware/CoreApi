@@ -282,6 +282,17 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Base Collection Response)
         + `data` (array[Business Asset Type Group], required)
 
+## Business Asset Type Group Detail [/businessassettypegroups/{id}]
+
++ Parameters
+    + page: 1 (number, optional) - The page to request from the collection.
+    + id: 12345 (required, number) - {INT} ID of the business asset type group in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Type Group)
+
 ## Business Asset Type Group Attribute Type Collection [/businessassettypegroups/{businessAssetTypeGroupId}/businessassetattributetypes{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
