@@ -269,6 +269,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
         + `data` (array[Business Asset Attribute Type], required)
 
 ## Business Asset Type Group Collection [/businessassettypegroups{?page,pagesize,orderby,includeAudit}]
+Retrieve all business asset type groups
 
 + Parameters
     + page: 1 (number, optional) - The page to request from the collection.
@@ -283,6 +284,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
         + `data` (array[Business Asset Type Group], required)
 
 ## Business Asset Type Group Detail [/businessassettypegroups/{id}]
+Retrieve an individual business asset type group
 
 + Parameters
     + id: 12345 (required, number) - {INT} ID of the business asset type group in the form of an integer
@@ -293,6 +295,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Business Asset Type Group)
 
 ## Business Asset Type Group Attribute Type Collection [/businessassettypegroups/{businessAssetTypeGroupId}/businessassetattributetypes{?page,pagesize,orderby,includeAudit}]
+Retrieve all Business Asset Attribute Types for a specified Business Asset Type Group
 
 + Parameters
     + businessAssetTypeGroupId: 12345 (required, number) - {INT} ID of the business asset type group in the form of an integer.
