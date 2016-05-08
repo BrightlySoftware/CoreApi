@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: https://v1.api.dudesolutions.io
 
-DATETIMEFORMAT:
+DATETIMEFORMAT: yyyy-mm-dd
 NULLIFY404: TRUE
 VALIDATEREQUIREDPARAMETERS: FALSE
 USECOMMONSDKLIBRARY: TRUE
@@ -1281,7 +1281,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Update PmSchedule Run Dates (object)
-+ `id`: 1 (number, required) - {INT64} The ID for the object
++ `id`: 1 (number, required) - {LONG} The ID for the object
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
