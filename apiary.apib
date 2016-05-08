@@ -386,7 +386,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {LONG} ID of the pm schedule
+    + id: 12345 (required, number) - ID of the pm schedule
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
@@ -406,7 +406,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {INT64} ID of the pm schedule
+    + id: 12345 (required, number) - ID of the pm schedule
 
 ### PUT
 
@@ -1266,21 +1266,21 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
 
 ## PmSchedule (Base PmSchedule)
-+ `id`: 1 (number, required) - the ID for the schedule object
++ `id`: 1 (number, required) - {LONG} the ID for the schedule object
 + `title`: `Pm Schedule` (string) - the title for the schedule object
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
-+ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
++ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {ISODATE} The last date and time the schedule recurrence pattern will be executed.
 + `businessAssetCount`: 0 (number, required) - {INT} The number of business assets attached to the schedule
-+ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATE} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
-+ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Update PmSchedule Run Dates (object)
-+ `id`: 1 (number, required) - The ID for the object
++ `id`: 1 (number, required) - {INT64} The ID for the object
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
