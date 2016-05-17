@@ -448,6 +448,8 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 # Group Manufacturers
 
 ## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,purpose,includeAudit}]
+Retrieve all manufacturers for a specified account
+
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
     + page: 1 (number, optional) - {INT} The page to request from the collection.
@@ -463,6 +465,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
         + `data` (array[Manufacturer], required)
 
 ## Manufacturer Create [/accounts/{accountId}/manufacturer]
+Create a new manufacturer
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
@@ -476,6 +479,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + Attributes (Manufacturer)
 
 ## Manufacturer Detail [/accounts/{accountId}/manufacturers/{id}{?includeAudit}]
+Retrieve a single manufacturer for a specified account
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
