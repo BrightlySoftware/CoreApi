@@ -705,12 +705,22 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
     + createdby: 1 (number, optional) -  {INT} Filter by the user who created the work order.
     + displayid: WO123 (string, optional) - Filter by the display ID of the work order.
-    + priority: Low (array[Priority], optional) - Filter by the priority of work orders.
+    + priority: Low (enum[string], optional) - Filter by the priority of work orders.
+        + Members
+            + Low (string)
+            + Medium (string)
+            + High (string)
+            + Emergency (string)
     + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
     + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
-    + status: NewRequest (array[Work Order Status], optional) - Filter by the work order status.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Complete (string)
+            + Void (string)
     + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - {INT} Filter by the business asset assigned to the work order.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
@@ -1211,14 +1221,37 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
 
 ## Work Order Transaction (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the work order attachment.
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
 + `typeAttributes` (Transaction Type, required) - The details of the transaction.
 
 ## Transaction Type (object)
-+ `type`: Regular (string, required) - The type of transaction.
-+ `cost`: 22.10 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
++ `type`: Labor (string, required) - The type of transaction.
++ `laborType`: Regular (string, required) - The labor type of the transaction.
++ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
++ `rate`: 35 (number, required) - The rate for this user.
++ `multiplier`: 1 (number, required) - The multiplier for this transaction.
++ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
++ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
+
+## Labor Transaction Type (Transaction Type)
++ `type`: Labor (string, required) - The type of transaction.
++ `laborType`: Regular (string, required) - The labor type of the transaction.
++ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
++ `rate`: 35 (number, required) - The rate for this user.
++ `multiplier`: 1 (number, required) - The multiplier for this transaction.
++ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
++ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
+
+## Purchase Transaction Type (Transaction Type)
++ `type`: Labor (string, required) - The type of transaction.
++ `laborType`: Regular (string, required) - The labor type of the transaction.
++ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
++ `rate`: 35 (number, required) - The rate for this user.
++ `multiplier`: 1 (number, required) - The multiplier for this transaction.
++ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
++ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
 
 ## Work Order Template Reference (object)
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
@@ -1307,7 +1340,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 ## Work Order Status (enum)
 + NewRequest (string)
 + WorkInProgress (string)
-+ Completed (string)
++ Complete (string)
 + Void (string)
 
 ## Priority (enum)
@@ -1378,5 +1411,5 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `order` : 1 (number, required) - {INT} The order in which the task should be completed.
 + `notes` : `Drained 1L of oil` (string, optional) - The notes for the task.
 + `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - The date and time the task was completed.
-+ `completedByUser` : (Base User Object, optional) - The ID for the user that completed the task.
++ `completedByUser` (Base User Object, optional) - The ID for the user that completed the task.
 + `isCompleted` : true (boolean, required) - Indicates if the task has been completed.
