@@ -998,7 +998,8 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + supplierName: ACME Inc. (optional, string) - {STRING} Name of the supplier in the form of a string
+    + includeAudit: true (optional, boolean) - Flag to return audit information from the api
 
 ### GET
 
@@ -1006,13 +1007,29 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + Attributes (Base Collection Response)
         + `data` (array[Order])
 
-## Order Create [/accounts/{accountId}/orders{?includeAudit}]
+## Order Create [/accounts/{accountId}/orders]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
 
 ### POST
 
 + Request
   + Attributes (Order)
 + Response 201 (application/json)
+    + Attributes (Order)
+    
+## Order Update [/accounts/{accountId}/orders/{orderId}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + orderId: 1 (required, number) - {INT} ID of the order in the form of an integer
+
+### PUT
+
++ Request
+  + Attributes (Order)
++ Response 200 (application/json)
     + Attributes (Order)
     
 
