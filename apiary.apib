@@ -994,12 +994,16 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 # Group Order
 
-## Order Collection [/accounts/{accountId}/orders{?includeAudit,supplierName,orderNumber}]
+## Order Collection [/accounts/{accountId}/orders{?supplierName,orderNumber,page,pagesize,orderby,includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + supplierName: ACME Inc. (optional, string) - {STRING} Name of the supplier in the form of a string
-    + includeAudit: true (optional, boolean) - Flag to return audit information from the api
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + supplierName: `ACME Inc.` (string, optional) - {STRING} Name of the supplier in the form of a string
+    + orderNumber: `12345abcde` (string, optional) - {STRING} Supplier order number in the form of a string
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby:  OrderNumber asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
