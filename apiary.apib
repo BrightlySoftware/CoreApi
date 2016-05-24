@@ -604,6 +604,51 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Response 204
 
+# Group Trade
+
+## Trade Collection [/accounts/{accountId}/trades{?page,pagesize,orderby,q,isactive,includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Trade], required)
+
+### POST
+
++ Response 201 (application/json)
+    + Attributes (Trade)
+
+## Trade Detail [/accounts/{accountId}/trades/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the trade in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Trade)
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Trade)
+
+### DELETE
+
++ Response 204
+
 # Group Labor Hour Types
 
 ## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby,includeAudit}]
@@ -1195,6 +1240,11 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `id`: 1 (number, required) - {INT} The ID of the purpose.
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
+
+## Trade (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
++ `name`: Electrician (string, required) - The name of the trade.
++ `isActive`: true (boolean, required) - Indicates if the trade is active.
 
 ## Labor Hour Type (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the labor hour type.
