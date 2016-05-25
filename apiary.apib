@@ -445,6 +445,52 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Response 204
 
+# Group Manufacturers
+
+## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,purpose,includeAudit}]
+Retrieve all manufacturers for a specified account
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Name asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Manufacturer], required)
+
+## Manufacturer Create [/accounts/{accountId}/manufacturer]
+Create a new manufacturer
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+
+### POST
+
++ Request
+    + Attributes (Manufacturer Create)
+
++ Response 201 (application/json)
+    + Attributes (Manufacturer)
+
+## Manufacturer Detail [/accounts/{accountId}/manufacturers/{id}{?includeAudit}]
+Retrieve a single manufacturer for a specified account
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the manufacturer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Manufacturer)
+
 # Group Task Books
 
 ## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q,ismaster,includeAudit}]
@@ -1149,6 +1195,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + `money` - Represents a floating point number greater than 0 and two decimal places
     + `string` - Represents a series of characters
     + `boolean` - Represents a true/false value
+    + `databound` - Represents an object
 + `isActive`: true (boolean, required) - Indicates if the attribute type is active
 + `fieldLength`: 125 (number, optional) - {INT} The number of characters allowed for the attribute
 + `quantity` (Quantity Reference, required) - The quantity type
@@ -1190,6 +1237,13 @@ A business asset type group. Used to classify a business asset type and apply ba
         + `None` - Not associated with a given measurement system.
         + `Metric` - Limit to Metric measurements.
         + `Imperial`- Limit to Imperial measurements.
+
+## Manufacturer Create (Object)
++ `id`: 1 (number, required) - {INT} The ID of the manufacturer.
++ `name`: Ford (string, required) - The name of the manufacturer.
+
+## Manufacturer (Manufacturer Create)
++ `isDudeManufacturer`: true (boolean) - Indicates if this is a common platform manufacturer.
 
 ## Purpose (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the purpose.
