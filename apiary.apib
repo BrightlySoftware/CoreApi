@@ -623,7 +623,15 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + Attributes (Base Collection Response)
         + `data` (array[Trade], required)
 
+## Trade Create [/accounts/{accountId}/trades{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### POST
++ Request
+    + Attributes (Trade)
 
 + Response 201 (application/json)
     + Attributes (Trade)
@@ -641,6 +649,8 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + Attributes (Trade)
 
 ### PUT
++ Request
+    + Attributes (Trade)
 
 + Response 200 (application/json)
     + Attributes (Trade)
@@ -1241,10 +1251,12 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
 
-## Trade (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the purpose.
+## Trade Create (Base Audit Object)
 + `name`: Electrician (string, required) - The name of the trade.
 + `isActive`: true (boolean, required) - Indicates if the trade is active.
+
+## Trade (Trade Create)
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
 
 ## Labor Hour Type (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the labor hour type.
