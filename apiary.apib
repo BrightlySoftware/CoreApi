@@ -1456,8 +1456,8 @@ A business asset type group. Used to classify a business asset type and apply ba
 
 ## Order Line (object)
 + `id`: 1 (number, required) - {INT} The ID for the object
-+ `orderLineNumber`: 1 (number, optional) - The line number for the order line item
-+ `workOrderId`: 1 (number, optional) - The ID for the work order.
++ `orderLineNumber`: 1 (number, optional) - {INT} The line number for the order line item
++ `workOrderId`: 1 (number, optional) - {INT} The ID for the work order.
 + `quantity`: 1 (number, required) - The quantity of the object.
 + `purchaseOrderNumber`: `12345ABCD` (string, optional) - The purchase order number assigned to the order line item.
 + `quantityUnit`: `EA` (string, optional) - The quantity unit of the order line item.
@@ -1476,7 +1476,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `supplierOrderLastUpdatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the supplier order was last updated.
 + `supplierOrderCreatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the supplier order was created.
 + `purchaseOrderNumber` : `12345ABCD` (string, optional) - The purchase order number assigned to the order.
-+ `orderCreatedByUserId` : 12345 (number, optional) - The ID for the user that created the order.
++ `orderCreatedByUserId` : 12345 (number, optional) - {INT} The ID for the user that created the order.
 + `orderSubTotal` (Currency, optional) - The sub total of the order.
 + `orderTaxTotal` (Currency, optional) - The tax total of the order.
 + `orderShippingTotal` (Currency, optional) - The shipping total of the order.
