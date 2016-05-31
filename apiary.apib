@@ -842,7 +842,7 @@ Retrieve a single manufacturer for a specified account
 ### POST
 
 + Response 201 (application/json)
-    + Attributes (Work Order Labor Transaction)
+    + Attributes (Work Order Labor Transaction Create)
 
 ## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
 
@@ -1304,13 +1304,23 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `fileApiId`: 123 (number, required) - {INT} The File Service ID for the attachment.
 + `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
 
-## Work Order Labor Transaction (object)
+## Work Order Labor Transaction Create (object)
++ `description`: The technician did work (string, required) - A short description of the transaction.
++ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
++ `typeAttributes` (Labor Transaction Type, required) - The details of the transaction.
+
+## Work Order Labor Transaction (Work Order Labor Transaction Create)
 + `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
 + `typeAttributes` (Labor Transaction Type, required) - The details of the transaction.
 
-## Work Order Purchase Transaction (object)
+## Work Order Purchase Transaction Create (object)
++ `description`: The technician did work (string, required) - A short description of the transaction.
++ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
++ `typeAttributes` (Purchase Transaction Type, required) - The details of the transaction.
+
+## Work Order Purchase Transaction (Work Order Purchase Transaction Create)
 + `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
