@@ -837,12 +837,12 @@ Retrieve a single manufacturer for a specified account
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[Work Order Transaction], required)
+        + `data` (array[Work Order Labor Transaction], required)
 
 ### POST
 
 + Response 201 (application/json)
-    + Attributes (Work Order Transaction)
+    + Attributes (Work Order Labor Transaction)
 
 ## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
 
@@ -855,12 +855,12 @@ Retrieve a single manufacturer for a specified account
 ### GET
 
 + Response 200 (application/json)
-    + Attributes (Work Order Transaction)
+    + Attributes (Work Order Labor Transaction)
 
 ### PUT
 
 + Response 200 (application/json)
-    + Attributes (Work Order Transaction)
+    + Attributes (Work Order Labor Transaction)
 
 ### DELETE
 
@@ -1304,11 +1304,17 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `fileApiId`: 123 (number, required) - {INT} The File Service ID for the attachment.
 + `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
 
-## Work Order Transaction (Base Audit Object)
+## Work Order Labor Transaction (object)
 + `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
-+ `typeAttributes` (Transaction Type, required) - The details of the transaction.
++ `typeAttributes` (Labor Transaction Type, required) - The details of the transaction.
+
+## Work Order Purchase Transaction (object)
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
++ `description`: The technician did work (string, required) - A short description of the transaction.
++ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
++ `typeAttributes` (Purchase Transaction Type, required) - The details of the transaction.
 
 ## Transaction Type (object)
 + `type`: Labor (string, required) - The type of transaction.
