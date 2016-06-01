@@ -445,52 +445,6 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Response 204
 
-# Group Manufacturers
-
-## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,purpose,includeAudit}]
-Retrieve all manufacturers for a specified account
-
-+ Parameters
-    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
-    + page: 1 (number, optional) - {INT} The page to request from the collection.
-    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
-    + orderby: Name asc (string, optional) - A string describing the ordering to perform on the collection.
-    + q (string, optional) - Filter the list by any custom query, when not set returns all.
-    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
-
-### GET
-
-+ Response 200 (application/json)
-    + Attributes (Base Collection Response)
-        + `data` (array[Manufacturer], required)
-
-## Manufacturer Create [/accounts/{accountId}/manufacturer]
-Create a new manufacturer
-
-+ Parameters
-    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-
-### POST
-
-+ Request
-    + Attributes (Manufacturer Create)
-
-+ Response 201 (application/json)
-    + Attributes (Manufacturer)
-
-## Manufacturer Detail [/accounts/{accountId}/manufacturers/{id}{?includeAudit}]
-Retrieve a single manufacturer for a specified account
-
-+ Parameters
-    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the manufacturer
-    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
-
-### GET
-
-+ Response 200 (application/json)
-    + Attributes (Manufacturer)
-
 # Group Task Books
 
 ## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q,ismaster,includeAudit}]
@@ -645,6 +599,61 @@ Retrieve a single manufacturer for a specified account
 
 + Response 200 (application/json)
     + Attributes (Purpose)
+
+### DELETE
+
++ Response 204
+
+# Group Trade
+
+## Trade Collection [/accounts/{accountId}/trades{?page,pagesize,orderby,q,isactive,includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Trade], required)
+
+## Trade Create [/accounts/{accountId}/trades{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
++ Request
+    + Attributes (Trade Create)
+
++ Response 201 (application/json)
+    + Attributes (Trade)
+
+## Trade Detail [/accounts/{accountId}/trades/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the trade in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Trade)
+
+### PUT
++ Request
+    + Attributes (Trade)
+
++ Response 200 (application/json)
+    + Attributes (Trade)
 
 ### DELETE
 
@@ -1068,7 +1077,7 @@ Retrieve a single manufacturer for a specified account
   + Attributes (Order)
 + Response 201 (application/json)
     + Attributes (Order)
-
+    
 ## Order Update [/accounts/{accountId}/orders/{orderId}]
 
 + Parameters
@@ -1081,7 +1090,7 @@ Retrieve a single manufacturer for a specified account
   + Attributes (Order)
 + Response 200 (application/json)
     + Attributes (Order)
-
+    
 
 # Data Structures
 
@@ -1195,7 +1204,6 @@ Retrieve a single manufacturer for a specified account
     + `money` - Represents a floating point number greater than 0 and two decimal places
     + `string` - Represents a series of characters
     + `boolean` - Represents a true/false value
-    + `databound` - Represents an object
 + `isActive`: true (boolean, required) - Indicates if the attribute type is active
 + `fieldLength`: 125 (number, optional) - {INT} The number of characters allowed for the attribute
 + `quantity` (Quantity Reference, required) - The quantity type
@@ -1238,17 +1246,19 @@ A business asset type group. Used to classify a business asset type and apply ba
         + `Metric` - Limit to Metric measurements.
         + `Imperial`- Limit to Imperial measurements.
 
-## Manufacturer Create (object)
-+ `id`: 1 (number, required) - {INT} The ID of the manufacturer.
-+ `name`: Ford (string, required) - The name of the manufacturer.
-
-## Manufacturer (Manufacturer Create)
-+ `isDudeManufacturer`: true (boolean) - Indicates if this is a common platform manufacturer.
-
 ## Purpose (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the purpose.
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
+
+## Trade Create (object)
++ `name`: Electrician (string, required) - The name of the trade.
++ `isActive`: true (boolean, required) - Indicates if the trade is active.
+
+## Trade (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
++ `name`: Electrician (string, required) - The name of the trade.
++ `isActive`: true (boolean, required) - Indicates if the trade is active.
 
 ## Labor Hour Type (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the labor hour type.
@@ -1295,6 +1305,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
 + `downtimeTracking` (Downtime Tracking, optional) - The downtime tracking assigned to the work order.
++ `trade` (Trade, optional) - The trade assigned to the work order.
 
 ## Work Order Attachment (Attachment)
 + `id`: 1 (number, required) - {INT} The ID of the work order attachment.
@@ -1454,8 +1465,9 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `stockKeepingUnit`: `123456` (string, optional) - The stock keeping code of the order line item.
 + `itemLink`: `http://www.abcvendorinc.com/product/GEORGIA-PACIFIC-Paper-Towel-Roll-3EB46` (string, optional) - The link to the order line item.
 
+
 ## Order Line (object)
-+ `id`: 1 (number, required) - {INT} The ID for the object
++ `id`: 1 (number, required) - The ID for the object
 + `orderLineNumber`: 1 (number, optional) - The line number for the order line item
 + `workOrderId`: 1 (number, optional) - The ID for the work order.
 + `quantity`: 1 (number, required) - The quantity of the object.
@@ -1467,7 +1479,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `itemDetail` (Order Line Item Detail, required) - The item details of the order line item.
 
 ## Order (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID for the schedule object.
++ `id`: 1 (number, required) - the ID for the schedule object.
 + `orderStatus`: `Approved` (Order Status, required) - The order status assigned to the order (Approved | Canceled | Closed | Denied | Fulfillment | New | PendingAproval | Received | ReturnedToSubmitter | Shipped).
 + `supplierName`: `ABCVendorInc.` (string,required) - The supplier name assigned to the order.
 + `supplierOrderNumber`: `12345ABCD` (string, required) - The supplier order number assigned to the order.
