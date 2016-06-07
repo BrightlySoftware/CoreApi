@@ -650,6 +650,61 @@ Retrieve a single manufacturer for a specified account
 
 + Response 204
 
+# Group Trade
+
+## Trade Collection [/accounts/{accountId}/trades{?page,pagesize,orderby,q,isactive,includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Trade], required)
+
+## Trade Create [/accounts/{accountId}/trades{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
++ Request
+    + Attributes (Trade Create)
+
++ Response 201 (application/json)
+    + Attributes (Trade)
+
+## Trade Detail [/accounts/{accountId}/trades/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the trade in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Trade)
+
+### PUT
++ Request
+    + Attributes (Trade)
+
++ Response 200 (application/json)
+    + Attributes (Trade)
+
+### DELETE
+
++ Response 204
+
 # Group Labor Hour Types
 
 ## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby,includeAudit}]
@@ -1276,6 +1331,21 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
 
+## Trade Create (object)
+Represents the Trade create object.
+
+### Properties
++ `name`: Electrician (string, required) - The name of the trade.
++ `isActive`: true (boolean, required) - Indicates if the trade is active.
+
+## Trade (Base Audit Object)
+Represents the trade object.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
++ `name`: Electrician (string, required) - The name of the trade.
++ `isActive`: true (boolean, required) - Indicates if the trade is active.
+
 ## Labor Hour Type (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the labor hour type.
 + `type`: Regular (string, required) - The name of the labor type.
@@ -1321,6 +1391,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
 + `downtimeTracking` (Downtime Tracking, optional) - The downtime tracking assigned to the work order.
++ `trade` (Trade, optional) - The trade assigned to the work order.
 
 ## Work Order Attachment (Attachment)
 + `id`: 1 (number, required) - {INT} The ID of the work order attachment.
@@ -1380,6 +1451,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime. 1 = today, 2 = tomorrow, etc.
++ `trade` (Trade, optional) - The trade assigned to the work order.
 
 ## Work Order Template (Work Order Template Create)
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
@@ -1491,7 +1563,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `id`: 1 (number, required) - {INT} The ID for the object
 + `orderLineNumber`: 1 (number, optional) - {INT} The line number for the order line item
 + `workOrderId`: 1 (number, optional) - {INT} The ID for the work order.
-+ `quantity`: 1 (number, required) - The quantity of the object.
++ `quantity`: 1 (number, required) - {INT} The quantity of the object.
 + `purchaseOrderNumber`: `12345ABCD` (string, optional) - The purchase order number assigned to the order line item.
 + `quantityUnit`: `EA` (string, optional) - The quantity unit of the order line item.
 + `unitPrice` (Currency, optional) - The unit price of the order line item.
