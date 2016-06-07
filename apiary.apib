@@ -823,7 +823,7 @@ Retrieve a single manufacturer for a specified account
 
 + Response 200 (text/csv)
 
-## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
+## Labor Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -841,10 +841,36 @@ Retrieve a single manufacturer for a specified account
 
 ### POST
 
-+ Response 201 (application/json)
++ Request
     + Attributes (Work Order Labor Transaction Create)
 
-## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
++ Response 201 (application/json)
+    + Attributes (Work Order Labor Transaction)
+
+## Purchase Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Purchase Transaction], required)
+
+### POST
+
++ Request
+    + Attributes (Work Order Purchase Transaction Create)
+
++ Response 201 (application/json)
+    + Attributes (Work Order Purchase Transaction Create)
+
+## Labor Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1327,17 +1353,18 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `typeAttributes` (Purchase Transaction Type, required) - The details of the transaction.
 
 ## Transaction Type (object)
-+ `type`: Labor (string, required) - The type of transaction.
 + `cost`: 175.00 (number, optional) - The cost for this type of transaction.
 + `user` (Base User Object, required) - Information about the user who is associated with the transaction.
 
 ## Labor Transaction Type (Transaction Type)
++ `type`: labor (string, required) - The type of transaction.
 + `laborType`: Regular (string, required) - The labor type of the transaction.
 + `hours`: 5 (number, required) - {INT} The number of hours in the labor transaction.
 + `rate`: 35 (number, optional) - The rate for this user.
 + `multiplier`: 1 (number, optional) - The multiplier for this transaction.
 
 ## Purchase Transaction Type (Transaction Type)
++ `type`: purchase (string, required) - The type of transaction.
 + `purchaseOrder`: 100ABC (string, optional) - The purchase order of the purchase transaction.
 + `quantity`: 35.00 (number, required) - The amount of items purchased for this transaction.
 + `unitCost`: 5 (number, required) - The unit cost for this purchase transaction.
