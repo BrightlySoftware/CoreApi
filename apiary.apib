@@ -947,6 +947,27 @@ Retrieve a single manufacturer for a specified account
 
 + Response 204
 
+## Purchase Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the transaction in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Work Order Purchase Transaction)
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Work Order Purchase Transaction)
+
+### DELETE
+
++ Response 204
+
 ## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
