@@ -923,7 +923,7 @@ Retrieve a single manufacturer for a specified account
     + Attributes (Work Order Purchase Transaction Create)
 
 + Response 201 (application/json)
-    + Attributes (Work Order Purchase Transaction Create)
+    + Attributes (Work Order Purchase Transaction)
 
 ## Labor Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
 
@@ -1429,9 +1429,6 @@ Represents the trade object.
 
 ## Work Order Labor Transaction (Work Order Labor Transaction Create)
 + `id`: 1 (number, required) - {INT} The ID of the work order transaction.
-+ `description`: The technician did work (string, required) - A short description of the transaction.
-+ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
-+ `typeAttributes` (Labor Transaction Type, required) - The details of the transaction.
 
 ## Work Order Purchase Transaction Create (object)
 + `description`: The technician did work (string, required) - A short description of the transaction.
@@ -1440,9 +1437,6 @@ Represents the trade object.
 
 ## Work Order Purchase Transaction (Work Order Purchase Transaction Create)
 + `id`: 1 (number, required) - {INT} The ID of the work order transaction.
-+ `description`: The technician did work (string, required) - A short description of the transaction.
-+ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
-+ `typeAttributes` (Purchase Transaction Type, required) - The details of the transaction.
 
 ## Transaction Type (object)
 + `cost`: 175.00 (number, optional) - The cost for this type of transaction.
