@@ -1,19 +1,24 @@
 FORMAT: 1A
 HOST: https://v1.api.dudesolutions.io
 
+USECOMMONSDKLIBRARY: TRUE
 GENERATEASYNCCODE: TRUE
+GENERATEINTERFACES: TRUE
 USEMETHODPREFIX: TRUE
 USEMODELPOSTFIX: FALSE
 USECONTROLLERPOSTFIX: FALSE
 USEENUMPOSTFIX: FALSE
 USECONSTRUCTORSFORCONFIG: TRUE
 CSHARPDEFAULTNAMESPACE: DSI.SDK.Unified
+JAVADEFAULTNAMESPACE: io.dudesolutions.unified
+BRANDLABEL: Dude Solutions, Inc.
+USERAGENT: Dude SDK
 
 # Dude Unified Api
 ![Dude Solutions](https://dudesolutions.com/assets/img/logo.png)
 
 ## Authentication
-*Dude Api* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
+*Dude Api* uses OAuth v2 Authorization. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
 
 New to *OAuth*?  Check out the [OAuth Bible](http://oauthbible.com/) for good reference material.
 
@@ -32,7 +37,7 @@ In addition to standard response codes the response object returned from the ser
             "dudeReferenceId": "3523845A-4729-4CCB-9E16-01DEADF6C2DF",
             "stackTrace": "Null, Typically"
         }
-        
+
 ## Data Restriction
 Depending on the access level granted to the calling client certain data elements throughout this API will be removed and not returned.
 
@@ -47,26 +52,44 @@ None at this time
 ## Documentation Notes
 In Progress
 
+# Group System Information
+
+## System Information [/]
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (System Information)
+
+# Group Health
+
+## Heartbeat [/heartbeat]
+The heartbeat is exposed and provided to check for availability of the service.
+Any response that does not provide a ```200 OK``` response code should be treated as an error.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Heartbeat)
+
 # Group Assets
 
-IN PROGRESS
------------
-
-## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,page,pagesize,orderby}]
+## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,page,pagesize,orderby,includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer.
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
     + q: Sample (string, optional) - Custom query object.
-    + parentid: 1 (number, optional) - The ID of the parent as a long.
+    + parentid: 1 (number, optional) - {INT} The ID of the parent as a long.
     + name: Facility (string, optional) - The name of the asset.
     + description: Big Building (string, optional) - The description of the asset.
-    + isactive: true (boolean, optional) - Return active or inactive assets?
-    + businessassettypeid: 1 (number, optional) - Return assets that match a specific asset type.
+    + isactive: true (string, optional) - Return active or inactive assets?
+    + businessassettypeid: 1 (number, optional) - {INT} Return assets that match a specific asset type.
     + includedescendants: true (boolean, optional) - Include descendant assets or just the current level?
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -75,57 +98,217 @@ IN PROGRESS
 
 ### POST
 
-+ Response 201 (application/json)
++ Request
+    + Attributes (Business Asset Create)
 
-## Business Asset Detail [/accounts/{accountId}/businessassets/{id}]
++ Response 201 (application/json)
+    + Attributes (Business Asset)
+
+## Business Asset Detail [/accounts/{accountId}/businessassets/{id}{?includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the business asset in the form on an integer
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
 + Response 200 (application/json)
+    + Attributes (Business Asset)
 
 ### PUT
 
++ Request
+    + Attributes (Business Asset Update)
+
 + Response 200 (application/json)
+    + Attributes (Business Asset)
 
 ### DELETE
 
 + Response 204
 
-## Business Asset Type Collection [/accounts/{accountId}/businessassettypes{?page,pagesize,orderby}]
+## Business Asset Attribute Collection [/accounts/{accountId}/businessassets/{businessAssetId}/businessassetattributes{?q,page,pagesize,orderby,includeAudit}]
 
 + Parameters
-    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
-    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
+    + businessAssetId: 1 (required, number) - {INT} ID of the asset in the form of an integer.
+    + q: Sample (string, optional) - Custom query object.
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[object], required)
+        + `data` (array[Business Asset Attribute], required)
 
 ### POST
 
-+ Response 201 (application/json)
++ Request
+    + Attributes (Business Asset Attribute Create)
 
-## Business Asset Type Detail [/accounts/{accountId}/businessassettypes/{id}]
++ Response 201 (application/json)
+    + Attributes (Business Asset Attribute)
+
+## Business Asset Attribute Detail [/accounts/{accountId}/businessassets/{businessAssetId}/businessassetattributes/{id}{?includeAudit}]
 
 + Parameters
-    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the business asset type in the form on an integer
-    
-### GET
-
-+ Response 200 (application/json)
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + businessAssetId: 1 (required, number) - {INT} ID of the asset in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### PUT
 
++ Request
+    + Attributes (Business Asset Attribute)
+
 + Response 200 (application/json)
+    + Attributes (Business Asset Attribute)
+
+## Business Asset Attachment Collection [/accounts/{accountId}/businessassets/{businessAssetId}/attachments{?page,pagesize,orderby,includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + businessAssetId: 12345 (required, number) - {INT} ID of the business asset in the form of a long
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Attachment], required)
+
+### POST
+
++ Request
+    + Attributes (Attachment)
+
++ Response 201 (application/json)
+    + Attributes (Business Asset Attachment)
+
+## Business Asset Attachment Detail [/accounts/{accountId}/businessassets/{businessAssetId}/attachments/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + businessAssetId: 12345 (required, number) - {INT} ID of the business asset in the form of a long
+    + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Attachment)
+
+### DELETE
+
++ Response 204
+
+## Business Asset Type Collection [/accounts/{accountId}/businessassettypes{?page,pagesize,orderby,includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Type], required)
+
+### POST
+
++ Request
+    + Attributes (Business Asset Type Create)
+
++ Response 201 (application/json)
+    + Attributes (Business Asset Type)
+
+## Business Asset Type Detail [/accounts/{accountId}/businessassettypes/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the business asset type in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Type)
+
+### PUT
+
++ Request
+    + Attributes (Business Asset Type Update)
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Type)
+
+## Business Asset Attribute Type Collection [/accounts/{accountId}/businessassettypes/{businessAssetTypeId}/businessassetattributetypes{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + businessAssetTypeId: 12345 (required, number) - {INT} ID of the business asset type in the form of an integer
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Attribute Type], required)
+
+## Business Asset Type Group Collection [/businessassettypegroups{?page,pagesize,orderby,includeAudit}]
+Retrieve all business asset type groups
+
++ Parameters
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Type Group], required)
+
+## Business Asset Type Group Detail [/businessassettypegroups/{id}]
+Retrieve an individual business asset type group
+
++ Parameters
+    + id: 12345 (required, number) - {INT} ID of the business asset type group in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Type Group)
+
+## Business Asset Type Group Attribute Type Collection [/businessassettypegroups/{businessAssetTypeGroupId}/businessassetattributetypes{?page,pagesize,orderby,includeAudit}]
+Retrieve all Business Asset Attribute Types for a specified Business Asset Type Group
+
++ Parameters
+    + businessAssetTypeGroupId: 12345 (required, number) - {INT} ID of the business asset type group in the form of an integer.
+    + page: 1 (number, optional) - The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Attribute Type], required)
 
 # Group Quantities
 
@@ -134,8 +317,8 @@ IN PROGRESS
 ### GET
 
 + Parameters
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
 
 + Response 200 (application/json)
@@ -145,13 +328,13 @@ IN PROGRESS
 ## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?measurementsystem,page,pagesize,orderby}]
 
 + Parameters
-    + quantityTypeId: 12345 (required, number) - ID of the measurement type in the form on an integer
+    + quantityTypeId: 12345 (required, number) - {INT} ID of the measurement type in the form of an integer
     + measurementsystem: None (optional, enum[string]) - The measurement system to filter
         + `None` - No filter specified
         + `Metric` - Limit to Metric measurements
         + `Imperial`- Limit to Imperial measurements
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: unitKey asc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
@@ -164,18 +347,277 @@ IN PROGRESS
 
 + Response 201 (application/json)
 
-# Group Purposes
+# Group PM Schedules
 
-## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive}]
+## PM Schedules Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive,includeAudit}]
 
 + Parameters
-    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
-    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
-    
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[PmSchedule], required)
+
+## Schedule Create [/accounts/{accountId}/pmschedules{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
+
++ Request
+    + Attributes (Base PmSchedule)
+
++ Response 201 (application/json)
+    + Attributes (PmSchedule)
+
+## Pm Schedule Detail [/accounts/{accountId}/pmschedules/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+
+### PUT
+
++ Request
+    + Attributes (PmSchedule)
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+
+## Pm Schedule Run Dates [/accounts/{accountId}/pmschedules/{id}/rundates]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the pm schedule
+
+### PUT
+
++ Request
+    + Attributes (Update PmSchedule Run Dates)
+
++ Response 200 (application/json)
+    + Attributes (PmSchedule)
+
+## PM Schedules Business Asset Collection [/accounts/{accountId}/pmschedules/{pmScheduleId}/businessassets{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + pmScheduleId: 1 (number, required) - ID of the work order template object who's collection is being referenced
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Business Asset Lite], required)
+
+## PM Schedules Business Asset Collection Detail [/accounts/{accountId}/pmschedules/{pmScheduleId}/businessassets/{id}]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + pmScheduleId: 1 (number, required) - ID of the work order template object who's collection is being referenced
+    + id: 1 (number, required) - {INT} The ID of the Business Asset
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Business Asset Lite)
+
+### DELETE
+
++ Response 204
+
+# Group Manufacturers
+
+## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,purpose,includeAudit}]
+Retrieve all manufacturers for a specified account
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Name asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Manufacturer], required)
+
+## Manufacturer Create [/accounts/{accountId}/manufacturer]
+Create a new manufacturer
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+
+### POST
+
++ Request
+    + Attributes (Manufacturer Create)
+
++ Response 201 (application/json)
+    + Attributes (Manufacturer)
+
+## Manufacturer Detail [/accounts/{accountId}/manufacturers/{id}{?includeAudit}]
+Retrieve a single manufacturer for a specified account
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the manufacturer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Manufacturer)
+
+# Group Task Books
+
+## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q,ismaster,includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Title asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + ismaster: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Task Book], required)
+
+## Task Book Create [/accounts/{accountId}/taskbooks{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
+
++ Request
+    + Attributes (Task Book)
+
++ Response 201 (application/json)
+    + Attributes (Task Book)
+
+## Task Book Detail [/accounts/{accountId}/taskbooks/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the task book
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Task Book)
+
+### PUT
+
++ Request
+    + Attributes (Task Book)
+
++ Response 200 (application/json)
+    + Attributes (Task Book)
+
+### DELETE
+
++ Response 204
+
+## Task Summary Collection [/accounts/{accountId}/taskbooks/{taskBookId}/tasks{?page,pagesize,orderby,q,includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Order asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Task Summary], required)
+
+## Task Summary Create [/accounts/{accountId}/taskbooks/{taskBookId}/tasks{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
+
++ Request
+    + Attributes (Task Summary)
+
++ Response 201 (application/json)
+    + Attributes (Task Summary)
+
+## Task Summary Detail [/accounts/{accountId}/taskbooks/{taskBookId}/tasks/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + taskBookId: 1 (number, required) - {INT} The ID of the taskBook in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the task
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Task Summary)
+
+### PUT
+
++ Request
+    + Attributes (Task Summary)
+
++ Response 200 (application/json)
+    + Attributes (Task Summary)
+
+### DELETE
+
++ Response 204
+
+# Group Purposes
+
+## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive,includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -187,11 +629,12 @@ IN PROGRESS
 + Response 201 (application/json)
     + Attributes (Purpose)
 
-## Purpose Detail [/accounts/{accountId}/purposes/{id}]
+## Purpose Detail [/accounts/{accountId}/purposes/{id}{?includeAudit}]
 
 + Parameters
-    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the purpose in the form of an integer
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the purpose in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -207,28 +650,72 @@ IN PROGRESS
 
 + Response 204
 
-## Purpose Detail Status [/accounts/{accountId}/purposes/{id}/active/{status}]
+# Group Trade
+
+## Trade Collection [/accounts/{accountId}/trades{?page,pagesize,orderby,q,isactive,includeAudit}]
 
 + Parameters
-    + accountId: 1234567890 (required, number) - ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the purpose in the form of an integer
-    + status: true (required, boolean) - The boolean to change the status of the purpose, either true or false
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
-### PUT
+### GET
 
 + Response 200 (application/json)
-    + Attributes (Purpose)
+    + Attributes (Base Collection Response)
+        + `data` (array[Trade], required)
+
+## Trade Create [/accounts/{accountId}/trades{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
++ Request
+    + Attributes (Trade Create)
+
++ Response 201 (application/json)
+    + Attributes (Trade)
+
+## Trade Detail [/accounts/{accountId}/trades/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the trade in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Trade)
+
+### PUT
++ Request
+    + Attributes (Trade)
+
++ Response 200 (application/json)
+    + Attributes (Trade)
+
+### DELETE
+
++ Response 204
 
 # Group Labor Hour Types
 
-## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby}]
+## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -239,8 +726,13 @@ IN PROGRESS
 
 + Response 201 (application/json)
     + Attributes (Labor Hour Type)
-    
-## Labor Hour Types Detail [/accounts/{accountId}/laborhourtypes/{id}]
+
+## Labor Hour Types Detail [/accounts/{accountId}/laborhourtypes/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 1 (required, number) - {INT} The ID of the labor type
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -254,17 +746,18 @@ IN PROGRESS
 
 # Group Work Categories
 
-## Work Category Collection [/accounts/{accountId}/workcategories{?page,pagesize,orderby,q,isactive,parentid}]
+## Work Category Collection [/accounts/{accountId}/workcategories{?page,pagesize,orderby,q,isactive,parentid,includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
-    + isactive (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
-    + parentid (number, optional) - Filter the list to get all children of a parent, when not set returns all.
-    
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + parentid: 3 (string, optional) - {INT} Filter the list to get all children of a parent, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -276,12 +769,13 @@ IN PROGRESS
 + Response 201 (application/json)
     + Attributes (Work Category Hierarchy)
 
-## Work Category Detail [/accounts/{accountId}/workcategories/{id}]
+## Work Category Detail [/accounts/{accountId}/workcategories/{id}{?includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the work category in the form of an integer
-    
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the work category in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -298,46 +792,67 @@ IN PROGRESS
 
 # Group Work Orders
 
-## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset}]
+## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - A free form filter mechanism.
     + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
-    + assignees: 1 (array[number], optional) - Filter by assignees.
+    + assignees: 1 (array[number], optional) - {INT} Filter by assignees.
     + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
-    + createdby: 1 (number, optional) - Filter by the user who created the work order.
+    + createdby: 1 (number, optional) -  {INT} Filter by the user who created the work order.
     + displayid: WO123 (string, optional) - Filter by the display ID of the work order.
-    + priority: 1 (array[number], optional) - Filter by the priority of work orders.
-    + purpose: 1 (array[number], optional) - Filter by the purpose of work orders.
+    + priority: Low (enum[string], optional) - Filter by the priority of work orders.
+        + Members
+            + Low (string)
+            + Medium (string)
+            + High (string)
+            + Emergency (string)
+    + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
-    + requestedby: 1 (array[number], optional) - Filter by the work order requester.
-    + status: 1 (array[number], optional) - Filter by the work order status.
-    + workcategory: 1 (array[number], optional) - Filter by the work category assigned to the work order.
-    + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
-    
+    + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Complete (string)
+            + Void (string)
+    + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
+    + businessasset: 1 (array[number], optional) - {INT} Filter by the business asset assigned to the work order.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
         + `data` (array[Work Order], required)
 
+## Work Order Create [/accounts/{accountId}/workorders{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### POST
 
++ Request
+  + Attributes (Work Order)
 + Response 201 (application/json)
     + Attributes (Work Order)
 
-## Work Order Detail [/accounts/{accountId}/workorders/{id}]
+
+## Work Order Detail [/accounts/{accountId}/workorders/{id}{?includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the work order in the form of an integer
-    
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -355,21 +870,24 @@ IN PROGRESS
 
 ## Work Order Export [/accounts/{accountId}/workorders/{id}/ascsv]
 
-*Deprecated*
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 1 (required, number) - {INT} The ID of the workorder
 
 ### As CSV [GET]
 
 + Response 200 (text/csv)
 
-## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby}]
+## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -381,13 +899,14 @@ IN PROGRESS
 + Response 201 (application/json)
     + Attributes (Work Order Transaction)
 
-## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}]
+## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
-    + id: 12345 (required, number) - ID of the transaction in the form of an integer
-    
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the transaction in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -402,15 +921,16 @@ IN PROGRESS
 
 + Response 204
 
-## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby}]
+## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -419,16 +939,20 @@ IN PROGRESS
 
 ### POST
 
++ Request
+    + Attributes (Attachment)
+
 + Response 201 (application/json)
     + Attributes (Work Order Attachment)
 
-## Attachment Detail [/accounts/{accountId}/workorders/{workOrderId}/attachments/{id}]
+## Attachment Detail [/accounts/{accountId}/workorders/{workOrderId}/attachments/{id}{?includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + workOrderId: 12345 (required, number) - ID of the work order in the form of an integer
-    + id: 12345 (required, number) - ID of the attachment in the form of an integer
-    
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -438,10 +962,73 @@ IN PROGRESS
 
 + Response 204
 
-## Work Order Template Collection [/accounts/{accountId}/workordertemplates]
+## Work Order Task Collection [/accounts/{accountId}/workorders/{workOrderId}/tasks{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Task], required)
+
+## Work Order Task Create [/accounts/{accountId}/workorders/{workOrderId}/tasks{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
+
++ Request (application/json)
+    + Attributes (Work Order Task)
+
++ Response 201 (application/json)
+    + Attributes (Work Order Task)
+
+## Work Order Task Detail [/accounts/{accountId}/workorders/{workOrderId}/tasks/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Work Order Task)
+
+# Group Work Order Templates
+
+## Work Order Template Collection [/accounts/{accountId}/workordertemplates{?page,pagesize,orderby,purpose,includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id asc (string, optional) - A string describing the ordering to perform on the collection.
+    + purpose: 1 (number, optional) - {INT} The ID of a purpose to filter the collection
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Template], required)
+
+## Work Order Template Create [/accounts/{accountId}/workordertemplates{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### POST
 
@@ -450,17 +1037,14 @@ IN PROGRESS
 
 + Response 201 (application/json)
     + Attributes (Work Order Template)
-    
-### DELETE
 
-+ Response 204
-
-## Work Order Template Detail [/accounts/{accountId}/workordertemplates/{id}]
+## Work Order Template Detail [/accounts/{accountId}/workordertemplates/{id}{?includeAudit}]
 
 + Parameters
-    + accountId: 1 (required, number) - ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the work order in the form of an integer
-    
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
 ### GET
 
 + Response 200 (application/json)
@@ -469,55 +1053,110 @@ IN PROGRESS
 ### PUT
 
 + Request (application/json)
-    + Attributes (Work Order Template Update)
+    + Attributes (Work Order Template)
 
 + Response 200 (application/json)
-
     + Attributes (Work Order)
 
-## Assignee Collection [/accounts/{accountId}/workordertemplates{workOrderTemplateId}/assignees{?page,pagesize,orderby}]
+### DELETE
+
++ Response 204
+
+## Assignee Collection [/accounts/{accountId}/workordertemplates/{workOrderTemplateId}/assignees{?page,pagesize,orderby}]
 
 + Parameters
-    + accountId: 1 (number, required) - ID of the account in the form of an integer
-    + workOrderTemplateId: 1 (number, required) - ID of the work order template object who's collection is being referenced
-    + page: 1 (number, optional) - The page to request from the collection.
-    + pagesize: 1000 (number, optional) - The number of records to load in a page from the collection.
-    
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + workOrderTemplateId: 1 (number, required) - {INT} ID of the work order template object who's collection is being referenced
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
 ### GET
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
         + `data` (array[Base User Object], required)
-        
-## Assignee Collection Detail [/accounts/{accountId}/workordertemplates{workOrderTemplateId}/assignees/{id}]
+
+## Assignee Collection Detail [/accounts/{accountId}/workordertemplates/{workOrderTemplateId}/assignees/{id}]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + workOrderTemplateId: 1 (number, required) - {INT} ID of the work order template object who's collection is being referenced
+    + id: 1 (number, required) - {INT} The User ID of the assignee
 
 ### PUT
 
 + Response 200 (application/json)
     + Attributes (Base User Object)
-    
+
 ### DELETE
 
 + Response 204
 
-# Group Health
+# Group Order
 
-## Heartbeat [/heartbeat]
-The heartbeat is exposed and provided to check for availability of the service.
-Any response that does not provide a ```200 OK``` response code should be treated as an error.
+## Order Collection [/accounts/{accountId}/orders{?supplierName,orderNumber,page,pagesize,orderby,includeAudit}]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + supplierName: `ACME Inc.` (string, optional) - {STRING} Name of the supplier in the form of a string
+    + orderNumber: `12345abcde` (string, optional) - {STRING} Supplier order number in the form of a string
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby:  OrderNumber asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
 + Response 200 (application/json)
-    + Attributes (Heartbeat)
+    + Attributes (Base Collection Response)
+        + `data` (array[Order])
+
+## Order Create [/accounts/{accountId}/orders]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+
+### POST
+
++ Request
+  + Attributes (Order)
++ Response 201 (application/json)
+    + Attributes (Order)
+
+## Order Update [/accounts/{accountId}/orders/{orderId}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + orderId: 1 (required, number) - {INT} ID of the order in the form of an integer
+
+### PUT
+
++ Request
+  + Attributes (Order)
++ Response 200 (application/json)
+    + Attributes (Order)
+
 
 # Data Structures
 
+## System Information (object)
++ `application`: `Dude Unified Api` (string, required) - The name of the application.
++ `version` : `1.0.0.0` (string, required) - The assembly version.
++ `apiVersion` : `1.0.0.0` (string, required) - The API version.
++ `vitals` (Heartbeat, required) - The state of the system dependencies.
++ `links` (array[System Links], required) - The API routes.
+
+## System Links (object)
++ `endpoint` : `WorkOrder` (string, required) - The name of the endpoint.
++ `action` : `Get` (string, required) - The REST action.
++ `route` : `/accounts/{accountId}/workorders` (string, required) - The route to the endpoint.
+
 ## Base Collection Response (object)
-+ `page`: 1 (number, required) - The current page provided in the response data.
-+ `pageSize`: 1000 (number, required) - The page size returned in the response data.
-+ `dataSize`: 1000 (number, required) - The total records returned in the response.
-+ `total`: 2000 (number, required) - The total number of records available in the collection.
++ `page`: 1 (number, required) - {INT} The current page provided in the response data.
++ `pageSize`: 1000 (number, required) - {INT} The page size returned in the response data.
++ `dataSize`: 1000 (number, required) - {INT} The total records returned in the response.
++ `total`: 2000 (number, required) - {INT} The total number of records available in the collection.
 
 ## Base Audit Object (object)
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
@@ -528,54 +1167,166 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Base User Object (object)
-+ `id`: 1 (number, required) - The ID of the user.
++ `id`: 1 (number, required) - {INT} The ID of the user.
 + `firstName`: John (string, required) - The first name of the user.
 + `lastName`: Smith (string, required) - The last name of the user.
 + `email`: john.smith@dudesolutions.io (string, required) - The email address of the user.
 
 ## Base Client Object (object)
-+ `id`: 1 (number, required) - The ID of the API client.
-+ `clientId`: publicclient (string, required) - The client ID of the API client.
++ `id`: 1 (number, required) - {INT} The ID of the API client.
 
 ## Heartbeat (object)
 + `applicationdbvitalCheck`: true (boolean, required) - Vital check to ensure the data store is online.
 + `cachevitalcheck`: true (boolean, required) - Vital check to ensure the cache store is online.
 
-## Business Asset (object)
-+ `id`: 1, (number, required) - Description
-+ `name`: Main Government Campus (string, required) - Description
-+ `description`: The big government campus (string, optional) - Description
-+ `notes`: Some notes would go here (string, optional) - Description
-+ `isActive`: true (boolean, required) - Description
-+ `ancestorIdPath`: Sample (string, required) - Description
+## Business Asset Create (object)
++ `name`: Main Government Campus (string, required) - The name of the asset
++ `description`: The big government campus (string, optional) - The description of the asset
++ `notes`: Some notes would go here (string, optional) - Notes about the asset
++ `isActive`: true (boolean, required) - Indicates if the asset is active
++ `parent` (Business Asset Reference, optional) - Describes the parent asset
++ `businessAssetType` (Business Asset Type Update, required) - Describes the type of the asset.
+
+## Business Asset Update (Business Asset Create)
++ `id`: 1 (number, required) - {INT} The ID of the object
+
+## Business Asset (Business Asset Update)
++ `parent` (Business Asset Lite) - Describes the initial parent
++ `businessAssetAttributeCount`: 4 (number, optional) - The number of attributes associated with this business asset
++ `ancestorIdPath`: Sample (string, required) - Provides the ancestor IDs starting at root to the current parent node.
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
-+ `updatedDateTime`: 2015-10-06T17:53:43.99Z (datetime, required) - Description
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
-## Quantity (object)
-+ `id`: 1 (number, required) - The ID of the quantity.
-+ `quantity`: Length (string, required) - The name of the quantity type.
+## Business Asset Reference (object)
++ `id`: 1 (number, required) - {INT} The ID of the object
+
+## Business Asset Attribute Create (object)
++ `value`: 1200 (string, required) - The value of the asset attribute instance
++ `businessAssetAttributeType` (Business Asset Attribute Type, required) - The type of the asset attribute instance
++ `unitOfMeasure` (Unit Of Measure, required) - The unit of measure associated with the asset attribute instance
+
+## Business Asset Attribute (Business Asset Attribute Create)
++ `id`: 1 (number, required) - {INT} The ID of the asset attribute instance
+
+## Business Asset Lite (Business Asset Reference)
++ `name`: pump (string, required) - The name of the asset
++ `description`: outside pump (string, required) - The description of the asset
++ `isActive`: true (boolean, required) - Indicates if the asset is active
++ `hasChildren`: true (boolean, required) - Description
++ `notes`: Some notes would go here (string, optional) - Description
+
+## Business Asset Attachment (Attachment)
++ `id`: 1 (number, required) - {INT} The ID of the business asset attachment.
+
+## Business Asset Type Create (object)
++ `description`: Bridge (string, required) - The name of the asset type
+
+## Business Asset Type Update (Business Asset Type Create)
++ `id`: 1 (number, required) - {INT} The ID of the object
+
+## Business Asset Type (Business Asset Type Update)
++ `isDudeAssetType`: true (boolean, required) - Indicates if this is a common platform asset type
++ `businessAssetAttributeTypeCount`: 4 (number, required) - {INT} The number of attributes associated with this asset type
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
++ `businessAssetTypeGroup` (Business Asset Type Group, required) - The business asset type group associated with the business asset type.
+
+## Business Asset Attribute Type Create (object)
++ `key`: length (string, required) - The name of the attribute type
++ `valueType`: date (enum[string], required) -
+    + `date` - Represents a date/time
+    + `double` - Represents a floating point value
+    + `integer` - Represents a whole number
+    + `money` - Represents a floating point number greater than 0 and two decimal places
+    + `string` - Represents a series of characters
+    + `boolean` - Represents a true/false value
+    + `databound` - Represents an object
++ `isActive`: true (boolean, required) - Indicates if the attribute type is active
++ `fieldLength`: 125 (number, optional) - {INT} The number of characters allowed for the attribute
++ `quantity` (Quantity Reference, required) - The quantity type
++ `businessAssetAttributeTypeCodes` (array[Business Asset Attribute Type Code], optional) - The type codes
+
+## Business Asset Attribute Type Update (Business Asset Attribute Type Create)
++ `id`: 1 (number, required) - {INT} The ID of the object
+
+## Business Asset Attribute Type (Business Asset Attribute Type Update)
++ `quantity` (Quantity, required) - The quantity type
+
+## Business Asset Attribute Type Code (object)
++ `id`: 1 (number, required) - {INT} The ID of the object
++ `keyCode`: yes (string, required) - The string representation
++ `valueCode`: Yes Sir (string, required) - The display representation of the type code
+
+## Business Asset Type Group (Base Audit Object)
+A business asset type group. Used to classify a business asset type and apply base business asset attribute types.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the group
++ `name`: Other (string, required) - The name of the group
++ `description`: Other (string, optional) - The description of the group
++ `businessAssetAttributeTypeCount`: 4 (number, optional) - The number of attribute types associated with this business asset type group
+
+## Quantity Create (object)
++ `quantity`: Length (string, required) - The name of the quantity type
+
+## Quantity (Quantity Create)
++ `id`: 1 (number, required) - {INT} The ID of the quantity.
+
+## Quantity Reference (object)
++ `id`: 1 (number, required) - {INT} The ID of the quantity.
 
 ## Unit Of Measure (object)
-+ `id`: 1 (number, required) - The ID of the unit of measure.
++ `id`: 1 (number, required) - {INT} The ID of the unit of measure.
 + `unitKey`: feet (string, required) - The unit of measurement as a string.
 + `measurementSystem`: None (enum[string], required) - The measurement system this unit belongs to.
         + `None` - Not associated with a given measurement system.
         + `Metric` - Limit to Metric measurements.
         + `Imperial`- Limit to Imperial measurements.
 
+## Manufacturer Create (object)
++ `id`: 1 (number, required) - {INT} The ID of the manufacturer.
++ `name`: Ford (string, required) - The name of the manufacturer.
+
+## Manufacturer (Manufacturer Create)
++ `isDudeManufacturer`: true (boolean) - Indicates if this is a common platform manufacturer.
+
 ## Purpose (Base Audit Object)
-+ `id`: 1 (number, required) - The ID of the purpose.
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
 
+## Trade Create (object)
+Represents the Trade create object.
+
+### Properties
++ `name`: Electrician (string, required) - The name of the trade.
++ `isActive`: true (boolean, required) - Indicates if the trade is active.
+
+## Trade (Base Audit Object)
+Represents the trade object.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
++ `name`: Electrician (string, required) - The name of the trade.
++ `isActive`: true (boolean, required) - Indicates if the trade is active.
+
 ## Labor Hour Type (Base Audit Object)
-+ `id`: 1 (number, required) - The ID of the labor hour type.
++ `id`: 1 (number, required) - {INT} The ID of the labor hour type.
 + `type`: Regular (string, required) - The name of the labor type.
 + `multiplier`: 1.0 (number, required) - The multiplier associated with the labor type.
 
 ## Work Category (Base Audit Object)
-+ `id`: 1 (number, required) - The ID of the work category.
++ `id`: 1 (number, required) - {INT} The ID of the work category.
 + `value`: Environmental (string, required) - The description of the work category.
 + `isActive`: true (boolean, required) - Indicates if the work category is active.
 
@@ -595,15 +1346,17 @@ Any response that does not provide a ```200 OK``` response code should be treate
 `latLongMatchesAddress`: true (boolean, required) - Indicates if the location address matches the latitude and longitude coordinates.
 
 ## Work Order (Base Audit Object)
-+ `id`: 1 (number, required) - The unique identifier of the work order.
++ `id`: 1 (number, required) - {INT} The unique identifier of the work order.
++ `workOrderTemplate` (Work Order Template Reference, optional) - the work order template that this work order was generated from, if applicable
++ `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
 + `displayId`: WO100 (string, required) - The display ID for the work order.
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
-+ `status`: 1 (number, required) - The status of a work order, in integer format.
-+ `priority`: 2 (number, required) - The priority of a work order, in integer format.
++ `status`: NewRequest (Work Order Status, required) - The status of a work order.
++ `priority`: Low (Priority, required) - The priority of a work order.
 + `requestDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The requested date and time for the work order.
 + `completionDateTime`:  `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the work order was completed.
 + `actionTaken`: I replaced the bolt (string, optional) - Text that describes what was done to resolve the reported issue.
-+ `attachmentCount`: 1 (number, optional) - A count of attachments associated with the work order.
++ `attachmentCount`: 1 (number, optional) - {INT} A count of attachments associated with the work order.
 + `requestedBy` (Base User Object, required) - The user who requested the work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
@@ -611,36 +1364,65 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
++ `downtimeTracking` (Downtime Tracking, optional) - The downtime tracking assigned to the work order.
++ `trade` (Trade, optional) - The trade assigned to the work order.
 
-## Work Order Attachment (Base Audit Object)
-+ `id`: 1 (number, required) - The ID of the work order attachment.
-+ `name`: My File (string, required) - The display name for the work order attachment.
-+ `fileApiId`: 123 (number, required) - The File Service ID for the attachment.
+## Work Order Attachment (Attachment)
++ `id`: 1 (number, required) - {INT} The ID of the work order attachment.
+
+## Attachment (Base Audit Object)
++ `name`: My File (string, required) - The display name for the attachment.
++ `fileApiId`: 123 (number, required) - {INT} The File Service ID for the attachment.
 + `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
 
 ## Work Order Transaction (Base Audit Object)
-+ `id`: 1 (number, required) - The ID of the work order attachment.
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
 + `typeAttributes` (Transaction Type, required) - The details of the transaction.
 
 ## Transaction Type (object)
-+ `type`: Regular (string, required) - The type of transaction.
-+ `cost`: 22.10 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
++ `type`: Labor (string, required) - The type of transaction.
++ `laborType`: Regular (string, required) - The labor type of the transaction.
++ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
++ `rate`: 35 (number, required) - The rate for this user.
++ `multiplier`: 1 (number, required) - The multiplier for this transaction.
++ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
++ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
+
+## Labor Transaction Type (Transaction Type)
++ `type`: Labor (string, required) - The type of transaction.
++ `laborType`: Regular (string, required) - The labor type of the transaction.
++ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
++ `rate`: 35 (number, required) - The rate for this user.
++ `multiplier`: 1 (number, required) - The multiplier for this transaction.
++ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
++ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
+
+## Purchase Transaction Type (Transaction Type)
++ `type`: Labor (string, required) - The type of transaction.
++ `laborType`: Regular (string, required) - The labor type of the transaction.
++ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
++ `rate`: 35 (number, required) - The rate for this user.
++ `multiplier`: 1 (number, required) - The multiplier for this transaction.
++ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
++ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
+
+## Work Order Template Reference (object)
++ `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
 
 ## Work Order Template Create (object)
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
-+ `priority`: 2 (number, required) - The priority of a work order, in integer format.
++ `priority`: Low (Priority, required) - The priority of a work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
-+ `dudeDateOffset`: 1 (number, optional) - The number of days out to set the dudeDateTime
++ `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime. 1 = today, 2 = tomorrow, etc.
++ `trade` (Trade, optional) - The trade assigned to the work order.
 
-## Work Order Template Update (Work Order Template Create)
-+ `id`: 1 (number, required) - The unique identifier of the work order order template.
-
-## Work Order Template (Work Order Template Update)
-+ `assigneeCount`: 1 (number, required) The number of assignees that exists for the template
+## Work Order Template (Work Order Template Create)
++ `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
++ `assigneeCount`: 1 (number, required) - {INT} The number of assignees that exists for the template
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
@@ -648,3 +1430,141 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
+## Recurrence Pattern (object)
++ `time`: `03:00:00` (string, optional) - The time of the recurrence
++ `dayOfMonth`: 24 (number, optional) - {INT} The day of the month that applies to the recurrence
++ `daysOfWeek` (array[number], optional) - {INT} The days of week that the recurrence applies to
++ `every`: 2 (number, optional) - {INT} How often it repeats
++ `month`: 12 (number, optional) - {INT} The month that the pattern recurs
++ `period`: `Day` (string, optional) - The period
++ `ordinal`: `1` (string, optional) - The integer value relating to an ordinal number (eg: 1 for 1st)
++ `startDateTime`: "2015-10-01T00:00:00Z" (string, optional) - The date/time that the recurrence pattern starts
++ `endDateTime`: "2016-10-01T00:00:00Z" (string, optional) - The date/time that the recurrence pattern terminates
++ `targetDate`: "2016-10-01T00:00:00Z" (string, optional) - The target generation date for the recurrence pattern
++ `cronex`: "0 0 12 * * ?" (string, optional) - The cron expression. This is a system generated expression based on the recurrence pattern.
+
+## PmSchedule Reference (object)
++ `id`: 1 (number, required) - the ID for the schedule object
+
+## Base PmSchedule (object)
++ `workOrderTemplateId`: 1 (number, required) - {INT} The integer id associated with the work order template for this schedule
++ `taskBookId`: 1 (number, optional) - {INT} The integer id associated with the task book for this schedule
++ `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
++ `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
+
+## PmSchedule (Base PmSchedule)
++ `id`: 1 (number, required) - the ID for the schedule object
++ `title`: `Pm Schedule` (string) - the title for the schedule object
++ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
++ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
++ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
++ `businessAssetCount`: 0 (number, required) - {INT} The number of business assets attached to the schedule
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
+## Update PmSchedule Run Dates (object)
++ `id`: 1 (number, required) - The ID for the object
++ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
++ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
++ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
+
+## Task Book (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the task book.
++ `title`: Oil Change (string, optional) - The title of the task book.
++ `isMaster`: true (boolean, required) - Indicates if the task book is a master template.
+
+## Task Summary (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the task.
++ `title`: Drain oil (string, required) - The title of the task.
++ `procedure`: Steps to complete this task (string, optional) - The detailed instructions for how to complete the task.
++ `order` : 1 (number, required) - {INT} The order in which the task should be completed.
+
+## Downtime Tracking (Base Audit Object)
++ `duration`: 850000000 (number, optional) - The downtime milliseconds recorded.
++ `cost`: 1028.50 (number, optional) - The entered cost for this workorder's downtime.
++ `failureReason` (Failure Reason, optional) - The failure reason assigned to this workorder's downtime.
+
+## Failure Reason (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the failure reason.
++ `name`: Accidental Damage (string, required) - The name of the failure reason.
++ `isActive`: true (boolean, required) - Indicates if the failure reason is active.
+
+## Work Order Status (enum)
++ NewRequest (string)
++ WorkInProgress (string)
++ Complete (string)
++ Void (string)
+
+## Priority (enum)
++ Low (string)
++ Medium (string)
++ High (string)
++ Emergency (string)
+
+## Order Status (enum)
++ Approved (string)
++ Canceled (string)
++ Closed (string)
++ Denied (string)
++ Fulfillment (string)
++ New (string)
++ PendingAproval (string)
++ Received (string)
++ ReturnedToSubmitter (string)
++ Shipped (string)
+
+## Order Line Item Detail (object)
++ `title`: `ABCVendorInc Item #3EB46` (string, required) - The title of the order line item.
++ `description`: `Paper Towel Roll, enMotion, 800 ft., PK6` (string, required) - The description of the order line item.
++ `brandName`: `enMotion` (string, optional) - The brand name of the order line item.
++ `manufacturer`: `Georgia-Pacific` (string, optional) - The manufacturer of the order line item.
++ `universalProductCode`: `123456789012` (string, optional) - The universal product code of the order line item.
++ `stockKeepingUnit`: `123456` (string, optional) - The stock keeping code of the order line item.
++ `itemLink`: `http://www.abcvendorinc.com/product/GEORGIA-PACIFIC-Paper-Towel-Roll-3EB46` (string, optional) - The link to the order line item.
+
+## Order Line (object)
++ `id`: 1 (number, required) - {INT} The ID for the object
++ `orderLineNumber`: 1 (number, optional) - {INT} The line number for the order line item
++ `workOrderId`: 1 (number, optional) - {INT} The ID for the work order.
++ `quantity`: 1 (number, required) - {INT} The quantity of the object.
++ `purchaseOrderNumber`: `12345ABCD` (string, optional) - The purchase order number assigned to the order line item.
++ `quantityUnit`: `EA` (string, optional) - The quantity unit of the order line item.
++ `unitPrice` (Currency, optional) - The unit price of the order line item.
++ `taxCost` (Currency, optional) - The tax cost of the order line item.
++ `shippingCost` (Currency, optional) - The shipping cost of the order line item.
++ `itemDetail` (Order Line Item Detail, required) - The item details of the order line item.
+
+## Order (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID for the schedule object.
++ `orderStatus`: `Approved` (Order Status, required) - The order status assigned to the order (Approved | Canceled | Closed | Denied | Fulfillment | New | PendingAproval | Received | ReturnedToSubmitter | Shipped).
++ `supplierName`: `ABCVendorInc.` (string,required) - The supplier name assigned to the order.
++ `supplierOrderNumber`: `12345ABCD` (string, required) - The supplier order number assigned to the order.
++ `supplierOrderLink`: `https://abcvendorinc.com/orders/12345ABCD` (string, optional) - The supplier order link assigned to the order.
++ `supplierInvoiceNumber`: `12345ABCD` (string, optional) - The supplier invoice number to the order.
++ `supplierOrderLastUpdatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the supplier order was last updated.
++ `supplierOrderCreatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the supplier order was created.
++ `purchaseOrderNumber` : `12345ABCD` (string, optional) - The purchase order number assigned to the order.
++ `orderCreatedByUserId` : 12345 (number, optional) - {INT} The ID for the user that created the order.
++ `orderSubTotal` (Currency, optional) - The sub total of the order.
++ `orderTaxTotal` (Currency, optional) - The tax total of the order.
++ `orderShippingTotal` (Currency, optional) - The shipping total of the order.
++ `orderGrandTotal` (Currency, optional) - The grand total of the order.
++ `orderLines` (array[Order Line], required) - The line items on the order.
+
+## Currency (object)
++ `value` : 22.10 (number, required) - The currency value.
++ `unit` : `USD` (string, required) - The ISO 4217 currency code.
+
+## Work Order Task (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the task.
++ `title`: `Drain Oil` (string, required) - The title of the task.
++ `procedure`: `Steps to complete this task` (string, optional) - The detailed instructions for how to complete the task.
++ `order` : 1 (number, required) - {INT} The order in which the task should be completed.
++ `notes` : `Drained 1L of oil` (string, optional) - The notes for the task.
++ `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - The date and time the task was completed.
++ `completedByUser` (Base User Object, optional) - The ID for the user that completed the task.
++ `isCompleted` : true (boolean, required) - Indicates if the task has been completed.
