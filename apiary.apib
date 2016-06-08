@@ -447,7 +447,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 # Group Manufacturers
 
-## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,purpose,includeAudit}]
+## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,q,includeAudit}]
 Retrieve all manufacturers for a specified account
 
 + Parameters
@@ -878,7 +878,7 @@ Retrieve a single manufacturer for a specified account
 
 + Response 200 (text/csv)
 
-## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
+## Labor Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -892,14 +892,40 @@ Retrieve a single manufacturer for a specified account
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[Work Order Transaction], required)
+        + `data` (array[Work Order Labor Transaction], required)
 
 ### POST
 
-+ Response 201 (application/json)
-    + Attributes (Work Order Transaction)
++ Request
+    + Attributes (Work Order Labor Transaction Create)
 
-## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
++ Response 201 (application/json)
+    + Attributes (Work Order Labor Transaction)
+
+## Purchase Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Purchase Transaction], required)
+
+### POST
+
++ Request
+    + Attributes (Work Order Purchase Transaction Create)
+
++ Response 201 (application/json)
+    + Attributes (Work Order Purchase Transaction)
+
+## Labor Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -910,12 +936,33 @@ Retrieve a single manufacturer for a specified account
 ### GET
 
 + Response 200 (application/json)
-    + Attributes (Work Order Transaction)
+    + Attributes (Work Order Labor Transaction)
 
 ### PUT
 
 + Response 200 (application/json)
-    + Attributes (Work Order Transaction)
+    + Attributes (Work Order Labor Transaction)
+
+### DELETE
+
++ Response 204
+
+## Purchase Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the transaction in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Work Order Purchase Transaction)
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Work Order Purchase Transaction)
 
 ### DELETE
 
@@ -1375,38 +1422,39 @@ Represents the trade object.
 + `fileApiId`: 123 (number, required) - {INT} The File Service ID for the attachment.
 + `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
 
-## Work Order Transaction (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
+## Work Order Labor Transaction Create (object)
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
-+ `typeAttributes` (Transaction Type, required) - The details of the transaction.
++ `typeAttributes` (Labor Transaction Type, required) - The details of the transaction.
+
+## Work Order Labor Transaction (Work Order Labor Transaction Create)
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
+
+## Work Order Purchase Transaction Create (object)
++ `description`: The technician did work (string, required) - A short description of the transaction.
++ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
++ `typeAttributes` (Purchase Transaction Type, required) - The details of the transaction.
+
+## Work Order Purchase Transaction (Work Order Purchase Transaction Create)
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 
 ## Transaction Type (object)
-+ `type`: Labor (string, required) - The type of transaction.
-+ `laborType`: Regular (string, required) - The labor type of the transaction.
-+ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
-+ `rate`: 35 (number, required) - The rate for this user.
-+ `multiplier`: 1 (number, required) - The multiplier for this transaction.
-+ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
-+ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
++ `cost`: 175.00 (number, optional) - The cost for this type of transaction.
++ `user` (Base User Object, required) - Information about the user who is associated with the transaction.
 
 ## Labor Transaction Type (Transaction Type)
-+ `type`: Labor (string, required) - The type of transaction.
++ `type`: labor (string, required) - The type of transaction.
 + `laborType`: Regular (string, required) - The labor type of the transaction.
-+ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
-+ `rate`: 35 (number, required) - The rate for this user.
-+ `multiplier`: 1 (number, required) - The multiplier for this transaction.
-+ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
-+ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
++ `hours`: 5 (number, required) - {INT} The number of hours in the labor transaction.
++ `rate`: 35 (number, optional) - The rate for this user.
++ `multiplier`: 1 (number, optional) - The multiplier for this transaction.
 
 ## Purchase Transaction Type (Transaction Type)
-+ `type`: Labor (string, required) - The type of transaction.
-+ `laborType`: Regular (string, required) - The labor type of the transaction.
-+ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
-+ `rate`: 35 (number, required) - The rate for this user.
-+ `multiplier`: 1 (number, required) - The multiplier for this transaction.
-+ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
-+ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
++ `type`: purchase (string, required) - The type of transaction.
++ `purchaseOrder`: 100ABC (string, optional) - The purchase order of the purchase transaction.
++ `quantity`: 35.00 (number, required) - The amount of items purchased for this transaction.
++ `unitCost`: 5 (number, required) - The unit cost for this purchase transaction.
++ `supplierName`: Grainger (string, optional) - The supplier of this purchase transaction.
 
 ## Work Order Template Reference (object)
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
