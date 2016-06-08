@@ -1393,6 +1393,9 @@ Represents the trade object.
 `latLongMatchesAddress`: true (boolean, required) - Indicates if the location address matches the latitude and longitude coordinates.
 
 ## Work Order (Base Audit Object)
+Represents the Work Order Object
+
+### Properties
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order.
 + `workOrderTemplate` (Work Order Template Reference, optional) - the work order template that this work order was generated from, if applicable
 + `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
@@ -1413,6 +1416,8 @@ Represents the trade object.
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
 + `downtimeTracking` (Downtime Tracking, optional) - The downtime tracking assigned to the work order.
 + `trade` (Trade, optional) - The trade assigned to the work order.
++ `estimatedCost`: 10.50 (number, optional) - The estimated cost to complete the work order.
++ `estimatedHours`: 1.5 (number, optional) - The estimated number of hours to complete the work order.
 
 ## Work Order Attachment (Attachment)
 + `id`: 1 (number, required) - {INT} The ID of the work order attachment.
@@ -1460,6 +1465,9 @@ Represents the trade object.
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
 
 ## Work Order Template Create (object)
+The object that represents the work order template create
+
+### Properties
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `priority`: Low (Priority, required) - The priority of a work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
@@ -1467,6 +1475,8 @@ Represents the trade object.
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime. 1 = today, 2 = tomorrow, etc.
 + `trade` (Trade, optional) - The trade assigned to the work order.
++ `estimatedCost`: 10.50 (number, optional) - The estimated cost to complete the associated work order.
++ `estimatedHours`: 1.5 (number, optional) - The estimated number of hours to complete the associated work order.
 
 ## Work Order Template (Work Order Template Create)
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
