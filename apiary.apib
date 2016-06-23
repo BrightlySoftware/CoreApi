@@ -819,12 +819,7 @@ Retrieve a single manufacturer for a specified account
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
     + createdby: 1 (number, optional) -  {INT} Filter by the user who created the work order.
     + displayid: WO123 (string, optional) - Filter by the display ID of the work order.
-    + priority: Low (enum[string], optional) - Filter by the priority of work orders.
-        + Members
-            + Low (string)
-            + Medium (string)
-            + High (string)
-            + Emergency (string)
+    + priority: Low (Priority, optional) - Filter by the priority of work orders.
     + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
