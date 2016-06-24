@@ -841,7 +841,7 @@ Retrieve a single manufacturer for a specified account
 ### POST
 
 + Request
-  + Attributes (Work Order)
+    + Attributes (Work Order)
 + Response 201 (application/json)
     + Attributes (Work Order)
 
@@ -1413,6 +1413,7 @@ Represents the Work Order Object
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
++ `scheduledStartDate`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is scheduled to start.
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
 + `downtimeTracking` (Downtime Tracking, optional) - The downtime tracking assigned to the work order.
 + `trade` (Trade, optional) - The trade assigned to the work order.
