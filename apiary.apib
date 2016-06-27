@@ -449,6 +449,52 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Response 204
 
+# Group Manufacturers
+
+## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,q,includeAudit}]
+Retrieve all manufacturers for a specified account
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Name asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Manufacturer], required)
+
+## Manufacturer Create [/accounts/{accountId}/manufacturer]
+Create a new manufacturer
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+
+### POST
+
++ Request
+    + Attributes (Manufacturer Create)
+
++ Response 201 (application/json)
+    + Attributes (Manufacturer)
+
+## Manufacturer Detail [/accounts/{accountId}/manufacturers/{id}{?includeAudit}]
+Retrieve a single manufacturer for a specified account
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the manufacturer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Manufacturer)
+
 # Group Task Books
 
 ## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q,ismaster,includeAudit}]
@@ -608,6 +654,61 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Response 204
 
+# Group Trade
+
+## Trade Collection [/accounts/{accountId}/trades{?page,pagesize,orderby,q,isactive,includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Trade], required)
+
+## Trade Create [/accounts/{accountId}/trades{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
++ Request
+    + Attributes (Trade Create)
+
++ Response 201 (application/json)
+    + Attributes (Trade)
+
+## Trade Detail [/accounts/{accountId}/trades/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the trade in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Trade)
+
+### PUT
++ Request
+    + Attributes (Trade)
+
++ Response 200 (application/json)
+    + Attributes (Trade)
+
+### DELETE
+
++ Response 204
+
 # Group Labor Hour Types
 
 ## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby,includeAudit}]
@@ -709,12 +810,22 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
     + createdby: 1 (number, optional) -  {INT} Filter by the user who created the work order.
     + displayid: WO123 (string, optional) - Filter by the display ID of the work order.
-    + priority: Low (array[Priority], optional) - Filter by the priority of work orders.
+    + priority: Low (enum[string], optional) - Filter by the priority of work orders.
+        + Members
+            + Low (string)
+            + Medium (string)
+            + High (string)
+            + Emergency (string)
     + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
     + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
-    + status: NewRequest (array[Work Order Status], optional) - Filter by the work order status.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Complete (string)
+            + Void (string)
     + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - {LONG} Filter by the business asset assigned to the work order.
     + pmschedule: 1 (array[number], optional) - {LONG} Filter by the PmSchedule associated with the work order.
@@ -736,7 +847,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 ### POST
 
 + Request
-  + Attributes (Work Order)
+    + Attributes (Work Order)
 + Response 201 (application/json)
     + Attributes (Work Order)
 
@@ -773,7 +884,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Response 200 (text/csv)
 
-## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
+## Labor Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -787,14 +898,40 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[Work Order Transaction], required)
+        + `data` (array[Work Order Labor Transaction], required)
 
 ### POST
 
-+ Response 201 (application/json)
-    + Attributes (Work Order Transaction)
++ Request
+    + Attributes (Work Order Labor Transaction Create)
 
-## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
++ Response 201 (application/json)
+    + Attributes (Work Order Labor Transaction)
+
+## Purchase Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Purchase Transaction], required)
+
+### POST
+
++ Request
+    + Attributes (Work Order Purchase Transaction Create)
+
++ Response 201 (application/json)
+    + Attributes (Work Order Purchase Transaction)
+
+## Labor Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -805,12 +942,33 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 ### GET
 
 + Response 200 (application/json)
-    + Attributes (Work Order Transaction)
+    + Attributes (Work Order Labor Transaction)
 
 ### PUT
 
 + Response 200 (application/json)
-    + Attributes (Work Order Transaction)
+    + Attributes (Work Order Labor Transaction)
+
+### DELETE
+
++ Response 204
+
+## Purchase Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the transaction in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Work Order Purchase Transaction)
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Work Order Purchase Transaction)
 
 ### DELETE
 
@@ -990,11 +1148,27 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 # Group Order
 
-## Order Create [/accounts/{accountId}/orders{?includeAudit}]
+## Order Collection [/accounts/{accountId}/orders{?supplierName,orderNumber,page,pagesize,orderby,includeAudit}]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + supplierName: `ACME Inc.` (string, optional) - {STRING} Name of the supplier in the form of a string
+    + orderNumber: `12345abcde` (string, optional) - {STRING} Supplier order number in the form of a string
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby:  OrderNumber asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Order])
+
+## Order Create [/accounts/{accountId}/orders]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### POST
 
@@ -1002,6 +1176,20 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
   + Attributes (Order)
 + Response 201 (application/json)
     + Attributes (Order)
+
+## Order Update [/accounts/{accountId}/orders/{orderId}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + orderId: 1 (required, number) - {INT} ID of the order in the form of an integer
+
+### PUT
+
++ Request
+  + Attributes (Order)
++ Response 200 (application/json)
+    + Attributes (Order)
+
 
 # Data Structures
 
@@ -1115,6 +1303,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + `money` - Represents a floating point number greater than 0 and two decimal places
     + `string` - Represents a series of characters
     + `boolean` - Represents a true/false value
+    + `databound` - Represents an object
 + `isActive`: true (boolean, required) - Indicates if the attribute type is active
 + `fieldLength`: 125 (number, optional) - {INT} The number of characters allowed for the attribute
 + `quantity` (Quantity Reference, required) - The quantity type
@@ -1157,10 +1346,32 @@ A business asset type group. Used to classify a business asset type and apply ba
         + `Metric` - Limit to Metric measurements.
         + `Imperial`- Limit to Imperial measurements.
 
+## Manufacturer Create (object)
++ `id`: 1 (number, required) - {INT} The ID of the manufacturer.
++ `name`: Ford (string, required) - The name of the manufacturer.
+
+## Manufacturer (Manufacturer Create)
++ `isDudeManufacturer`: true (boolean) - Indicates if this is a common platform manufacturer.
+
 ## Purpose (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the purpose.
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
+
+## Trade Create (object)
+Represents the Trade create object.
+
+### Properties
++ `name`: Electrician (string, required) - The name of the trade.
++ `isActive`: true (boolean, required) - Indicates if the trade is active.
+
+## Trade (Base Audit Object)
+Represents the trade object.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
++ `name`: Electrician (string, required) - The name of the trade.
++ `isActive`: true (boolean, required) - Indicates if the trade is active.
 
 ## Labor Hour Type (Base Audit Object)
 + `id`: 1 (number, required) - {LONG} The ID of the labor hour type.
@@ -1188,6 +1399,9 @@ A business asset type group. Used to classify a business asset type and apply ba
 `latLongMatchesAddress`: true (boolean, required) - Indicates if the location address matches the latitude and longitude coordinates.
 
 ## Work Order (Base Audit Object)
+Represents the Work Order Object
+
+### Properties
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order.
 + `workOrderTemplate` (Work Order Template Reference, optional) - the work order template that this work order was generated from, if applicable
 + `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
@@ -1205,8 +1419,12 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
++ `scheduledStartDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to start.
 + `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is expected to be completed.
 + `downtimeTracking` (Downtime Tracking, optional) - The downtime tracking assigned to the work order.
++ `trade` (Trade, optional) - The trade assigned to the work order.
++ `estimatedCost`: 10.50 (number, optional) - The estimated cost to complete the work order.
++ `estimatedHours`: 1.5 (number, optional) - The estimated number of hours to complete the work order.
 
 ## Work Order Attachment (Attachment)
 + `id`: 1 (number, required) - {INT} The ID of the work order attachment.
@@ -1216,26 +1434,56 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `fileApiId`: 123 (number, required) - {INT} The File Service ID for the attachment.
 + `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
 
-## Work Order Transaction (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the work order attachment.
+## Work Order Labor Transaction Create (object)
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
-+ `typeAttributes` (Transaction Type, required) - The details of the transaction.
++ `typeAttributes` (Labor Transaction Type, required) - The details of the transaction.
+
+## Work Order Labor Transaction (Work Order Labor Transaction Create)
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
+
+## Work Order Purchase Transaction Create (object)
++ `description`: The technician did work (string, required) - A short description of the transaction.
++ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
++ `typeAttributes` (Purchase Transaction Type, required) - The details of the transaction.
+
+## Work Order Purchase Transaction (Work Order Purchase Transaction Create)
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 
 ## Transaction Type (object)
-+ `type`: Regular (string, required) - The type of transaction.
-+ `cost`: 22.10 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
++ `cost`: 175.00 (number, optional) - The cost for this type of transaction.
++ `user` (Base User Object, required) - Information about the user who is associated with the transaction.
+
+## Labor Transaction Type (Transaction Type)
++ `type`: labor (string, required) - The type of transaction.
++ `laborType`: Regular (string, required) - The labor type of the transaction.
++ `hours`: 5 (number, required) - {INT} The number of hours in the labor transaction.
++ `rate`: 35 (number, optional) - The rate for this user.
++ `multiplier`: 1 (number, optional) - The multiplier for this transaction.
+
+## Purchase Transaction Type (Transaction Type)
++ `type`: purchase (string, required) - The type of transaction.
++ `purchaseOrder`: 100ABC (string, optional) - The purchase order of the purchase transaction.
++ `quantity`: 35.00 (number, required) - The amount of items purchased for this transaction.
++ `unitCost`: 5 (number, required) - The unit cost for this purchase transaction.
++ `supplierName`: Grainger (string, optional) - The supplier of this purchase transaction.
 
 ## Work Order Template Reference (object)
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
 
 ## Work Order Template Create (object)
+The object that represents the work order template create
+
+### Properties
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `priority`: Low (Priority, required) - The priority of a work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime. 1 = today, 2 = tomorrow, etc.
++ `trade` (Trade, optional) - The trade assigned to the work order.
++ `estimatedCost`: 10.50 (number, optional) - The estimated cost to complete the associated work order.
++ `estimatedHours`: 1.5 (number, optional) - The estimated number of hours to complete the associated work order.
 
 ## Work Order Template (Work Order Template Create)
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
@@ -1313,7 +1561,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 ## Work Order Status (enum)
 + NewRequest (string)
 + WorkInProgress (string)
-+ Completed (string)
++ Complete (string)
 + Void (string)
 
 ## Priority (enum)
@@ -1343,12 +1591,11 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `stockKeepingUnit`: `123456` (string, optional) - The stock keeping code of the order line item.
 + `itemLink`: `http://www.abcvendorinc.com/product/GEORGIA-PACIFIC-Paper-Towel-Roll-3EB46` (string, optional) - The link to the order line item.
 
-
 ## Order Line (object)
-+ `id`: 1 (number, required) - The ID for the object
-+ `orderLineNumber`: 1 (number, optional) - The line number for the order line item
-+ `workOrderId`: 1 (number, optional) - The ID for the work order.
-+ `quantity`: 1 (number, required) - The quantity of the object.
++ `id`: 1 (number, required) - {INT} The ID for the object
++ `orderLineNumber`: 1 (number, optional) - {INT} The line number for the order line item
++ `workOrderId`: 1 (number, optional) - {INT} The ID for the work order.
++ `quantity`: 1 (number, required) - {INT} The quantity of the object.
 + `purchaseOrderNumber`: `12345ABCD` (string, optional) - The purchase order number assigned to the order line item.
 + `quantityUnit`: `EA` (string, optional) - The quantity unit of the order line item.
 + `unitPrice` (Currency, optional) - The unit price of the order line item.
@@ -1357,7 +1604,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `itemDetail` (Order Line Item Detail, required) - The item details of the order line item.
 
 ## Order (Base Audit Object)
-+ `id`: 1 (number, required) - the ID for the schedule object.
++ `id`: 1 (number, required) - {INT} The ID for the schedule object.
 + `orderStatus`: `Approved` (Order Status, required) - The order status assigned to the order (Approved | Canceled | Closed | Denied | Fulfillment | New | PendingAproval | Received | ReturnedToSubmitter | Shipped).
 + `supplierName`: `ABCVendorInc.` (string,required) - The supplier name assigned to the order.
 + `supplierOrderNumber`: `12345ABCD` (string, required) - The supplier order number assigned to the order.
@@ -1366,7 +1613,7 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `supplierOrderLastUpdatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the supplier order was last updated.
 + `supplierOrderCreatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time the supplier order was created.
 + `purchaseOrderNumber` : `12345ABCD` (string, optional) - The purchase order number assigned to the order.
-+ `orderCreatedByUserId` : 12345 (number, optional) - The ID for the user that created the order.
++ `orderCreatedByUserId` : 12345 (number, optional) - {INT} The ID for the user that created the order.
 + `orderSubTotal` (Currency, optional) - The sub total of the order.
 + `orderTaxTotal` (Currency, optional) - The tax total of the order.
 + `orderShippingTotal` (Currency, optional) - The shipping total of the order.
@@ -1384,5 +1631,5 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `order` : 1 (number, required) - {INT} The order in which the task should be completed.
 + `notes` : `Drained 1L of oil` (string, optional) - The notes for the task.
 + `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - {DATETIME} The date and time the task was completed.
-+ `completedByUser` : (Base User Object, optional) - The ID for the user that completed the task.
++ `completedByUser` (Base User Object, optional) - The ID for the user that completed the task.
 + `isCompleted` : true (boolean, required) - Indicates if the task has been completed.
