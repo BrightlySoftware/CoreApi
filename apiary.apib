@@ -709,6 +709,23 @@ Retrieve a single manufacturer for a specified account
 
 + Response 204
 
+# Group Failure Reasons
+
+## Failure Reason Collection [/accounts/{accountId}/failurereasons{?page,pagesize,orderby,includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Failure Reason], required)
+
 # Group Labor Hour Types
 
 ## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby,includeAudit}]
@@ -1457,7 +1474,7 @@ Represents the Work Order Object
 ## Labor Transaction Type (Transaction Type)
 + `type`: labor (string, required) - The type of transaction.
 + `laborType`: Regular (string, required) - The labor type of the transaction.
-+ `hours`: 5 (number, required) - {INT} The number of hours in the labor transaction.
++ `hours`: 5 (number, required) - The number of hours in the labor transaction.
 + `rate`: 35 (number, optional) - The rate for this user.
 + `multiplier`: 1 (number, optional) - The multiplier for this transaction.
 
