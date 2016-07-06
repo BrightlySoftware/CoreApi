@@ -835,7 +835,7 @@ Retrieve a single manufacturer for a specified account
 
 # Group Work Orders
 
-## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,includeAudit}]
+## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,pmschedule,includedescendants,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1372,17 +1372,18 @@ A business asset type group. Used to classify a business asset type and apply ba
 Represents a Calendar Event object
 
 ### Properties
-+ `WorkOrderType`: Reactive (string, required) - The type of work order.
-+ `PmScheduleId`: 1 (number, optional) - The ID of the PM schedule.
-+ `WorkOrderId`: 1 (number, optional) - {INT} The ID of the work order.
-+ `DisiplayId`: 1 (number, optional) - {INT} The display ID for the work order.
++ `workOrderType`: Reactive (string, required) - The type of work order.
++ `pmScheduleId`: 1 (number, optional) - {LONG} The ID of the PM schedule.
++ `workOrderId`: 1 (number, optional) - {INT} The ID of the work order.
++ `displayId`: 1 (number, optional) - {INT} The display ID for the work order.
 + `priority`: High (string, optional) - The priority of a work order.
++ `scheduledStartDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to start.
++ `scheduledEndDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to end.
++ `requestDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is requested.
++ `eventDescription`: The chair is broken (string, optional) - Text that describes the work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
-+ `scheduledStart`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to start.
-+ `scheduledEnd`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to end.
-+ `descriptionValue`: The chair is broken (string, optional) - Text that describes the work order.
 
 ## Quantity Create (object)
 + `quantity`: Length (string, required) - The name of the quantity type
