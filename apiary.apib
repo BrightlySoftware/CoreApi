@@ -1285,15 +1285,10 @@ Retrieve a single manufacturer for a specified account
 ## Business Asset (Business Asset Update)
 + `parent` (Business Asset Lite) - Describes the initial parent
 + `businessAssetAttributeCount`: 4 (number, optional) - The number of attributes associated with this business asset
++ `attachmentCount`: 1 (number, optional) - {INT} A count of attachments associated with the asset.
 + `ancestorIdPath`: Sample (string, required) - Provides the ancestor IDs starting at root to the current parent node.
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
-+ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
-+ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
-+ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
-+ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
-+ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
-+ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Business Asset Reference (object)
 + `id`: 1 (number, required) - {LONG} The ID of the object
@@ -1382,7 +1377,7 @@ Represents a Calendar Event object
 + `requestDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is requested.
 + `eventDescription`: The chair is broken (string, optional) - Text that describes the work order.
 + `estimatedHours`: 2.5 (number, optional) - The estimated hours of work for the work order.
-+ `purpose` (Purpose, optional) - The purpose assigned to the work order.
++ `purpose` (Purpose Lite, optional) - The purpose assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
 
@@ -1411,6 +1406,11 @@ Represents a Calendar Event object
 + `isDudeManufacturer`: true (boolean) - Indicates if this is a common platform manufacturer.
 
 ## Purpose (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
++ `value`: General Maintenance (string, required) - The description of the purpose.
++ `isActive`: true (boolean, required) - Indicates if the purpose is active.
+
+## Purpose Lite (object)
 + `id`: 1 (number, required) - {INT} The ID of the purpose.
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
