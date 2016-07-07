@@ -314,6 +314,28 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + Attributes (Base Collection Response)
         + `data` (array[Business Asset Attribute Type], required)
 
+# Group Calendar Events
+Calendar event endpoints.
+
+## Calendar Events Collection [/accounts/{accountId}/calendarEvents{?page,pagesize,orderby,scheduledStartDateFrom,scheduledStartDateTo,scheduledEndDateFrom,scheduledEndDateTo}]
+Retieve all Calendar Events for a specified Account
+
+### GET
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + scheduledStartDateFrom: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
+    + scheduledStartDateTo: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
+    + scheduledEndDateFrom: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
+    + scheduledEndDateTo: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + data (required, array[Calendar Event]) - The Calendar Event collection
+
 # Group Quantities
 
 ## Quantities [/quantities{?page,pagesize,orderby}]
@@ -813,7 +835,7 @@ Retrieve a single manufacturer for a specified account
 
 # Group Work Orders
 
-## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,includeAudit}]
+## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,pmschedule,includedescendants,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1263,15 +1285,10 @@ Retrieve a single manufacturer for a specified account
 ## Business Asset (Business Asset Update)
 + `parent` (Business Asset Lite) - Describes the initial parent
 + `businessAssetAttributeCount`: 4 (number, optional) - The number of attributes associated with this business asset
++ `attachmentCount`: 1 (number, optional) - {INT} A count of attachments associated with the asset.
 + `ancestorIdPath`: Sample (string, required) - Provides the ancestor IDs starting at root to the current parent node.
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
-+ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
-+ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
-+ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
-+ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
-+ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
-+ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Business Asset Reference (object)
 + `id`: 1 (number, required) - {LONG} The ID of the object
@@ -1346,6 +1363,24 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `description`: Other (string, optional) - The description of the group
 + `businessAssetAttributeTypeCount`: 4 (number, optional) - The number of attribute types associated with this business asset type group
 
+## Calendar Event (object)
+Represents a Calendar Event object
+
+### Properties
++ `workOrderType`: Reactive (string, required) - The type of work order.
++ `pmScheduleId`: 1 (number, optional) - {LONG} The ID of the PM schedule.
++ `workOrderId`: 1 (number, optional) - {INT} The ID of the work order.
++ `displayId`: 1 (number, optional) - {INT} The display ID for the work order.
++ `priority`: Medium (Priority, required) - The priority of a work order.
++ `scheduledStartDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to start.
++ `scheduledEndDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to end.
++ `requestDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is requested.
++ `eventDescription`: The chair is broken (string, optional) - Text that describes the work order.
++ `estimatedHours`: 2.5 (number, optional) - The estimated hours of work for the work order.
++ `purpose` (Purpose Lite, optional) - The purpose assigned to the work order.
++ `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
++ `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
+
 ## Quantity Create (object)
 + `quantity`: Length (string, required) - The name of the quantity type
 
@@ -1371,6 +1406,11 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `isDudeManufacturer`: true (boolean) - Indicates if this is a common platform manufacturer.
 
 ## Purpose (Base Audit Object)
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
++ `value`: General Maintenance (string, required) - The description of the purpose.
++ `isActive`: true (boolean, required) - Indicates if the purpose is active.
+
+## Purpose Lite (object)
 + `id`: 1 (number, required) - {INT} The ID of the purpose.
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
