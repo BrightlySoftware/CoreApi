@@ -1,6 +1,10 @@
 FORMAT: 1A
 HOST: https://v1.api.dudesolutions.io
 
+COLLECTPARAMETERS: TRUE
+DATETIMEFORMAT:
+NULLIFY404: TRUE
+VALIDATEREQUIREDPARAMETERS: FALSE
 USECOMMONSDKLIBRARY: TRUE
 GENERATEASYNCCODE: TRUE
 GENERATEINTERFACES: TRUE
@@ -107,7 +111,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
+    + id: 12345 (required, number) - {LONG} ID of the business asset in the form of an integer
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
@@ -131,7 +135,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
-    + businessAssetId: 1 (required, number) - {INT} ID of the asset in the form of an integer.
+    + businessAssetId: 1 (required, number) - {LONG} ID of the asset in the form of an integer.
     + q: Sample (string, optional) - Custom query object.
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
@@ -156,7 +160,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + businessAssetId: 1 (required, number) - {INT} ID of the asset in the form of an integer
+    + businessAssetId: 1 (required, number) - {LONG} ID of the asset in the form of an integer
     + id: 12345 (required, number) - {INT} ID of the business asset in the form of an integer
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
@@ -172,7 +176,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + businessAssetId: 12345 (required, number) - {INT} ID of the business asset in the form of a long
+    + businessAssetId: 12345 (required, number) - {LONG} ID of the business asset in the form of a long
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
@@ -196,7 +200,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + businessAssetId: 12345 (required, number) - {INT} ID of the business asset in the form of a long
+    + businessAssetId: 12345 (required, number) - {LONG} ID of the business asset in the form of a long
     + id: 12345 (required, number) - {INT} ID of the attachment in the form of an integer
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
@@ -309,6 +313,28 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
     + Attributes (Base Collection Response)
         + `data` (array[Business Asset Attribute Type], required)
 
+# Group Calendar Events
+Calendar event endpoints.
+
+## Calendar Events Collection [/accounts/{accountId}/calendarEvents{?page,pagesize,orderby,scheduledStartDateFrom,scheduledStartDateTo,scheduledEndDateFrom,scheduledEndDateTo}]
+Retieve all Calendar Events for a specified Account
+
+### GET
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + scheduledStartDateFrom: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
+    + scheduledStartDateTo: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
+    + scheduledEndDateFrom: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
+    + scheduledEndDateTo: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + data (required, array[Calendar Event]) - The Calendar Event collection
+
 # Group Quantities
 
 ## Quantities [/quantities{?page,pagesize,orderby}]
@@ -383,7 +409,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the pm schedule
+    + id: 12345 (required, number) - {LONG} ID of the pm schedule
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
@@ -403,7 +429,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - ID of the pm schedule
+    + id: 12345 (required, number) - {LONG} ID of the pm schedule
 
 ### PUT
 
@@ -417,7 +443,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Parameters
     + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
-    + pmScheduleId: 1 (number, required) - ID of the work order template object who's collection is being referenced
+    + pmScheduleId: 1 (number, required) - {LONG} ID of the work order template object who's collection is being referenced
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
@@ -432,8 +458,8 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 + Parameters
     + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
-    + pmScheduleId: 1 (number, required) - ID of the work order template object who's collection is being referenced
-    + id: 1 (number, required) - {INT} The ID of the Business Asset
+    + pmScheduleId: 1 (number, required) - {LONG} ID of the work order template object who's collection is being referenced
+    + id: 1 (number, required) - {LONG} The ID of the Business Asset
 
 ### PUT
 
@@ -446,7 +472,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Type 
 
 # Group Manufacturers
 
-## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,purpose,includeAudit}]
+## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,q,includeAudit}]
 Retrieve all manufacturers for a specified account
 
 + Parameters
@@ -704,6 +730,23 @@ Retrieve a single manufacturer for a specified account
 
 + Response 204
 
+# Group Failure Reasons
+
+## Failure Reason Collection [/accounts/{accountId}/failurereasons{?page,pagesize,orderby,includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Failure Reason], required)
+
 # Group Labor Hour Types
 
 ## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby,includeAudit}]
@@ -730,7 +773,7 @@ Retrieve a single manufacturer for a specified account
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 1 (required, number) - {INT} The ID of the labor type
+    + id: 1 (required, number) - {LONG} The ID of the labor type
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
@@ -791,7 +834,7 @@ Retrieve a single manufacturer for a specified account
 
 # Group Work Orders
 
-## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,includeAudit}]
+## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,pmschedule,includedescendants,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -822,8 +865,10 @@ Retrieve a single manufacturer for a specified account
             + Complete (string)
             + Void (string)
     + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
-    + businessasset: 1 (array[number], optional) - {INT} Filter by the business asset assigned to the work order.
-    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + businessasset: 1 (array[number], optional) - {LONG} Filter by the business asset assigned to the work order.
+    + pmschedule: 1 (array[number], optional) - {LONG} Filter by the PmSchedule associated with the work order.
+    + includedescendants: false (boolean, optional) - Flag to include workorders assigned to descendants of the specified business assets.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api.
 
 ### GET
 
@@ -840,7 +885,7 @@ Retrieve a single manufacturer for a specified account
 ### POST
 
 + Request
-  + Attributes (Work Order)
+    + Attributes (Work Order)
 + Response 201 (application/json)
     + Attributes (Work Order)
 
@@ -877,7 +922,7 @@ Retrieve a single manufacturer for a specified account
 
 + Response 200 (text/csv)
 
-## Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
+## Labor Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -891,14 +936,40 @@ Retrieve a single manufacturer for a specified account
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[Work Order Transaction], required)
+        + `data` (array[Work Order Labor Transaction], required)
 
 ### POST
 
-+ Response 201 (application/json)
-    + Attributes (Work Order Transaction)
++ Request
+    + Attributes (Work Order Labor Transaction Create)
 
-## Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
++ Response 201 (application/json)
+    + Attributes (Work Order Labor Transaction)
+
+## Purchase Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Purchase Transaction], required)
+
+### POST
+
++ Request
+    + Attributes (Work Order Purchase Transaction Create)
+
++ Response 201 (application/json)
+    + Attributes (Work Order Purchase Transaction)
+
+## Labor Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -909,12 +980,33 @@ Retrieve a single manufacturer for a specified account
 ### GET
 
 + Response 200 (application/json)
-    + Attributes (Work Order Transaction)
+    + Attributes (Work Order Labor Transaction)
 
 ### PUT
 
 + Response 200 (application/json)
-    + Attributes (Work Order Transaction)
+    + Attributes (Work Order Labor Transaction)
+
+### DELETE
+
++ Response 204
+
+## Purchase Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the transaction in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Work Order Purchase Transaction)
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Work Order Purchase Transaction)
 
 ### DELETE
 
@@ -1158,10 +1250,10 @@ Retrieve a single manufacturer for a specified account
 + `total`: 2000 (number, required) - {INT} The total number of records available in the collection.
 
 ## Base Audit Object (object)
-+ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
-+ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
@@ -1187,23 +1279,18 @@ Retrieve a single manufacturer for a specified account
 + `businessAssetType` (Business Asset Type Update, required) - Describes the type of the asset.
 
 ## Business Asset Update (Business Asset Create)
-+ `id`: 1 (number, required) - {INT} The ID of the object
++ `id`: 1 (number, required) - {LONG} The ID of the object
 
 ## Business Asset (Business Asset Update)
 + `parent` (Business Asset Lite) - Describes the initial parent
 + `businessAssetAttributeCount`: 4 (number, optional) - The number of attributes associated with this business asset
++ `attachmentCount`: 1 (number, optional) - {INT} A count of attachments associated with the asset.
 + `ancestorIdPath`: Sample (string, required) - Provides the ancestor IDs starting at root to the current parent node.
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
-+ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
-+ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
-+ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
-+ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
-+ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
-+ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Business Asset Reference (object)
-+ `id`: 1 (number, required) - {INT} The ID of the object
++ `id`: 1 (number, required) - {LONG} The ID of the object
 
 ## Business Asset Attribute Create (object)
 + `value`: 1200 (string, required) - The value of the asset attribute instance
@@ -1232,10 +1319,10 @@ Retrieve a single manufacturer for a specified account
 ## Business Asset Type (Business Asset Type Update)
 + `isDudeAssetType`: true (boolean, required) - Indicates if this is a common platform asset type
 + `businessAssetAttributeTypeCount`: 4 (number, required) - {INT} The number of attributes associated with this asset type
-+ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
-+ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 + `businessAssetTypeGroup` (Business Asset Type Group, required) - The business asset type group associated with the business asset type.
@@ -1275,6 +1362,24 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `description`: Other (string, optional) - The description of the group
 + `businessAssetAttributeTypeCount`: 4 (number, optional) - The number of attribute types associated with this business asset type group
 
+## Calendar Event (object)
+Represents a Calendar Event object
+
+### Properties
++ `workOrderType`: Reactive (string, required) - The type of work order.
++ `pmScheduleId`: 1 (number, optional) - {LONG} The ID of the PM schedule.
++ `workOrderId`: 1 (number, optional) - {INT} The ID of the work order.
++ `displayId`: 1 (number, optional) - {INT} The display ID for the work order.
++ `priority`: Medium (Priority, required) - The priority of a work order.
++ `scheduledStartDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to start.
++ `scheduledEndDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to end.
++ `requestDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is requested.
++ `eventDescription`: The chair is broken (string, optional) - Text that describes the work order.
++ `estimatedHours`: 2.5 (number, optional) - The estimated hours of work for the work order.
++ `purpose` (Purpose Lite, optional) - The purpose assigned to the work order.
++ `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
++ `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
+
 ## Quantity Create (object)
 + `quantity`: Length (string, required) - The name of the quantity type
 
@@ -1304,6 +1409,11 @@ A business asset type group. Used to classify a business asset type and apply ba
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
 
+## Purpose Lite (object)
++ `id`: 1 (number, required) - {INT} The ID of the purpose.
++ `value`: General Maintenance (string, required) - The description of the purpose.
++ `isActive`: true (boolean, required) - Indicates if the purpose is active.
+
 ## Trade Create (object)
 Represents the Trade create object.
 
@@ -1320,7 +1430,7 @@ Represents the trade object.
 + `isActive`: true (boolean, required) - Indicates if the trade is active.
 
 ## Labor Hour Type (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the labor hour type.
++ `id`: 1 (number, required) - {LONG} The ID of the labor hour type.
 + `type`: Regular (string, required) - The name of the labor type.
 + `multiplier`: 1.0 (number, required) - The multiplier associated with the labor type.
 
@@ -1345,6 +1455,9 @@ Represents the trade object.
 `latLongMatchesAddress`: true (boolean, required) - Indicates if the location address matches the latitude and longitude coordinates.
 
 ## Work Order (Base Audit Object)
+Represents the Work Order Object
+
+### Properties
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order.
 + `workOrderTemplate` (Work Order Template Reference, optional) - the work order template that this work order was generated from, if applicable
 + `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
@@ -1352,8 +1465,8 @@ Represents the trade object.
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `status`: NewRequest (Work Order Status, required) - The status of a work order.
 + `priority`: Low (Priority, required) - The priority of a work order.
-+ `requestDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The requested date and time for the work order.
-+ `completionDateTime`:  `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the work order was completed.
++ `requestDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The requested date and time for the work order.
++ `completionDateTime`:  `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time the work order was completed.
 + `actionTaken`: I replaced the bolt (string, optional) - Text that describes what was done to resolve the reported issue.
 + `attachmentCount`: 1 (number, optional) - {INT} A count of attachments associated with the work order.
 + `requestedBy` (Base User Object, required) - The user who requested the work order.
@@ -1362,9 +1475,12 @@ Represents the trade object.
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
-+ `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time that the work order is expected to be completed.
++ `scheduledStartDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is scheduled to start.
++ `dueDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is expected to be completed.
 + `downtimeTracking` (Downtime Tracking, optional) - The downtime tracking assigned to the work order.
 + `trade` (Trade, optional) - The trade assigned to the work order.
++ `estimatedCost`: 10.50 (number, optional) - The estimated cost to complete the work order.
++ `estimatedHours`: 1.5 (number, optional) - The estimated number of hours to complete the work order.
 
 ## Work Order Attachment (Attachment)
 + `id`: 1 (number, required) - {INT} The ID of the work order attachment.
@@ -1374,43 +1490,47 @@ Represents the trade object.
 + `fileApiId`: 123 (number, required) - {INT} The File Service ID for the attachment.
 + `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
 
-## Work Order Transaction (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
+## Work Order Labor Transaction Create (object)
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
-+ `typeAttributes` (Transaction Type, required) - The details of the transaction.
++ `typeAttributes` (Labor Transaction Type, required) - The details of the transaction.
+
+## Work Order Labor Transaction (Work Order Labor Transaction Create)
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
+
+## Work Order Purchase Transaction Create (object)
++ `description`: The technician did work (string, required) - A short description of the transaction.
++ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
++ `typeAttributes` (Purchase Transaction Type, required) - The details of the transaction.
+
+## Work Order Purchase Transaction (Work Order Purchase Transaction Create)
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 
 ## Transaction Type (object)
-+ `type`: Labor (string, required) - The type of transaction.
-+ `laborType`: Regular (string, required) - The labor type of the transaction.
-+ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
-+ `rate`: 35 (number, required) - The rate for this user.
-+ `multiplier`: 1 (number, required) - The multiplier for this transaction.
-+ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
-+ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
++ `cost`: 175.00 (number, optional) - The cost for this type of transaction.
++ `user` (Base User Object, required) - Information about the user who is associated with the transaction.
 
 ## Labor Transaction Type (Transaction Type)
-+ `type`: Labor (string, required) - The type of transaction.
++ `type`: labor (string, required) - The type of transaction.
 + `laborType`: Regular (string, required) - The labor type of the transaction.
-+ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
-+ `rate`: 35 (number, required) - The rate for this user.
-+ `multiplier`: 1 (number, required) - The multiplier for this transaction.
-+ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
-+ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
++ `hours`: 5 (number, required) - The number of hours in the labor transaction.
++ `rate`: 35 (number, optional) - The rate for this user.
++ `multiplier`: 1 (number, optional) - The multiplier for this transaction.
 
 ## Purchase Transaction Type (Transaction Type)
-+ `type`: Labor (string, required) - The type of transaction.
-+ `laborType`: Regular (string, required) - The labor type of the transaction.
-+ `hours`: 5 (number, optional) - {INT} The number of hours in the work order transaction.
-+ `rate`: 35 (number, required) - The rate for this user.
-+ `multiplier`: 1 (number, required) - The multiplier for this transaction.
-+ `cost`: 175.00 (number, required) - The cost for this type of transaction.  Determined by the hourly rate and the transaction type multiplier.
-+ `user` (Base User Object, optional) - Information about the user who is associated with the transaction.
++ `type`: purchase (string, required) - The type of transaction.
++ `purchaseOrder`: 100ABC (string, optional) - The purchase order of the purchase transaction.
++ `quantity`: 35.00 (number, required) - The amount of items purchased for this transaction.
++ `unitCost`: 5 (number, required) - The unit cost for this purchase transaction.
++ `supplierName`: Grainger (string, optional) - The supplier of this purchase transaction.
 
 ## Work Order Template Reference (object)
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
 
 ## Work Order Template Create (object)
+The object that represents the work order template create
+
+### Properties
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `priority`: Low (Priority, required) - The priority of a work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
@@ -1418,14 +1538,16 @@ Represents the trade object.
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime. 1 = today, 2 = tomorrow, etc.
 + `trade` (Trade, optional) - The trade assigned to the work order.
++ `estimatedCost`: 10.50 (number, optional) - The estimated cost to complete the associated work order.
++ `estimatedHours`: 1.5 (number, optional) - The estimated number of hours to complete the associated work order.
 
 ## Work Order Template (Work Order Template Create)
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
 + `assigneeCount`: 1 (number, required) - {INT} The number of assignees that exists for the template
-+ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
-+ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
@@ -1437,13 +1559,13 @@ Represents the trade object.
 + `month`: 12 (number, optional) - {INT} The month that the pattern recurs
 + `period`: `Day` (string, optional) - The period
 + `ordinal`: `1` (string, optional) - The integer value relating to an ordinal number (eg: 1 for 1st)
-+ `startDateTime`: "2015-10-01T00:00:00Z" (string, optional) - The date/time that the recurrence pattern starts
-+ `endDateTime`: "2016-10-01T00:00:00Z" (string, optional) - The date/time that the recurrence pattern terminates
-+ `targetDate`: "2016-10-01T00:00:00Z" (string, optional) - The target generation date for the recurrence pattern
++ `startDateTime`: "2015-10-01T00:00:00Z" (string, optional) - {DATETIME} The date/time that the recurrence pattern starts
++ `endDateTime`: "2016-10-01T00:00:00Z" (string, optional) - {DATETIME} The date/time that the recurrence pattern terminates
++ `targetDate`: "2016-10-01T00:00:00Z" (string, optional) - {DATETIME} The target generation date for the recurrence pattern
 + `cronex`: "0 0 12 * * ?" (string, optional) - The cron expression. This is a system generated expression based on the recurrence pattern.
 
 ## PmSchedule Reference (object)
-+ `id`: 1 (number, required) - the ID for the schedule object
++ `id`: 1 (number, required) - {LONG} The ID for the schedule object
 
 ## Base PmSchedule (object)
 + `workOrderTemplateId`: 1 (number, required) - {INT} The integer id associated with the work order template for this schedule
@@ -1452,24 +1574,24 @@ Represents the trade object.
 + `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
 
 ## PmSchedule (Base PmSchedule)
-+ `id`: 1 (number, required) - the ID for the schedule object
++ `id`: 1 (number, required) - {LONG} the ID for the schedule object
 + `title`: `Pm Schedule` (string) - the title for the schedule object
-+ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
-+ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
-+ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
++ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The next date and time the schedule recurrence pattern will be executed
++ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern was executed.
++ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern will be executed.
 + `businessAssetCount`: 0 (number, required) - {INT} The number of business assets attached to the schedule
-+ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was created.
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
-+ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time in ISO-8601 format the record was last updated.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Update PmSchedule Run Dates (object)
-+ `id`: 1 (number, required) - The ID for the object
-+ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The next date and time the schedule recurrence pattern will be executed
-+ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern was executed.
-+ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the schedule recurrence pattern will be executed.
++ `id`: 1 (number, required) - {LONG} The ID for the object
++ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The next date and time the schedule recurrence pattern will be executed
++ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern was executed.
++ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern will be executed.
 
 ## Task Book (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the task book.
@@ -1544,8 +1666,8 @@ Represents the trade object.
 + `supplierOrderNumber`: `12345ABCD` (string, required) - The supplier order number assigned to the order.
 + `supplierOrderLink`: `https://abcvendorinc.com/orders/12345ABCD` (string, optional) - The supplier order link assigned to the order.
 + `supplierInvoiceNumber`: `12345ABCD` (string, optional) - The supplier invoice number to the order.
-+ `supplierOrderLastUpdatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The last date and time the supplier order was last updated.
-+ `supplierOrderCreatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - The date and time the supplier order was created.
++ `supplierOrderLastUpdatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the supplier order was last updated.
++ `supplierOrderCreatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time the supplier order was created.
 + `purchaseOrderNumber` : `12345ABCD` (string, optional) - The purchase order number assigned to the order.
 + `orderCreatedByUserId` : 12345 (number, optional) - {INT} The ID for the user that created the order.
 + `orderSubTotal` (Currency, optional) - The sub total of the order.
@@ -1564,6 +1686,6 @@ Represents the trade object.
 + `procedure`: `Steps to complete this task` (string, optional) - The detailed instructions for how to complete the task.
 + `order` : 1 (number, required) - {INT} The order in which the task should be completed.
 + `notes` : `Drained 1L of oil` (string, optional) - The notes for the task.
-+ `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - The date and time the task was completed.
++ `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - {DATETIME} The date and time the task was completed.
 + `completedByUser` (Base User Object, optional) - The ID for the user that completed the task.
 + `isCompleted` : true (boolean, required) - Indicates if the task has been completed.
