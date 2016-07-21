@@ -471,6 +471,44 @@ Retieve all Calendar Events for a specified Account
 
 + Response 204
 
+## PM Projection Collection [/accounts/{accountId}/pmschedules/{pmScheduleId}/projections{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + pmScheduleId: 1 (required, number) - {INT} ID of the PM Schedule in the form of an integer
+    + includeAudit: false (required, boolean) - Indicates if the audit fields should be included on each resource
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[PMProjection], required)
+
+## PM Projection Create [/accounts/{accountId}/pmschedules/{pmScheduleId}/projections]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + pmScheduleId: 1 (required, number) - {INT} ID of the PM Schedule in the form of an integer
+
+### POST
+
++ Request
+  + Attributes (Create PMProjection)
+
++ Response 201 (application/json)
+    + Attributes (PMProjection)
+
+## PM Projection Detail [/accounts/{accountId}/pmschedules/{pmScheduleId}/projections/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + pmScheduleId: 1 (required, number) - {INT} ID of the PM Schedule in the form of an integer
+    + id: 1 (required, number) - {INT} The ID of the projection to be deleted
+
+### DELETE
+
++ Response 204
+
 # Group Manufacturers
 
 ## Manufacturer Collection [/accounts/{accountId}/manufacturers{?page,pagesize,orderby,q,includeAudit}]
@@ -1690,3 +1728,29 @@ The object that represents the work order template create
 + `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - {DATETIME} The date and time the task was completed.
 + `completedByUser` (Base User Object, optional) - The ID for the user that completed the task.
 + `isCompleted` : true (boolean, required) - Indicates if the task has been completed.
+
+## Create PMProjection (object)
+Represents a shell of what a PM generated work order will look like at a point in time.  It provides the dates it will generate as well as details about the schedule and asset that it will associated with.
+
+### Properties
++ `businessAsset` (Business Asset Reference, optional) - An optional reference to the asset that will be associated to the generated work order
++ `dueDate`: `2015-01-01T12:00:00.123Z` (string, optional) - {DATETIME} An optional ISO Date string to represent when the generated work order would be due to be completed.
++ `scheduledStartDate`: `2015-01-01T12:00:00.123Z` (string, optional) - {DATETIME} An optional ISO Date string to represent the date when the work is to start for the work order to be generated.
++ `generationDateTime`: `2015-01-01T07:00:00.000Z` (string, required) - {DATETIME} A required date time field representing the estimated time of when the work order would be created for this projection
+
+## Update PMProjection (Create PMProjection)
+Represents a shell of what a PM generated work order will look like at a point in time.  It provides the dates it will generate as well as details about the schedule and asset that it will associated with.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the projection
+
+## PMProjection (Update PMProjection)
+Represents a shell of what a PM generated work order will look like at a point in time.  It provides the dates it will generate as well as details about the schedule and asset that it will associated with.
+
+### Properties
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, required) - {DATETIME} The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, required) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, required) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, required) - Information about the client who last modified the record.
