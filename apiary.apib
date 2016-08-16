@@ -899,12 +899,7 @@ Retrieve a single manufacturer for a specified account
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
     + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
-    + status: NewRequest (enum[string], optional) - Filter by the work order status.
-        + Members
-            + NewRequest (string)
-            + WorkInProgress (string)
-            + Complete (string)
-            + Void (string)
+    + status: NewRequest (string, optional) - Filter by the work order status.  Acceptable values: NewRequest, WorkInProgress, Complete, Void.
     + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - {LONG} Filter by the business asset assigned to the work order.
     + pmschedule: 1 (array[number], optional) - {LONG} Filter by the PmSchedule associated with the work order.
@@ -1505,7 +1500,7 @@ Represents the Work Order Object
 + `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
 + `displayId`: WO100 (string, required) - The display ID for the work order.
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
-+ `status`: NewRequest (Work Order Status, required) - The status of a work order.
++ `status`: NewRequest (string, required) - The status of a work order.  Acceptable values: NewRequest, WorkInProgress, Complete, Void.
 + `priority`: Low (Priority, required) - The priority of a work order.
 + `requestDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The requested date and time for the work order.
 + `completionDateTime`:  `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time the work order was completed.
@@ -1656,12 +1651,6 @@ The object that represents the work order template create
 + `name`: Accidental Damage (string, required) - The name of the failure reason.
 + `isActive`: true (boolean, required) - Indicates if the failure reason is active.
 
-## Work Order Status (enum)
-+ NewRequest (string)
-+ WorkInProgress (string)
-+ Complete (string)
-+ Void (string)
-
 ## Priority (enum)
 + Low (string)
 + Medium (string)
@@ -1736,9 +1725,9 @@ The object that represents the work order template create
 Represents a shell of what a PM generated work order will look like at a point in time.  It provides the dates it will generate as well as details about the schedule and asset that it will associated with.
 
 ### Properties
-+ `businessAsset` (Business Asset Reference, optional) - An optional reference to the asset that will be associated to the generated work order
 + `dueDateTime`: `2015-01-01T12:00:00.123Z` (string, required) - {DATETIME} An optional ISO Date string to represent when the generated work order would be due to be completed.
 + `scheduledStartDate`: `2015-01-01T12:00:00.123Z` (string, required) - {DATETIME} An optional ISO Date string to represent the date when the work is to start for the work order to be generated.
++ `workOrderTemplate` (Work Order Template, required) - An required reference to the workorder template that will be associated to the generated work order
 
 ## Update PMProjection (Create PMProjection)
 Represents a shell of what a PM generated work order will look like at a point in time.  It provides the dates it will generate as well as details about the schedule and asset that it will associated with.
