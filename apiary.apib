@@ -1499,7 +1499,8 @@ Represents the Work Order Object
 + `workOrderTemplate` (Work Order Template Reference, optional) - the work order template that this work order was generated from, if applicable
 + `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
 + `displayId`: WO100 (string, required) - The display ID for the work order.
-+ `description`: The chair is broken (string, optional) - Text that describes the work order.
++ `description`: The chair is broken; it has a broken right front leg. (string, optional) - Text that describes the work order in detail.
++ `summary`: The chair is broken (string, optional) - Text that summarizes the work order.
 + `status`: NewRequest (string, required) - The status of a work order.  Acceptable values: NewRequest, WorkInProgress, Complete, Void.
 + `priority`: Low (Priority, required) - The priority of a work order.
 + `requestDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The requested date and time for the work order.
@@ -1518,6 +1519,7 @@ Represents the Work Order Object
 + `trade` (Trade, optional) - The trade assigned to the work order.
 + `estimatedCost`: 10.50 (number, optional) - The estimated cost to complete the work order.
 + `estimatedHours`: 1.5 (number, optional) - The estimated number of hours to complete the work order.
++ `extraData`: {extraProperty: 'value'} (object, optional) - Additional data used for various integrations.
 
 ## Work Order Attachment (Attachment)
 + `id`: 1 (number, required) - {INT} The ID of the work order attachment.
