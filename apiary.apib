@@ -78,7 +78,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Assets
 
-## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,page,pagesize,orderby,includeAudit}]
+## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,ancestorNamePath,page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
@@ -89,6 +89,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + isactive: true (string, optional) - Return active or inactive assets?
     + businessassettypeid: 1 (number, optional) - {INT} Return assets that match a specific asset type.
     + includedescendants: true (boolean, optional) - Include descendant assets or just the current level?
+	+ ancestorNamePath: |A|B (string, optional) - Filter assets by AncestorNamePath
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
