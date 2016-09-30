@@ -558,6 +558,52 @@ Retrieve a single manufacturer for a specified account
 + Response 200 (application/json)
     + Attributes (Manufacturer)
 
+# Group Suppliers
+
+## Supplier Collection [/accounts/{accountId}/suppliers{?page,pagesize,orderby,q,includeAudit}]
+Retrieve all suppliers for a specified account
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Name asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - Filter the list by any custom query, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Supplier], required)
+
+## Supplier Create [/accounts/{accountId}/suppliers]
+Create a new supplier
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+
+### POST
+
++ Request
+    + Attributes (Supplier Create)
+
++ Response 201 (application/json)
+    + Attributes (Supplier)
+
+## Supplier Detail [/accounts/{accountId}/suppliers/{id}{?includeAudit}]
+Retrieve a single supplier for a specified account
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - ID of the supplier
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Supplier)
+	
 # Group Task Books
 
 ## Task Book Collection [/accounts/{accountId}/taskbooks{?page,pagesize,orderby,q,ismaster,includeAudit}]
@@ -1441,6 +1487,13 @@ Represents a Calendar Event object
 
 ## Manufacturer (Manufacturer Create)
 + `isDudeManufacturer`: true (boolean) - Indicates if this is a common platform manufacturer.
+
+## Supplier Create (object)
++ 'id': 1 (number, required) - {INT} The ID of the supplier.
++ 'name': Ford Dealership (string, required) - The name of the supplier 
+
+## Supplier (Supplier Create)
++ 'isDudeSupplier': true (boolean) - Indicates if this is a common platform supplier.
 
 ## Purpose (Base Audit Object)
 + `id`: 1 (number, required) - {INT} The ID of the purpose.
