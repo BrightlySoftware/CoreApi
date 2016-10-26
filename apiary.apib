@@ -78,17 +78,17 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Assets
 
-## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentid,name,description,isactive,businessassettypeid,includedescendants,ancestorNamePath,page,pagesize,orderby,includeAudit}]
+## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentId,name,description,isActive,businessAssetTypeId,includeDescendants,ancestorNamePath,page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
     + q: Sample (string, optional) - Custom query object.
-    + parentid: 1 (number, optional) - {INT} The ID of the parent as a long.
+    + parentId: 1 (number, optional) - {INT} The ID of the parent as a long.
     + name: Facility (string, optional) - The name of the asset.
     + description: Big Building (string, optional) - The description of the asset.
-    + isactive: true (string, optional) - Return active or inactive assets?
-    + businessassettypeid: 1 (number, optional) - {INT} Return assets that match a specific asset type.
-    + includedescendants: true (boolean, optional) - Include descendant assets or just the current level?
+    + isActive: true (string, optional) - Return active or inactive assets?
+    + businessAssetTypeId: 1 (number, optional) - {INT} Return assets that match a specific asset type.
+    + includeDescendants: true (boolean, optional) - Include descendant assets or just the current level?
     + ancestorNamePath: `|A|B` (string, optional) - Filter assets by AncestorNamePath
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
@@ -223,6 +223,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + isActive: true (boolean, optional) - Flag to indicate whether to return inactive BusinessAssetTypes
 
 ### GET
 
@@ -1361,6 +1362,8 @@ Retrieve a single supplier for a specified account
 + `isActive`: true (boolean, required) - Indicates if the asset is active
 + `parent` (Business Asset Reference, optional) - Describes the parent asset
 + `businessAssetType` (Business Asset Type Update, required) - Describes the type of the asset.
++ `isRepairable` (boolean, optional) - Indicates if the asset is for work orders.
++ `isInventoryStorageArea` (boolean, optional) - Indicates if the asset is for inventory purposes.
 
 ## Business Asset Update (Business Asset Create)
 + `id`: 1 (number, required) - {LONG} The ID of the object
