@@ -78,7 +78,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Assets
 
-## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentId,name,description,isActive,businessAssetTypeId,includeDescendants,ancestorNamePath,page,pagesize,orderby,includeAudit}]
+## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentId,name,description,isActive,isRepairable,isInventoryStorageArea,businessAssetTypeId,includeDescendants,ancestorNamePath,page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
@@ -87,6 +87,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + name: Facility (string, optional) - The name of the asset.
     + description: Big Building (string, optional) - The description of the asset.
     + isActive: true (string, optional) - Return active or inactive assets?
+    + isRepairable: true (boolean, optional) - Indicates if the asset is for work orders.
+    + isInventoryStorageArea: true (boolean, optional) - Indicates if the asset is for inventory purposes.
     + businessAssetTypeId: 1 (number, optional) - {INT} Return assets that match a specific asset type.
     + includeDescendants: true (boolean, optional) - Include descendant assets or just the current level?
     + ancestorNamePath: `|A|B` (string, optional) - Filter assets by AncestorNamePath
