@@ -2,7 +2,6 @@ FORMAT: 1A
 HOST: https://v1.api.dudesolutions.io
 
 COLLECTPARAMETERS: TRUE
-DATETIMEFORMAT:
 NULLIFY404: TRUE
 VALIDATEREQUIREDPARAMETERS: FALSE
 USECOMMONSDKLIBRARY: TRUE
@@ -483,7 +482,7 @@ Retieve all Calendar Events for a specified Account
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Name asc (string, optional) - A string describing the ordering to perform on the collection.
-    + includeAudit: false (required, boolean) - Indicates if the audit fields should be included on each resource
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
@@ -500,7 +499,7 @@ Retieve all Calendar Events for a specified Account
 ### POST
 
 + Request
-  + Attributes (Create PMProjection)
+  + Attributes (PMProjection Create)
 
 + Response 201 (application/json)
     + Attributes (PMProjection)
@@ -743,6 +742,9 @@ Retrieve a single supplier for a specified account
 
 ### POST
 
++ Request
+    + Attributes (Purpose Create)
+
 + Response 201 (application/json)
     + Attributes (Purpose)
 
@@ -896,12 +898,12 @@ Retrieve a single supplier for a specified account
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[Work Category Hierarchy], required)
+        + `data` (array[Work Category], required)
 
 ### POST
 
 + Response 201 (application/json)
-    + Attributes (Work Category Hierarchy)
+    + Attributes (Work Category Create)
 
 ## Work Category Detail [/accounts/{accountId}/workcategories/{id}{?includeAudit}]
 
@@ -913,12 +915,12 @@ Retrieve a single supplier for a specified account
 ### GET
 
 + Response 200 (application/json)
-    + Attributes (Work Category Hierarchy)
+    + Attributes (Work Category)
 
 ### PUT
 
 + Response 200 (application/json)
-    + Attributes (Work Category Hierarchy)
+    + Attributes (Work Category)
 
 ### DELETE
 
@@ -1319,6 +1321,9 @@ Retrieve a single supplier for a specified account
 # Data Structures
 
 ## System Information (object)
+Represents information regarding the API being called.
+
+### Properties
 + `application`: `Dude Unified Api` (string, required) - The name of the application.
 + `version` : `1.0.0.0` (string, required) - The assembly version.
 + `apiVersion` : `1.0.0.0` (string, required) - The API version.
@@ -1326,17 +1331,26 @@ Retrieve a single supplier for a specified account
 + `links` (array[System Links], required) - The API routes.
 
 ## System Links (object)
+Represents the endpoints available from the API.
+
+### Properties
 + `endpoint` : `WorkOrder` (string, required) - The name of the endpoint.
 + `action` : `Get` (string, required) - The REST action.
 + `route` : `/accounts/{accountId}/workorders` (string, required) - The route to the endpoint.
 
 ## Base Collection Response (object)
+Represents a paged collection result.
+
+### Properties
 + `page`: 1 (number, required) - {INT} The current page provided in the response data.
 + `pageSize`: 1000 (number, required) - {INT} The page size returned in the response data.
 + `dataSize`: 1000 (number, required) - {INT} The total records returned in the response.
 + `total`: 2000 (number, required) - {INT} The total number of records available in the collection.
 
 ## Base Audit Object (object)
+Represents standard audit properties available on an object.
+
+### Properties
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
@@ -1345,68 +1359,105 @@ Retrieve a single supplier for a specified account
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Base User Object (object)
+Represents a user with base properties.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the user.
 + `firstName`: John (string, required) - The first name of the user.
 + `lastName`: Smith (string, required) - The last name of the user.
 + `email`: john.smith@dudesolutions.io (string, required) - The email address of the user.
 
 ## Base Client Object (object)
+Represents a client with base properties.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the API client.
 
 ## Heartbeat (object)
+Represents the vital statistics for the API.
+
+### Properties
 + `applicationdbvitalCheck`: true (boolean, required) - Vital check to ensure the data store is online.
 + `cachevitalcheck`: true (boolean, required) - Vital check to ensure the cache store is online.
 
+## Business Asset Lite (object)
+Represents a business asset with base properties.
+
+### Properties
++ `id`: 1 (number, required) - {LONG} The ID of the object
++ `name`: pump (string, optional) - The name of the asset
++ `description`: outside pump (string, optional) - The description of the asset
++ `isActive`: true (boolean, optional) - Indicates if the asset is active
++ `hasChildren`: true (boolean, optional) - Description
++ `notes`: Some notes would go here (string, optional) - Description
+
 ## Business Asset Create (object)
+Represents a business asset with its available properties on a POST request.
+
+### Properties
 + `name`: Main Government Campus (string, required) - The name of the asset
 + `description`: The big government campus (string, optional) - The description of the asset
 + `notes`: Some notes would go here (string, optional) - Notes about the asset
 + `isActive`: true (boolean, required) - Indicates if the asset is active
-+ `parent` (Business Asset Reference, optional) - Describes the parent asset
++ `parent` (Business Asset Lite, optional) - Describes the parent asset
 + `businessAssetType` (Business Asset Type Update, required) - Describes the type of the asset.
 + `isWorkOrderAsset` (boolean, optional) - Indicates if the asset is for work orders.
 + `isInventoryStorageArea` (boolean, optional) - Indicates if the asset is for inventory purposes.
 
 ## Business Asset Update (Business Asset Create)
+Represents a business asset with its available properties on a PUT request.
+
+### Properties
 + `id`: 1 (number, required) - {LONG} The ID of the object
 
 ## Business Asset (Business Asset Update)
-+ `parent` (Business Asset Lite) - Describes the initial parent
+Represents a full business asset.
+
+### Properties
 + `businessAssetAttributeCount`: 4 (number, optional) - The number of attributes associated with this business asset
 + `attachmentCount`: 1 (number, optional) - {INT} A count of attachments associated with the asset.
 + `ancestorIdPath`: Sample (string, required) - Provides the ancestor IDs starting at root to the current parent node.
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
 
-## Business Asset Reference (object)
-+ `id`: 1 (number, required) - {LONG} The ID of the object
-
 ## Business Asset Attribute Create (object)
+Represents a business asset attribute with its available properties on a POST request.
+
+### Properties
 + `value`: 1200 (string, required) - The value of the asset attribute instance
 + `businessAssetAttributeType` (Business Asset Attribute Type, required) - The type of the asset attribute instance
 + `unitOfMeasure` (Unit Of Measure, required) - The unit of measure associated with the asset attribute instance
 
 ## Business Asset Attribute (Business Asset Attribute Create)
+Represents a full business asset attribute.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the asset attribute instance
 
-## Business Asset Lite (Business Asset Reference)
-+ `name`: pump (string, required) - The name of the asset
-+ `description`: outside pump (string, required) - The description of the asset
-+ `isActive`: true (boolean, required) - Indicates if the asset is active
-+ `hasChildren`: true (boolean, required) - Description
-+ `notes`: Some notes would go here (string, optional) - Description
-
 ## Business Asset Attachment (Attachment)
+Represents a business asset attachment.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the business asset attachment.
 
 ## Business Asset Type Create (object)
+Represents a business asset type with its available properties on a POST request.
+
+### Properties
 + `name`: Bridge (string, required) - The name of the asset type
 + `description`: A bridge (string, optional) - The description of the asset type
++ `businessAssetTypeGroup` (Business Asset Type Group, required) - The business asset type group associated with the business asset type.
 
 ## Business Asset Type Update (Business Asset Type Create)
+Represents a business asset type with its available properties on a PUT request.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the object
 
 ## Business Asset Type (Business Asset Type Update)
+Represents a full business asset type.
+
+### Properties
 + `isDudeAssetType`: true (boolean, required) - Indicates if this is a common platform asset type
 + `businessAssetAttributeTypeCount`: 4 (number, required) - {INT} The number of attributes associated with this asset type
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
@@ -1415,9 +1466,12 @@ Retrieve a single supplier for a specified account
 + `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
-+ `businessAssetTypeGroup` (Business Asset Type Group, required) - The business asset type group associated with the business asset type.
 
-## Business Asset Attribute Type Create (object)
+## Business Asset Attribute Type (object)
+Represents a business asset attribute type.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the object
 + `key`: length (string, required) - The name of the attribute type
 + `valueType`: date (enum[string], required) -
     + `date` - Represents a date/time
@@ -1429,16 +1483,13 @@ Retrieve a single supplier for a specified account
     + `databound` - Represents an object
 + `isActive`: true (boolean, required) - Indicates if the attribute type is active
 + `fieldLength`: 125 (number, optional) - {INT} The number of characters allowed for the attribute
-+ `quantity` (Quantity Reference, required) - The quantity type
++ `quantity` (Quantity, required) - The quantity type
 + `businessAssetAttributeTypeCodes` (array[Business Asset Attribute Type Code], optional) - The type codes
 
-## Business Asset Attribute Type Update (Business Asset Attribute Type Create)
-+ `id`: 1 (number, required) - {INT} The ID of the object
-
-## Business Asset Attribute Type (Business Asset Attribute Type Update)
-+ `quantity` (Quantity, required) - The quantity type
-
 ## Business Asset Attribute Type Code (object)
+Represents a business asset attribute type code as a key/value pair.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the object
 + `keyCode`: yes (string, required) - The string representation
 + `valueCode`: Yes Sir (string, required) - The display representation of the type code
@@ -1466,20 +1517,21 @@ Represents a Calendar Event object
 + `requestDate`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time that the work order is requested.
 + `eventDescription`: The chair is broken (string, optional) - Text that describes the work order.
 + `estimatedHours`: 2.5 (number, optional) - The estimated hours of work for the work order.
-+ `purpose` (Purpose Lite, optional) - The purpose assigned to the work order.
++ `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
 
-## Quantity Create (object)
+## Quantity (object)
+Represents a basic quantity type.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the quantity.
 + `quantity`: Length (string, required) - The name of the quantity type
 
-## Quantity (Quantity Create)
-+ `id`: 1 (number, required) - {INT} The ID of the quantity.
-
-## Quantity Reference (object)
-+ `id`: 1 (number, required) - {INT} The ID of the quantity.
-
 ## Unit Of Measure (object)
+Represents the units of measure and associated measurement system.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the unit of measure.
 + `unitKey`: feet (string, required) - The unit of measurement as a string.
 + `measurementSystem`: None (enum[string], required) - The measurement system this unit belongs to.
@@ -1488,28 +1540,43 @@ Represents a Calendar Event object
         + `Imperial`- Limit to Imperial measurements.
 
 ## Manufacturer Create (object)
-+ `id`: 1 (number, required) - {INT} The ID of the manufacturer.
+Represents a manufacturer object with its available properties on a POST request.
+
+### Properties
 + `name`: Ford (string, required) - The name of the manufacturer.
 
 ## Manufacturer (Manufacturer Create)
+Represents a full manufacturer.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the manufacturer.
 + `isDudeManufacturer`: true (boolean) - Indicates if this is a common platform manufacturer.
 
 ## Supplier Create (object)
-+ 'id': 1 (number, required) - {INT} The ID of the supplier.
+Represents a supplier object with its available properties on a POST request.
+
+### Properties
 + 'name': Ford Dealership (string, required) - The name of the supplier
 
 ## Supplier (Supplier Create)
+Represents a full supplier.
+
+### Properties
++ 'id': 1 (number, required) - {INT} The ID of the supplier.
 + 'isDudeSupplier': true (boolean) - Indicates if this is a common platform supplier.
 
-## Purpose (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the purpose.
+## Purpose Create (Base Audit Object)
+Represents a purpose object with its available properties on a POST request.
+
+### Properties
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
 
-## Purpose Lite (object)
+## Purpose (Purpose Create)
+Represents a full purpose object.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the purpose.
-+ `value`: General Maintenance (string, required) - The description of the purpose.
-+ `isActive`: true (boolean, required) - Indicates if the purpose is active.
 
 ## Trade Create (object)
 Represents the Trade create object.
@@ -1527,36 +1594,48 @@ Represents the trade object.
 + `isActive`: true (boolean, required) - Indicates if the trade is active.
 
 ## Labor Hour Type (Base Audit Object)
+Represents a labor hour type object.
+
+### Properties
 + `id`: 1 (number, required) - {LONG} The ID of the labor hour type.
 + `type`: Regular (string, required) - The name of the labor type.
 + `multiplier`: 1.0 (number, required) - The multiplier associated with the labor type.
 
-## Work Category (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the work category.
+## Work Category Create (Base Audit Object)
+Represents a work category object with its available properties on a POST request.
+
+### Properties
 + `value`: Environmental (string, required) - The description of the work category.
 + `isActive`: true (boolean, required) - Indicates if the work category is active.
-
-## Work Category Hierarchy (Work Category)
 + `parent` (Work Category, required) - The parent record for this work category.
+
+## Work Category (Work Category Create)
+Represents a work category object.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the work category.
 + `childCount`: 0 (number, required) - Indicates how many children the current work category has.
 
 ## Work Order Location (object)
-`latitude`: 35.729235 (number, required) - The latitude of the location.
-`longitude`: -78.799214 (number, required) - The longitude of the location.
-`streetAddress`: 11000 Regency Parkway (string, required) - The primary street address of the location.
-`streetAddressLine2`: Suite 110 (string, required) - The secondary street address of the location.
-`city`: Cary (string, required) - The city of the location.
-`region`: North Carolina (string, required) - The primary region of the location.
-`postalCode`: 27518 (string, required) - The postal code of the location.
-`country`: USA (string, required) - The country of the location.
-`latLongMatchesAddress`: true (boolean, required) - Indicates if the location address matches the latitude and longitude coordinates.
+Represents a work order location object.
+
+### Properties
++ `latitude`: 35.729235 (number, required) - The latitude of the location.
++ `longitude`: -78.799214 (number, required) - The longitude of the location.
++ `streetAddress`: 11000 Regency Parkway (string, required) - The primary street address of the location.
++ `streetAddressLine2`: Suite 110 (string, required) - The secondary street address of the location.
++ `city`: Cary (string, required) - The city of the location.
++ `region`: North Carolina (string, required) - The primary region of the location.
++ `postalCode`: 27518 (string, required) - The postal code of the location.
++ `country`: USA (string, required) - The country of the location.
++ `latLongMatchesAddress`: true (boolean, required) - Indicates if the location address matches the latitude and longitude coordinates.
 
 ## Work Order (Base Audit Object)
 Represents the Work Order Object
 
 ### Properties
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order.
-+ `workOrderTemplate` (Work Order Template Reference, optional) - the work order template that this work order was generated from, if applicable
++ `workOrderTemplate` (Work Order Template, optional) - the work order template that this work order was generated from, if applicable
 + `pmSchedule` (PmSchedule Reference, optional) - the PM Schedule that defined when this work order was generated
 + `displayId`: WO100 (string, required) - The display ID for the work order.
 + `description`: The chair is broken; it has a broken right front leg. (string, optional) - Text that describes the work order in detail.
@@ -1569,7 +1648,7 @@ Represents the Work Order Object
 + `attachmentCount`: 1 (number, optional) - {INT} A count of attachments associated with the work order.
 + `requestedBy` (Base User Object, required) - The user who requested the work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
-+ `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
++ `workCategory` (Work Category, optional) - The work category assigned to the work order.
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
@@ -1582,34 +1661,58 @@ Represents the Work Order Object
 + `extraData`: {extraProperty: 'value'} (object, optional) - Additional data used for various integrations.
 
 ## Work Order Attachment (Attachment)
+Represents a work order attachment object.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the work order attachment.
 
 ## Attachment (Base Audit Object)
+Represents an attachment.
+
+### Properties
 + `name`: My File (string, required) - The display name for the attachment.
 + `fileApiId`: 123 (number, required) - {INT} The File Service ID for the attachment.
 + `fileApiViewToken`: abcd12345 (string, required) - The File Service Token to retrieve the attachment.
 
 ## Work Order Labor Transaction Create (object)
+Represents a labor transaction with its available properties on a POST request.
+
+### Properties
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
 + `typeAttributes` (Labor Transaction Type, required) - The details of the transaction.
 
 ## Work Order Labor Transaction (Work Order Labor Transaction Create)
+Represents a labor transaction object.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 
 ## Work Order Purchase Transaction Create (object)
+Represents a work order purchase transaction with its available properties on a POST request.
+
+### Properties
 + `description`: The technician did work (string, required) - A short description of the transaction.
 + `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
 + `typeAttributes` (Purchase Transaction Type, required) - The details of the transaction.
 
 ## Work Order Purchase Transaction (Work Order Purchase Transaction Create)
+Represents a work order purchase transaction.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 
 ## Transaction Type (object)
+Represents a transaction type object.
+
+### Properties
 + `cost`: 175.00 (number, optional) - The cost for this type of transaction.
 + `user` (Base User Object, required) - Information about the user who is associated with the transaction.
 
 ## Labor Transaction Type (Transaction Type)
+Represents a labor transaction type.
+
+### Properties
 + `type`: labor (string, required) - The type of transaction.
 + `laborType`: Regular (string, required) - The labor type of the transaction.
 + `hours`: 5 (number, required) - The number of hours in the labor transaction.
@@ -1617,14 +1720,14 @@ Represents the Work Order Object
 + `multiplier`: 1 (number, optional) - The multiplier for this transaction.
 
 ## Purchase Transaction Type (Transaction Type)
+Represents a purchase transaction type.
+
+### Properties
 + `type`: purchase (string, required) - The type of transaction.
 + `purchaseOrder`: 100ABC (string, optional) - The purchase order of the purchase transaction.
 + `quantity`: 35.00 (number, required) - The amount of items purchased for this transaction.
 + `unitCost`: 5 (number, required) - The unit cost for this purchase transaction.
 + `supplierName`: Grainger (string, optional) - The supplier of this purchase transaction.
-
-## Work Order Template Reference (object)
-+ `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
 
 ## Work Order Template Create (object)
 The object that represents the work order template create
@@ -1633,7 +1736,7 @@ The object that represents the work order template create
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `priority`: Low (Priority, required) - The priority of a work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
-+ `workCategory` (Work Category Hierarchy, optional) - The work category assigned to the work order.
++ `workCategory` (Work Category, optional) - The work category assigned to the work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime. 1 = today, 2 = tomorrow, etc.
 + `trade` (Trade, optional) - The trade assigned to the work order.
@@ -1641,6 +1744,9 @@ The object that represents the work order template create
 + `estimatedHours`: 1.5 (number, optional) - The estimated number of hours to complete the associated work order.
 
 ## Work Order Template (Work Order Template Create)
+Represents a work order template.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
 + `assigneeCount`: 1 (number, required) - {INT} The number of assignees that exists for the template
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
@@ -1651,33 +1757,42 @@ The object that represents the work order template create
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Recurrence Pattern (object)
-+ `time`: `03:00:00` (string, optional) - The time of the recurrence
+Represents a recurrence pattern.
+
+### Properties
++ `time`: `03:00:00` (string, optional) - The time of the recurrence local to the account's timezone.
 + `dayOfMonth`: 24 (number, optional) - {INT} The day of the month that applies to the recurrence
 + `daysOfWeek` (array[number], optional) - {INT} The days of week that the recurrence applies to
 + `every`: 2 (number, optional) - {INT} How often it repeats
 + `month`: 12 (number, optional) - {INT} The month that the pattern recurs
 + `period`: `Day` (string, optional) - The period
 + `ordinal`: `1` (string, optional) - The integer value relating to an ordinal number (eg: 1 for 1st)
-+ `startDateTime`: "2015-10-01T00:00:00Z" (string, optional) - {DATETIME} The date/time that the recurrence pattern starts
-+ `endDateTime`: "2016-10-01T00:00:00Z" (string, optional) - {DATETIME} The date/time that the recurrence pattern terminates
-+ `targetDate`: "2016-10-01T00:00:00Z" (string, optional) - {DATETIME} The target generation date for the recurrence pattern
++ `startDateTime`: "2015-10-01T00:00:00Z" (string, optional) - {DATETIME} The date/time that the recurrence pattern starts in UTC.
++ `endDateTime`: "2016-10-01T00:00:00Z" (string, optional) - {DATETIME} The date/time that the recurrence pattern terminates in UTC.
++ `targetDate`: "2016-10-01T00:00:00Z" (string, optional) - {DATETIME} The target generation date for the recurrence pattern in UTC.
 + `cronex`: "0 0 12 * * ?" (string, optional) - The cron expression. This is a system generated expression based on the recurrence pattern.
 
 ## PmSchedule Reference (object)
 + `id`: 1 (number, required) - {LONG} The ID for the schedule object
 
 ## Base PmSchedule (object)
+Represents a PM Schedule with its most basic properties.
+
+### Properties
 + `workOrderTemplateId`: 1 (number, required) - {INT} The integer id associated with the work order template for this schedule
 + `taskBookId`: 1 (number, optional) - {INT} The integer id associated with the task book for this schedule
 + `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
 + `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
 
 ## PmSchedule (Base PmSchedule)
+Represents a full PM Schedule object.
+
+### Properties
 + `id`: 1 (number, required) - {LONG} the ID for the schedule object
 + `title`: `Pm Schedule` (string) - the title for the schedule object
-+ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The next date and time the schedule recurrence pattern will be executed
-+ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern was executed.
-+ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern will be executed.
++ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The next date and time the schedule recurrence pattern will be executed in UTC.
++ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern was executed in UTC.
++ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern will be executed in UTC.
 + `businessAssetCount`: 0 (number, required) - {INT} The number of business assets attached to the schedule
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
@@ -1687,39 +1802,70 @@ The object that represents the work order template create
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
 ## Update PmSchedule Run Dates (object)
-+ `id`: 1 (number, required) - {LONG} The ID for the object
-+ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The next date and time the schedule recurrence pattern will be executed
-+ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern was executed.
-+ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern will be executed.
+Represents the object required to update PmSchedule Run Dates.
 
-## Task Book (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the task book.
+### Properties
++ `id`: 1 (number, required) - {LONG} The ID for the object
++ `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The next date and time the schedule recurrence pattern will be executed in UTC.
++ `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern was executed in UTC.
++ `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern will be executed in UTC.
+
+## Task Book Create (Base Audit Object)
+Represents a task book with its available properties on a POST request.
+
+### Properties
 + `title`: Oil Change (string, optional) - The title of the task book.
 + `isMaster`: true (boolean, required) - Indicates if the task book is a master template.
 
-## Task Summary (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the task.
+## Task Book (Task Book Create)
+Represents a task book.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the task book.
+
+## Task Summary Create (Base Audit Object)
+Represents a task summary with its available properties on a POST request.
+
+### Properties
 + `title`: Drain oil (string, required) - The title of the task.
 + `procedure`: Steps to complete this task (string, optional) - The detailed instructions for how to complete the task.
 + `order` : 1 (number, required) - {INT} The order in which the task should be completed.
 
+## Task Summary (Task Summary Create)
+Represents a task summary.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the task.
+
 ## Downtime Tracking (Base Audit Object)
+Represents a downtime tracking object.
+
+### Properties
 + `duration`: 850000000 (number, optional) - The downtime milliseconds recorded.
 + `cost`: 1028.50 (number, optional) - The entered cost for this workorder's downtime.
 + `failureReason` (Failure Reason, optional) - The failure reason assigned to this workorder's downtime.
 
 ## Failure Reason (Base Audit Object)
+Represents a failure reason object.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID of the failure reason.
 + `name`: Accidental Damage (string, required) - The name of the failure reason.
 + `isActive`: true (boolean, required) - Indicates if the failure reason is active.
 
 ## Priority (enum)
+Represents valid priority values.
+
+### Properties
 + Low (string)
 + Medium (string)
 + High (string)
 + Emergency (string)
 
 ## Order Status (enum)
+Represents valid order status values.
+
+### Properties
 + Approved (string)
 + Canceled (string)
 + Closed (string)
@@ -1732,6 +1878,9 @@ The object that represents the work order template create
 + Shipped (string)
 
 ## Order Line Item Detail (object)
+Represents an order line item detail.
+
+### Properties
 + `title`: `ABCVendorInc Item #3EB46` (string, required) - The title of the order line item.
 + `description`: `Paper Towel Roll, enMotion, 800 ft., PK6` (string, required) - The description of the order line item.
 + `brandName`: `enMotion` (string, optional) - The brand name of the order line item.
@@ -1741,6 +1890,9 @@ The object that represents the work order template create
 + `itemLink`: `http://www.abcvendorinc.com/product/GEORGIA-PACIFIC-Paper-Towel-Roll-3EB46` (string, optional) - The link to the order line item.
 
 ## Order Line (object)
+Represents an order line.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID for the object
 + `orderLineNumber`: 1 (number, optional) - {INT} The line number for the order line item
 + `workOrderId`: 1 (number, optional) - {INT} The ID for the work order.
@@ -1753,6 +1905,9 @@ The object that represents the work order template create
 + `itemDetail` (Order Line Item Detail, required) - The item details of the order line item.
 
 ## Order (Base Audit Object)
+Represents an order.
+
+### Properties
 + `id`: 1 (number, required) - {INT} The ID for the schedule object.
 + `orderStatus`: `Approved` (Order Status, required) - The order status assigned to the order (Approved | Canceled | Closed | Denied | Fulfillment | New | PendingApproval | Received | ReturnedToSubmitter | Shipped).
 + `supplierName`: `ABCVendorInc.` (string,required) - The supplier name assigned to the order.
@@ -1770,11 +1925,16 @@ The object that represents the work order template create
 + `orderLines` (array[Order Line], required) - The line items on the order.
 
 ## Currency (object)
+Represents a currency object.
+
+### Properties
 + `value` : 22.10 (number, required) - The currency value.
 + `unit` : `USD` (string, required) - The ISO 4217 currency code.
 
-## Work Order Task (Base Audit Object)
-+ `id`: 1 (number, required) - {INT} The ID of the task.
+## Work Order Task Create (Base Audit Object)
+Represents a work order task with its available properties on a POST request.
+
+### Properties
 + `title`: `Drain Oil` (string, required) - The title of the task.
 + `procedure`: `Steps to complete this task` (string, optional) - The detailed instructions for how to complete the task.
 + `order` : 1 (number, required) - {INT} The order in which the task should be completed.
@@ -1783,7 +1943,13 @@ The object that represents the work order template create
 + `completedByUser` (Base User Object, optional) - The ID for the user that completed the task.
 + `isCompleted` : true (boolean, required) - Indicates if the task has been completed.
 
-## Create PMProjection (object)
+## Work Order Task (Work Order Task Create)
+Represents a full work order task.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the task.
+
+## PMProjection Create (object)
 Represents a shell of what a PM generated work order will look like at a point in time.  It provides the dates it will generate as well as details about the schedule and asset that it will associated with.
 
 ### Properties
@@ -1791,16 +1957,11 @@ Represents a shell of what a PM generated work order will look like at a point i
 + `scheduledStartDate`: `2015-01-01T12:00:00.123Z` (string, required) - {DATETIME} An optional ISO Date string to represent the date when the work is to start for the work order to be generated.
 + `workOrderTemplate` (Work Order Template, required) - An required reference to the workorder template that will be associated to the generated work order
 
-## Update PMProjection (Create PMProjection)
+## PMProjection (PMProjection Create)
 Represents a shell of what a PM generated work order will look like at a point in time.  It provides the dates it will generate as well as details about the schedule and asset that it will associated with.
 
 ### Properties
 + `id`: 1 (number, required) - {LONG} The ID of the projection
-
-## PMProjection (Update PMProjection)
-Represents a shell of what a PM generated work order will look like at a point in time.  It provides the dates it will generate as well as details about the schedule and asset that it will associated with.
-
-### Properties
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, required) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, required) - Information about the client who created the record.
