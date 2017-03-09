@@ -16,6 +16,7 @@ CSHARPDEFAULTNAMESPACE: DSI.SDK.Unified
 JAVADEFAULTNAMESPACE: io.dudesolutions.unified
 BRANDLABEL: Dude Solutions, Inc.
 USERAGENT: Dude SDK
+ARRAYSERIALIZATION: Plain
 
 # Dude Unified Api
 ![Dude Solutions](https://dudesolutions.com/assets/img/logo.png)
@@ -378,7 +379,7 @@ Retieve all Calendar Events for a specified Account
 
 # Group PM Schedules
 
-## PM Schedules Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive,includeAudit}]
+## PM Schedule Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive,includeAudit,businessAssets,includeDescendants}]
 
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
@@ -388,6 +389,8 @@ Retieve all Calendar Events for a specified Account
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + businessAssets: 1 (number, optional) - {ARRAY} {LONG} Filter by the business asset assigned to the work order.
+    + includeDescendants: true (boolean, optional) - Flag to include pm schedules assigned to descendants of the specified business assets.
 
 ### GET
 
@@ -395,7 +398,7 @@ Retieve all Calendar Events for a specified Account
     + Attributes (Base Collection Response)
         + `data` (array[PmSchedule], required)
 
-## Schedule Create [/accounts/{accountId}/pmschedules{?includeAudit}]
+## PM Schedule Create [/accounts/{accountId}/pmschedules{?includeAudit}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
@@ -443,38 +446,7 @@ Retieve all Calendar Events for a specified Account
 + Response 200 (application/json)
     + Attributes (PmSchedule)
 
-## PM Schedules Business Asset Collection [/accounts/{accountId}/pmschedules/{pmScheduleId}/businessassets{?page,pagesize,orderby}]
-
-+ Parameters
-    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
-    + pmScheduleId: 1 (number, required) - {LONG} ID of the work order template object who's collection is being referenced
-    + page: 1 (number, optional) - {INT} The page to request from the collection.
-    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
-    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
-
-### GET
-
-+ Response 200 (application/json)
-    + Attributes (Base Collection Response)
-        + `data` (array[Business Asset Lite], required)
-
-## PM Schedules Business Asset Collection Detail [/accounts/{accountId}/pmschedules/{pmScheduleId}/businessassets/{id}]
-
-+ Parameters
-    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
-    + pmScheduleId: 1 (number, required) - {LONG} ID of the work order template object who's collection is being referenced
-    + id: 1 (number, required) - {LONG} The ID of the Business Asset
-
-### PUT
-
-+ Response 200 (application/json)
-    + Attributes (Business Asset Lite)
-
-### DELETE
-
-+ Response 204
-
-## PM Projection Collection [/accounts/{accountId}/pmschedules/{pmScheduleId}/projections{?page,pagesize,orderby,includeAudit}]
+## PM Projection Collection [/accounts/{accountId}/pmschedules/{pmScheduleId}/projections{?page,pagesize,orderby,includeAudit,workOrderTemplateId,businessAsset}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -483,6 +455,8 @@ Retieve all Calendar Events for a specified Account
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Name asc (string, optional) - A string describing the ordering to perform on the collection.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + workOrderTemplateId: 1 (optional, number) - {INT} ID of the WorkOrderTemplate in the form of an integer
+    + businessAsset: 1 (number, optional) - {ARRAY} {LONG} ID of the BusinessAsset in the form of an integer
 
 ### GET
 
@@ -841,6 +815,110 @@ Retrieve a single supplier for a specified account
     + Attributes (Base Collection Response)
         + `data` (array[Failure Reason], required)
 
+# Group Departments
+
+## Department Collection [/accounts/{accountId}/departments{?page,pagesize,orderby,q,isActive,includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Name asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q: Printing (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isActive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Department], required)
+
+## Department Create [/accounts/{accountId}/departments{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
++ Request
+    + Attributes (Department Create)
+
++ Response 201 (application/json)
+    + Attributes (Department)
+
+## Department Detail [/accounts/{accountId}/departments/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 10 (required, number) - {INT} ID of the department in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Department)
+
+### PUT
+
++ Request (application/json)
+    + Attributes (Department)
+
++ Response 200 (application/json)
+    + Attributes (Department)
+
+# Group Projects
+
+## Project Collection [/accounts/{accountId}/projects{?page,pagesize,orderby,q,isActive,includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Name asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q: Gymnasium (string, optional) - Filter the list by any custom query, when not set returns all.
+    + isActive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Project], required)
+
+## Project Create [/accounts/{accountId}/projects{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
++ Request
+    + Attributes (Project Create)
+
++ Response 201 (application/json)
+    + Attributes (Project)
+
+## Project Detail [/accounts/{accountId}/projects/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 10 (required, number) - {INT} ID of the project in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Project)
+
+### PUT
+
++ Request (application/json)
+    + Attributes (Project)
+
++ Response 200 (application/json)
+    + Attributes (Project)
+
 # Group Labor Hour Types
 
 ## Labor Hour Types Collection [/accounts/{accountId}/laborhourtypes{?page,pagesize,orderby,includeAudit}]
@@ -891,7 +969,7 @@ Retrieve a single supplier for a specified account
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
-    + parentid: 3 (string, optional) - {INT} Filter the list to get all children of a parent, when not set returns all.
+    + parentid: 3 (number, optional) - {INT} Filter the list to get all children of a parent, when not set returns all.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
@@ -928,7 +1006,7 @@ Retrieve a single supplier for a specified account
 
 # Group Work Orders
 
-## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,pmschedule,includedescendants,includeAudit}]
+## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,project,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,pmschedule,includedescendants,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -937,7 +1015,7 @@ Retrieve a single supplier for a specified account
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - A free form filter mechanism.
     + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
-    + assignees: 1 (array[number], optional) - {INT} Filter by assignees.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
     + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
     + createdby: 1 (number, optional) -  {INT} Filter by the user who created the work order.
@@ -948,14 +1026,20 @@ Retrieve a single supplier for a specified account
             + Medium (string)
             + High (string)
             + Emergency (string)
-    + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + project: 1 (number, optional) - {ARRAY} {INT} Filter by the project assigned to the work order.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
-    + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
-    + status: NewRequest (string, optional) - Filter by the work order status.  Acceptable values: NewRequest, WorkInProgress, Complete, Void.
-    + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
-    + businessasset: 1 (array[number], optional) - {LONG} Filter by the business asset assigned to the work order.
-    + pmschedule: 1 (array[number], optional) - {LONG} Filter by the PmSchedule associated with the work order.
+    + requestedby: 1 (number, optional) - {ARRAY} {INT} Filter by the work order requester.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.  Acceptable values: NewRequest, WorkInProgress, Complete, Void.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Complete (string)
+            + Void (string)
+    + workcategory: 1 (number, optional) - {ARRAY} {INT} Filter by the work category assigned to the work order.
+    + businessasset: 1 (number, optional) - {ARRAY} {LONG} Filter by the business asset assigned to the work order.
+    + pmschedule: 1 (number, optional) - {ARRAY} {LONG} Filter by the PmSchedule associated with the work order.
     + includedescendants: false (boolean, optional) - Flag to include workorders assigned to descendants of the specified business assets.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api.
 
@@ -1242,37 +1326,6 @@ Retrieve a single supplier for a specified account
 
 + Response 204
 
-## Assignee Collection [/accounts/{accountId}/workordertemplates/{workOrderTemplateId}/assignees{?page,pagesize,orderby}]
-
-+ Parameters
-    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
-    + workOrderTemplateId: 1 (number, required) - {INT} ID of the work order template object who's collection is being referenced
-    + page: 1 (number, optional) - {INT} The page to request from the collection.
-    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
-    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-
-### GET
-
-+ Response 200 (application/json)
-    + Attributes (Base Collection Response)
-        + `data` (array[Base User Object], required)
-
-## Assignee Collection Detail [/accounts/{accountId}/workordertemplates/{workOrderTemplateId}/assignees/{id}]
-
-+ Parameters
-    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
-    + workOrderTemplateId: 1 (number, required) - {INT} ID of the work order template object who's collection is being referenced
-    + id: 1 (number, required) - {INT} The User ID of the assignee
-
-### PUT
-
-+ Response 200 (application/json)
-    + Attributes (Base User Object)
-
-### DELETE
-
-+ Response 204
-
 # Group Order
 
 ## Order Collection [/accounts/{accountId}/orders{?supplierName,orderNumber,page,pagesize,orderby,includeAudit}]
@@ -1427,6 +1480,7 @@ Represents a business asset attribute with its available properties on a POST re
 + `value`: 1200 (string, required) - The value of the asset attribute instance
 + `businessAssetAttributeType` (Business Asset Attribute Type, required) - The type of the asset attribute instance
 + `unitOfMeasure` (Unit Of Measure, required) - The unit of measure associated with the asset attribute instance
++ `isMetered`: true (boolean, required) - Indicates if the asset attribute instance is metered
 
 ## Business Asset Attribute (Business Asset Attribute Create)
 Represents a full business asset attribute.
@@ -1485,6 +1539,7 @@ Represents a business asset attribute type.
 + `fieldLength`: 125 (number, optional) - {INT} The number of characters allowed for the attribute
 + `quantity` (Quantity, required) - The quantity type
 + `businessAssetAttributeTypeCodes` (array[Business Asset Attribute Type Code], optional) - The type codes
++ `isMeterable`: false (boolean, required) - Indicates if the attribute type is meterable
 
 ## Business Asset Attribute Type Code (object)
 Represents a business asset attribute type code as a key/value pair.
@@ -1593,6 +1648,56 @@ Represents the trade object.
 + `name`: Electrician (string, required) - The name of the trade.
 + `isActive`: true (boolean, required) - Indicates if the trade is active.
 
+## Department Create (Base Audit Object)
+Represents a department object with its available properties on a POST request.
+
+### Properties
++ `name`: Printing Office (string, required) - The description of the department.
++ `isActive`: true (boolean, required) - Indicates if the department is active.
+
+## Department (Department Create)
+Represents a full department object.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the department.
+
+## Project Create (Base Audit Object)
+Represents a project object with its available properties on a POST request.
+
+### Properties
++ `name`: Gymnasium (string, required) - The name of the project.
++ `description`: The 2017 Gym renovation project (string, optional) - The description of the project.
++ `notes`: This tracks only the internal employee work on the gym renovation (string, optional) - Additional notes for the project.
++ `startDate`: `2017-02-01T00:00:00.123Z` (string, optional) - The starting date for the project.
++ `endDate`: `2017-05-31T00:00:00.123Z` (string, optional) - The ending date for the project.
++ `budgetedAmount`: 120500.89 (number, optional) - The budgeted amount for the project.
++ `isActive`: true (boolean, required) - Indicates if the project is active.
+
+## Project Details (Project Create)
+Represents a project object with additional detail properties.
++ `workOrders`: (Work Order Summary, optional) - Counts and total costs of the work orders associated with the project.
+
+## Project (Project Details)
+Represents a full project object.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the project.
+
+## Work Order Summary (object)
+Represents the counts and total costs of the work order
+
+### Properties
++ `workOrderCount`: 1 (number, optional) - {INT} The number of work orders.
++ `totalCost`: (Cost, optional) - The aggregated costs of the work orders.
+
+## Cost (object)
+Represents costs.
+
+### Properties
++ `purchase`: 175.00 (number, optional) - The purchase cost.
++ `labor`: 175.00 (number, optional) - The labor cost.
++ `total`: 175.00 (number, optional) - The sum of all costs.
+
 ## Labor Hour Type (Base Audit Object)
 Represents a labor hour type object.
 
@@ -1648,6 +1753,7 @@ Represents the Work Order Object
 + `attachmentCount`: 1 (number, optional) - {INT} A count of attachments associated with the work order.
 + `requestedBy` (Base User Object, required) - The user who requested the work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
++ `project` (Project, optional) - The project asscociated with this work order.
 + `workCategory` (Work Category, optional) - The work category assigned to the work order.
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
@@ -1742,13 +1848,13 @@ The object that represents the work order template create
 + `trade` (Trade, optional) - The trade assigned to the work order.
 + `estimatedCost`: 10.50 (number, optional) - The estimated cost to complete the associated work order.
 + `estimatedHours`: 1.5 (number, optional) - The estimated number of hours to complete the associated work order.
++ `taskBookId`: 1 (number, optional) - {INT} The integer id associated with the task book for this schedule
 
 ## Work Order Template (Work Order Template Create)
 Represents a work order template.
 
 ### Properties
 + `id`: 1 (number, required) - {INT} The unique identifier of the work order order template.
-+ `assigneeCount`: 1 (number, required) - {INT} The number of assignees that exists for the template
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
@@ -1780,9 +1886,11 @@ Represents a PM Schedule with its most basic properties.
 
 ### Properties
 + `workOrderTemplateId`: 1 (number, required) - {INT} The integer id associated with the work order template for this schedule
-+ `taskBookId`: 1 (number, optional) - {INT} The integer id associated with the task book for this schedule
 + `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
 + `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
++ `assignees` (array[Base User Object], optional) - The users assigned to the work orders generated from this PmSchedule
++ `businessAssets` (array[PmSchedule Business Asset], required) - The business assets on the pm schedule.
++ `scheduleType` : `Fixed` (PM Schedule Type, required) - The type of schedule.
 
 ## PmSchedule (Base PmSchedule)
 Represents a full PM Schedule object.
@@ -1793,7 +1901,7 @@ Represents a full PM Schedule object.
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The next date and time the schedule recurrence pattern will be executed in UTC.
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern was executed in UTC.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern will be executed in UTC.
-+ `businessAssetCount`: 0 (number, required) - {INT} The number of business assets attached to the schedule
++ `workOrderCount`: 1 (number, optional) - The number of work orders generated by this schedule.
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUser` (Base User Object, optional) - Information about the user who created the record.
 + `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
@@ -1809,6 +1917,12 @@ Represents the object required to update PmSchedule Run Dates.
 + `nextRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The next date and time the schedule recurrence pattern will be executed in UTC.
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern was executed in UTC.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern will be executed in UTC.
+
+## PmSchedule Business Asset (Business Asset Lite)
+Represents a Business Asset associated with a PmSchedule
+
+### Properties
++ `hasOpenWorkOrders`: true (boolean, optional) - Indicates whether the asset has open work orders associated with this schedule.
 
 ## Task Book Create (Base Audit Object)
 Represents a task book with its available properties on a POST request.
@@ -1941,7 +2055,7 @@ Represents a work order task with its available properties on a POST request.
 + `notes` : `Drained 1L of oil` (string, optional) - The notes for the task.
 + `completedDateTime` : `2015-01-01T12:00:00.123Z` (string, optional) - {DATETIME} The date and time the task was completed.
 + `completedByUser` (Base User Object, optional) - The ID for the user that completed the task.
-+ `isCompleted` : true (boolean, required) - Indicates if the task has been completed.
++ `status` : `Complete` (Work Order Task Status, required) - The state or status of the task.
 
 ## Work Order Task (Work Order Task Create)
 Represents a full work order task.
@@ -1955,7 +2069,13 @@ Represents a shell of what a PM generated work order will look like at a point i
 ### Properties
 + `dueDateTime`: `2015-01-01T12:00:00.123Z` (string, required) - {DATETIME} An optional ISO Date string to represent when the generated work order would be due to be completed.
 + `scheduledStartDate`: `2015-01-01T12:00:00.123Z` (string, required) - {DATETIME} An optional ISO Date string to represent the date when the work is to start for the work order to be generated.
-+ `workOrderTemplate` (Work Order Template, required) - An required reference to the workorder template that will be associated to the generated work order
++ `workOrderTemplate` (Work Order Template, required) - A required reference to the workorder template that will be associated to the generated work order
++ `businessAsset` (Business Asset Lite, optional) - A reference to the Business Asset that will be associated with the generated work order.
+
+## Work Order Task Status (enum)
++ Incomplete (string)
++ Not Applicable (string)
++ Complete (string)
 
 ## PMProjection (PMProjection Create)
 Represents a shell of what a PM generated work order will look like at a point in time.  It provides the dates it will generate as well as details about the schedule and asset that it will associated with.
@@ -1968,3 +2088,7 @@ Represents a shell of what a PM generated work order will look like at a point i
 + `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, required) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, required) - Information about the client who last modified the record.
+
+## PM Schedule Type (enum)
++ Fixed (string)
++ Floating (string)
