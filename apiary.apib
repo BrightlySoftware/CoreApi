@@ -342,11 +342,12 @@ Retieve all Calendar Events for a specified Account
 
 # Group Quantities
 
-## Quantities [/quantities{?page,pagesize,orderby}]
+## Quantities [/quantities{?isUnitOfIssue,page,pagesize,orderby}]
 
 ### GET
 
 + Parameters
+    + isUnitOfIssue: true (boolean, optional) - Filter the response list to include only those quantities that have units of measure with their isUnitOfIssue flag set to true.
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
@@ -355,14 +356,12 @@ Retieve all Calendar Events for a specified Account
     + Attributes (Base Collection Response)
         + data (required, array[Quantity]) - The Quantity response collection.
 
-## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?measurementsystem,page,pagesize,orderby}]
+## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?measurementSystem,isUnitOfIssue,page,pagesize,orderby}]
 
 + Parameters
     + quantityTypeId: 12345 (required, number) - {INT} ID of the measurement type in the form of an integer
-    + measurementsystem: None (optional, enum[string]) - The measurement system to filter
-        + `None` - No filter specified
-        + `Metric` - Limit to Metric measurements
-        + `Imperial`- Limit to Imperial measurements
+    + isUnitOfIssue: true (boolean, optional) - Filter the response list to include only those quantities that have units of measure with their isUnitOfIssue flag set to true.
+    + measurementSystem: 1 (number, optional) - {INT} - The measurement system this unit belongs to.
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: unitKey asc (string, optional) - A string describing the ordering to perform on the collection.
@@ -1411,6 +1410,17 @@ Represents standard audit properties available on an object.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 
+## Work Order Audit Object (object)
+Represents standard audit properties available on an object.
+
+### Properties
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
+
 ## Base User Object (object)
 Represents a user with base properties.
 
@@ -1580,19 +1590,20 @@ Represents a Calendar Event object
 Represents a basic quantity type.
 
 ### Properties
-+ `id`: 1 (number, required) - {INT} The ID of the quantity.
-+ `quantity`: Length (string, required) - The name of the quantity type
++ `id`: 11 (number, required) - {INT} The ID of the quantity.
++ `quantity`: length (string, required) - The name of the quantity type.
++ `measurementSystem`: 1 (number, optional) - {ARRAY} {INT} - The measurement systems available for this quantity.
+        
 
 ## Unit Of Measure (object)
 Represents the units of measure and associated measurement system.
 
 ### Properties
 + `id`: 1 (number, required) - {INT} The ID of the unit of measure.
-+ `unitKey`: feet (string, required) - The unit of measurement as a string.
-+ `measurementSystem`: None (enum[string], required) - The measurement system this unit belongs to.
-        + `None` - Not associated with a given measurement system.
-        + `Metric` - Limit to Metric measurements.
-        + `Imperial`- Limit to Imperial measurements.
++ `unitKey`: inch (string, required) - The unit of measurement as a string.
++ `measurementSystem`: 1 (number, optional) - {ARRAY} {INT} - The measurement system this unit belongs to.
++ `isUnitOfIssue`: true (boolean, required) - Indicates if this is a unit of issue.
++ `conversionFactor`: 1 (number, optional) - {INT} - Multiplication factor to convert from the lowest unit of measure for the quantity type to the given unit of measure
 
 ## Manufacturer Create (object)
 Represents a manufacturer object with its available properties on a POST request.
@@ -1688,7 +1699,7 @@ Represents the counts and total costs of the work order
 
 ### Properties
 + `workOrderCount`: 1 (number, optional) - {INT} The number of work orders.
-+ `totalCost`: (Cost, optional) - The aggregated costs of the work orders.
++ `totalCost`: `1.40' (Cost, optional) - The aggregated costs of the work orders.
 
 ## Cost (object)
 Represents costs.
@@ -1726,7 +1737,7 @@ Represents a work order location object.
 
 ### Properties
 + `latitude`: 35.729235 (number, required) - The latitude of the location.
-+ `longitude`: -78.799214 (number, required) - The longitude of the location.
++ `longitude`: `-78.799214` (number, required) - The longitude of the location.
 + `streetAddress`: 11000 Regency Parkway (string, required) - The primary street address of the location.
 + `streetAddressLine2`: Suite 110 (string, required) - The secondary street address of the location.
 + `city`: Cary (string, required) - The city of the location.
@@ -1735,7 +1746,7 @@ Represents a work order location object.
 + `country`: USA (string, required) - The country of the location.
 + `latLongMatchesAddress`: true (boolean, required) - Indicates if the location address matches the latitude and longitude coordinates.
 
-## Work Order (Base Audit Object)
+## Work Order (Work Order Audit Object)
 Represents the Work Order Object
 
 ### Properties
@@ -1967,7 +1978,7 @@ Represents a failure reason object.
 + `name`: Accidental Damage (string, required) - The name of the failure reason.
 + `isActive`: true (boolean, required) - Indicates if the failure reason is active.
 
-## Priority (enum)
+## Priority (object)
 Represents valid priority values.
 
 ### Properties
@@ -1976,7 +1987,7 @@ Represents valid priority values.
 + High (string)
 + Emergency (string)
 
-## Order Status (enum)
+## Order Status (object)
 Represents valid order status values.
 
 ### Properties
