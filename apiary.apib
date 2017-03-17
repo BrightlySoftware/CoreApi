@@ -342,12 +342,13 @@ Retieve all Calendar Events for a specified Account
 
 # Group Quantities
 
-## Quantities [/quantities{?isUnitOfIssue,page,pagesize,orderby}]
+## Quantities [/quantities{?hasUnitOfIssue,unitKey,page,pagesize,orderby}]
 
 ### GET
 
 + Parameters
-    + isUnitOfIssue: true (boolean, optional) - Filter the response list to include only those quantities that have units of measure with their isUnitOfIssue flag set to true.
+    + hasUnitOfIssue: true (boolean, optional) - Filter the response list to include only those quantities that have units of measure with their isUnitOfIssue flag set to true.
+    + unitKey: inch (string, optional) - Filter the response list to include only those quantities that have unit keys of the given type.
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
@@ -356,7 +357,7 @@ Retieve all Calendar Events for a specified Account
     + Attributes (Base Collection Response)
         + data (required, array[Quantity]) - The Quantity response collection.
 
-## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?measurementSystem,isUnitOfIssue,page,pagesize,orderby}]
+## Units of Measure [/quantities/{quantityTypeId}/unitsOfMeasure{?isUnitOfIssue,measurementSystem,page,pagesize,orderby}]
 
 + Parameters
     + quantityTypeId: 12345 (required, number) - {INT} ID of the measurement type in the form of an integer
@@ -1592,8 +1593,7 @@ Represents a basic quantity type.
 ### Properties
 + `id`: 11 (number, required) - {INT} The ID of the quantity.
 + `quantity`: length (string, required) - The name of the quantity type.
-+ `measurementSystem`: 1 (number, optional) - {ARRAY} {INT} - The measurement systems available for this quantity.
-        
++ `hasUnitOfIssue`: true (boolean, required) - Indicates if this has units of measure which can be used as units of issue.
 
 ## Unit Of Measure (object)
 Represents the units of measure and associated measurement system.
@@ -1601,7 +1601,7 @@ Represents the units of measure and associated measurement system.
 ### Properties
 + `id`: 1 (number, required) - {INT} The ID of the unit of measure.
 + `unitKey`: inch (string, required) - The unit of measurement as a string.
-+ `measurementSystem`: 1 (number, optional) - {ARRAY} {INT} - The measurement system this unit belongs to.
++ `measurementSystem`: 1 (number, optional) - {INT} - The measurement system this unit belongs to.
 + `isUnitOfIssue`: true (boolean, required) - Indicates if this is a unit of issue.
 + `conversionFactor`: 1 (number, optional) - {INT} - Multiplication factor to convert from the lowest unit of measure for the quantity type to the given unit of measure
 
