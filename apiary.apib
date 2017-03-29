@@ -958,9 +958,9 @@ Retrieve a single supplier for a specified account
 + Response 200 (application/json)
     + Attributes (Labor Hour Type)
 
-# Group Work Categories
+# Group Work Types
 
-## Work Category Collection [/accounts/{accountId}/workcategories{?page,pagesize,orderby,q,isactive,parentid,includeAudit}]
+## Work Type Collection [/accounts/{accountId}/worktypes{?page,pagesize,orderby,q,isactive,parentid,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -976,29 +976,29 @@ Retrieve a single supplier for a specified account
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
-        + `data` (array[Work Category], required)
+        + `data` (array[Work Type], required)
 
 ### POST
 
 + Response 201 (application/json)
-    + Attributes (Work Category Create)
+    + Attributes (Work Type Create)
 
-## Work Category Detail [/accounts/{accountId}/workcategories/{id}{?includeAudit}]
+## Work Type Detail [/accounts/{accountId}/worktypes/{id}{?includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {INT} ID of the work category in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the work type in the form of an integer
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
 
 + Response 200 (application/json)
-    + Attributes (Work Category)
+    + Attributes (Work Type)
 
 ### PUT
 
 + Response 200 (application/json)
-    + Attributes (Work Category)
+    + Attributes (Work Type)
 
 ### DELETE
 
@@ -1006,7 +1006,7 @@ Retrieve a single supplier for a specified account
 
 # Group Work Orders
 
-## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,project,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,pmschedule,includedescendants,includeAudit}]
+## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,project,requestdatefrom,requestdateto,requestedby,status,worktype,businessasset,pmschedule,includedescendants,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1038,7 +1038,7 @@ Retrieve a single supplier for a specified account
             + Complete (string)
             + Void (string)
             + OnHold (string)
-    + workcategory: 1 (number, optional) - {ARRAY} {INT} Filter by the work category assigned to the work order.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type assigned to the work order.
     + businessasset: 1 (number, optional) - {ARRAY} {LONG} Filter by the business asset assigned to the work order.
     + pmschedule: 1 (number, optional) - {ARRAY} {LONG} Filter by the PmSchedule associated with the work order.
     + includedescendants: false (boolean, optional) - Flag to include workorders assigned to descendants of the specified business assets.
@@ -1718,20 +1718,20 @@ Represents a labor hour type object.
 + `type`: Regular (string, required) - The name of the labor type.
 + `multiplier`: 1.0 (number, required) - The multiplier associated with the labor type.
 
-## Work Category Create (Base Audit Object)
-Represents a work category object with its available properties on a POST request.
+## Work Type Create (Base Audit Object)
+Represents a work type object with its available properties on a POST request.
 
 ### Properties
-+ `value`: Environmental (string, required) - The description of the work category.
-+ `isActive`: true (boolean, required) - Indicates if the work category is active.
-+ `parent` (Work Category, required) - The parent record for this work category.
++ `name`: Environmental (string, required) - The description of the work type.
++ `isActive`: true (boolean, required) - Indicates if the work type is active.
++ `parent` (Work Type, required) - The parent record for this work type.
 
-## Work Category (Work Category Create)
-Represents a work category object.
+## Work Type (Work Type Create)
+Represents a work type object.
 
 ### Properties
-+ `id`: 1 (number, required) - {INT} The ID of the work category.
-+ `childCount`: 0 (number, required) - Indicates how many children the current work category has.
++ `id`: 1 (number, required) - {INT} The ID of the work type.
++ `childCount`: 0 (number, required) - Indicates how many children the current work type has.
 
 ## Work Order Location (object)
 Represents a work order location object.
@@ -1766,7 +1766,7 @@ Represents the Work Order Object
 + `requestedBy` (Base User Object, required) - The user who requested the work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `project` (Project, optional) - The project asscociated with this work order.
-+ `workCategory` (Work Category, optional) - The work category assigned to the work order.
++ `workType` (Work Type, optional) - The work type assigned to the work order.
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
@@ -1854,7 +1854,7 @@ The object that represents the work order template create
 + `description`: The chair is broken (string, optional) - Text that describes the work order.
 + `priority`: Low (Priority, required) - The priority of a work order.
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
-+ `workCategory` (Work Category, optional) - The work category assigned to the work order.
++ `workType` (Work Type, optional) - The work type assigned to the work order.
 + `location` (Work Order Location, optional) - The location associated with this work order.
 + `dueDateOffset`: 1 (number, optional) - {INT} The number of days out to set the dueDateTime. 1 = today, 2 = tomorrow, etc.
 + `trade` (Trade, optional) - The trade assigned to the work order.
