@@ -695,18 +695,46 @@ Retrieve a single supplier for a specified account
 
 + Response 204
 
-# Group Purposes
+# Group Purpose Types
 
-## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive,includeAudit}]
+## Purpose Types Collection [/accounts/{accountId}/purposeTypes{?page,pagesize,orderby}]
 
 + Parameters
     + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
-    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + orderby: name asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Purpose Type], required)
+
+## Purpose Type Detail [/accounts/{accountId}/purposeTypes/{id}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the purpose in the form of an integer
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Purpose Type)
+
+# Group Purposes
+
+## Purpose Collection [/accounts/{accountId}/purposes{?page,pagesize,orderby,q,isactive,includeAudit,purposeTypeId}]
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: value asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + purposeTypeId: 12 (number, optional) - Filter the list of purposes by the purpose type
 
 ### GET
 
@@ -1632,12 +1660,20 @@ Represents a full supplier.
 + 'id': 1 (number, required) - {INT} The ID of the supplier.
 + 'isDudeSupplier': true (boolean) - Indicates if this is a common platform supplier.
 
+## Purpose Type (object)
+Represents a purpose type object
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the purpose type.
++ `name`: Preventive Maintenance (string, required) - The name of the purpose type.
+
 ## Purpose Create (Base Audit Object)
 Represents a purpose object with its available properties on a POST request.
 
 ### Properties
 + `value`: General Maintenance (string, required) - The description of the purpose.
 + `isActive`: true (boolean, required) - Indicates if the purpose is active.
++ `purposeType` (Purpose Type, required) - Indicates the type of the purpose.
 
 ## Purpose (Purpose Create)
 Represents a full purpose object.
