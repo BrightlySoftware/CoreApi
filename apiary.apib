@@ -1935,6 +1935,7 @@ Represents a PM Schedule with its most basic properties.
 ### Properties
 + `workOrderTemplateId`: 1 (number, required) - {INT} The integer id associated with the work order template for this schedule
 + `recurrencePattern` (Recurrence Pattern, required) - The recurrence pattern
++ `meterInterval` (number, optional) - The meter interval for floating and mixed schedule types (ex: 3000 miles)
 + `isActive`: true (boolean, required) - Boolean value to indicate whether the schedule will continue to generate based on its recurrence pattern
 + `assignees` (array[Base User Object], optional) - The users assigned to the work orders generated from this PmSchedule
 + `businessAssets` (array[PmSchedule Business Asset], required) - The business assets on the pm schedule.
