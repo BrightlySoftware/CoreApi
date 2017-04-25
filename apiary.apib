@@ -379,7 +379,7 @@ Retieve all Calendar Events for a specified Account
 
 # Group PM Schedules
 
-## PM Schedule Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive,includeAudit,assignee,businessAssets,includeDescendants}]
+## PM Schedule Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive,includeAudit,assignees,businessAssets,includeDescendants}]
 
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
@@ -389,7 +389,7 @@ Retieve all Calendar Events for a specified Account
     + q (string, optional) - Filter the list by any custom query, when not set returns all.
     + isactive: true (boolean, optional) - Filter the list by active or inactive items, when not set returns all.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
-    + assignee: 1 (number, optional) - {ARRAY} {INT} Filter by the user assigned to the work order.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by the user assigned to the work order.
     + businessAssets: 1 (number, optional) - {ARRAY} {LONG} Filter by the business asset assigned to the work order.
     + includeDescendants: true (boolean, optional) - Flag to include pm schedules assigned to descendants of the specified business assets.
 
