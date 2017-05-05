@@ -1215,6 +1215,52 @@ Retrieve a single supplier for a specified account
 
 + Response 204
 
+## Service Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby},includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Order Service Transaction], required)
+
+### POST
+
++ Request
+    + Attributes (Work Order Service Transaction Create)
+
++ Response 201 (application/json)
+    + Attributes (Work Order Service Transaction)
+
+## Service Transaction Detail [/accounts/{accountId}/workorders/{workOrderId}/transactions/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the transaction in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Work Order Service Transaction)
+
+### PUT
+
++ Response 200 (application/json)
+    + Attributes (Work Order Service Transaction)
+
+### DELETE
+
++ Response 204
+
 ## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
@@ -1844,6 +1890,20 @@ Represents a labor transaction object.
 ### Properties
 + `id`: 1 (number, required) - {INT} The ID of the work order transaction.
 
+## Work Order Service Transaction Create (object)
+Represents a service transaction with its available properties on a POST request.
+
+### Properties
++ `description`: The technician did work (string, required) - A short description of the transaction.
++ `transactionDate`: `2015-01-01T01:01:01.123Z` (string, required) - The date and time the transaction occurred.
++ `typeAttributes` (Service Transaction Type, required) - The details of the transaction.
+
+## Work Order Service Transaction (Work Order Service Transaction Create)
+Represents a service transaction object.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the work order transaction.
+
 ## Work Order Purchase Transaction Create (object)
 Represents a work order purchase transaction with its available properties on a POST request.
 
@@ -1884,6 +1944,15 @@ Represents a purchase transaction type.
 + `quantity`: 35.00 (number, required) - The amount of items purchased for this transaction.
 + `unitCost`: 5 (number, required) - The unit cost for this purchase transaction.
 + `supplierName`: Grainger (string, optional) - The supplier of this purchase transaction.
+
+## Service Transaction Type (Transaction Type)
+Represents a service transaction type.
+
+### Properties
++ `type`: service (string, required) - The type of transaction.
++ `serviceType`:  Contract (Service Type, required) - The type of service.
++ `purchaseOrder`: 100ABC (string, optional) - The purchase order of the service transaction.
++ `supplierName`: Lowes (string, optional) - The supplier of this service transaction.
 
 ## Work Order Template Create (object)
 The object that represents the work order template create
@@ -2139,3 +2208,8 @@ Represents a shell of what a PM generated work order will look like at a point i
 + Floating (string)
 + Metered (string)
 + Mixed (string)
+
+## Service Type (enum)
++ Contract (string)
++ EquipmentRental (string)
++ Other (string)
