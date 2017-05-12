@@ -379,7 +379,7 @@ Retieve all Calendar Events for a specified Account
 
 # Group PM Schedules
 
-## PM Schedule Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive,includeAudit,assignees,businessAssets,includeDescendants, pmScheduleTypes}]
+## PM Schedule Collection [/accounts/{accountId}/pmschedules{?page,pagesize,orderby,q,isactive,includeAudit,assignees,businessAssets,includeDescendants}]
 
 + Parameters
     + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
@@ -392,12 +392,6 @@ Retieve all Calendar Events for a specified Account
     + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by the user assigned to the work order.
     + businessAssets: 1 (number, optional) - {ARRAY} {LONG} Filter by the business asset assigned to the work order.
     + includeDescendants: true (boolean, optional) - Flag to include pm schedules assigned to descendants of the specified business assets.
-    + pmScheduleTypes (enum[string], optional) - {ARRAY} Filter by the schedule types
-        + Members
-            + Fixed (string)
-            + Floating (string)
-            + Metered (string)
-            + Mixed (string)
 
 ### GET
 
@@ -449,20 +443,6 @@ Retieve all Calendar Events for a specified Account
 
 + Request
     + Attributes (Update PmSchedule Run Dates)
-
-+ Response 200 (application/json)
-    + Attributes (PmSchedule)
-
-## Pm Schedule Force Update [/accounts/{accountId}/pmschedules/{id}/forceupdate]
-
-+ Parameters
-    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {LONG} ID of the pm schedule
-
-### PUT
-
-+ Request
-    + Attributes (PmSchedule)
 
 + Response 200 (application/json)
     + Attributes (PmSchedule)
