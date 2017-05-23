@@ -1215,7 +1215,7 @@ Retrieve a single supplier for a specified account
 
 + Response 204
 
-## Service Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby},includeAudit}]
+## Service Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1445,6 +1445,88 @@ Retrieve a single supplier for a specified account
   + Attributes (Order)
 + Response 200 (application/json)
     + Attributes (Order)
+
+# Group Web Link Types
+
+## Web Link Types Collection [/accounts/{accountId}/weblinktypes{?q,page,pagesize,orderby}]
+
++Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+	+ q: `workorder` (string, required) - {STRING} Description of the type of the object
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby:  OrderNumber asc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Web Link Type])
+		
+## Web Link Type Detail [/accounts/{accountId}/weblinktypes/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 1 (required, number) - {INT} ID of the web link type
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Web Link Type)
+	
+# Group Web Links
+
+## Web Links Collection [/accounts/{accountId}/weblinks{?objectId,objectTypeId,page,pagesize,orderby,includeAudit}]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+    + objectId: 1 (number, optional) - {INT} ID of the object with which the url is associated
+	+ objectTypeId: 1 (number, optional) - {INT} ID of the type of the object with which the url is associated
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby:  OrderNumber asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Web Link Response])
+
+## Web Links Create [/accounts/{accountId}/weblinks]
+
++ Parameters
+    + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
+
+### POST
+
++ Request
+  + Attributes (Web Link Create)
+
++ Response 201 (application/json)
+    + Attributes (Web Link Response)
+
+## Web Link Detail [/accounts/{accountId}/weblinks/{id}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 1 (required, number) - {INT} ID of the web link
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Web Link Response)
+
+### PUT
+
++ Request
+  + Attributes (Web Link)
++ Response 200 (application/json)
+    + Attributes (Web Link Response)
+
+### DELETE
+
++ Response 204
 
 
 # Data Structures
@@ -2213,3 +2295,38 @@ Represents a shell of what a PM generated work order will look like at a point i
 + Contract (string)
 + EquipmentRental (string)
 + Other (string)
+
+## Web Link Type (object)
+Respresents the base web link type object
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the web link type
++ `description` : `WorkOrder` (string, required) - The description of the web link type
+
+## Web Link Base (object)
+Represents the base web links object
+
+### Properties
++ `objectId` : 1 (number, required) - {INT} The ID of the object with which the link is associated
++ `objectType` (Web Link Type, required) - Information about the web link type
++ `url`: `http://www.usatoday.com` (string, required) - The url of the external link.
+
+## Web Link Create (Web Link Base)
+Represents the web link specific to work orders
+
+## Web Link (Web Link Create)
+Represents a web link object used for put calls.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the web link.
+
+## Web Link Response (Web Link Base)
+Represents a web link response object
+
+### Properties
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, required) - {DATETIME} The date and time in ISO-8601 format the record was created.
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, required) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, required) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, required) - Information about the client who last modified the record.
