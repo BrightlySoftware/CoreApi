@@ -1450,9 +1450,9 @@ Retrieve a single supplier for a specified account
 
 ## Web Link Types Collection [/accounts/{accountId}/weblinktypes{?q,page,pagesize,orderby}]
 
-+Parameters
++ Parameters
     + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
-	+ q: `workorder` (string, required) - {STRING} Description of the type of the object
+    + q: `workorder` (string, optional) - Description of the type of the object
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby:  OrderNumber asc (string, optional) - A string describing the ordering to perform on the collection.
@@ -1462,7 +1462,7 @@ Retrieve a single supplier for a specified account
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
         + `data` (array[Web Link Type])
-		
+
 ## Web Link Type Detail [/accounts/{accountId}/weblinktypes/{id}]
 
 + Parameters
@@ -1473,7 +1473,7 @@ Retrieve a single supplier for a specified account
 
 + Response 200 (application/json)
     + Attributes (Web Link Type)
-	
+
 # Group Web Links
 
 ## Web Links Collection [/accounts/{accountId}/weblinks{?objectId,objectTypeId,page,pagesize,orderby,includeAudit}]
@@ -1481,7 +1481,7 @@ Retrieve a single supplier for a specified account
 + Parameters
     + accountId: 1 (number, required) - {INT} ID of the account in the form of an integer
     + objectId: 1 (number, optional) - {INT} ID of the object with which the url is associated
-	+ objectTypeId: 1 (number, optional) - {INT} ID of the type of the object with which the url is associated
+    + objectTypeId: 1 (number, optional) - {INT} ID of the type of the object with which the url is associated
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby:  OrderNumber asc (string, optional) - A string describing the ordering to perform on the collection.
@@ -1528,6 +1528,15 @@ Retrieve a single supplier for a specified account
 
 + Response 204
 
+## Metadata Collection [/accounts/{accountId}/weblinks/metadata{?url}]
+
++ Parameters
+    + accountId : 1 (required, number) - {INT} ID of the account in the form of an integer
+    + url : `http://www.usatoday.com` (required, string) - The url of the external link.
+
+### GET
++ Response 200 (application/json)
+    + Attributes (Metadata)
 
 # Data Structures
 
@@ -2309,7 +2318,10 @@ Represents the base web links object
 ### Properties
 + `objectId` : 1 (number, required) - {INT} The ID of the object with which the link is associated
 + `objectType` (Web Link Type, required) - Information about the web link type
-+ `url`: `http://www.usatoday.com` (string, required) - The url of the external link.
++ `url` : `http://www.usatoday.com` (string, required) - The url of the external link.
++ `title` : `Web site title` (string, optional) - The title of the url
++ `description` : `Web site description` (string, optional) - The description of the web site
++ `thumbnail` : `http://www.usatoday.com/thumb.jpg` (string, optional) - The url for the external thumbnail
 
 ## Web Link Create (Web Link Base)
 Represents the web link specific to work orders
@@ -2330,3 +2342,11 @@ Represents a web link response object
 + `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, required) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, required) - Information about the client who last modified the record.
+
+## Metadata (object)
+
+### Properties
++ `url` : `http://www.usatoday.com` (string, required) - The url of the external link.
++ `title` : `Web site title` (string, optional) - The title of the url
++ `description` : `Web site description` (string, optional) - The description of the web site
++ `thumbnail` : `http://www.usatoday.com/thumb.jpg` (string, optional) - The url for the external thumbnail
