@@ -78,7 +78,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 # Group Assets
 
-## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentId,name,description,isActive,isWorkOrderAsset,isInventoryStorageArea,businessAssetTypeId,includeDescendants,ancestorNamePath,page,pagesize,orderby,includeAudit}]
+## Business Asset Collection [/accounts/{accountId}/businessassets{?q,parentId,name,description,isActive,isWorkOrderAsset,isInventoryStorageArea,businessAssetTypeId,includeDescendants,ancestorNamePath,page,pagesize,orderby,includeAudit,updatedDateTimeFrom,updatedDateTimeTo}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer.
@@ -96,6 +96,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + updatedDateTimeFrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by updated date time, starting from.
+    + updatedDateTimeTo: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the updated date time, until.
 
 ### GET
 
@@ -176,7 +178,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + Response 200 (application/json)
     + Attributes (Business Asset Attribute)
 
-## Business Asset Attachment Collection [/accounts/{accountId}/businessassets/{businessAssetId}/attachments{?page,pagesize,orderby,includeAudit}]
+## Business Asset Attachment Collection [/accounts/{accountId}/businessassets/{businessAssetId}/attachments{?page,pagesize,orderby,includeAudit,updatedDateTimeFrom,updatedDateTimeTo}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -185,6 +187,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + updatedDateTimeFrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by updated date time, starting from.
+    + updatedDateTimeTo: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the updated date time, until.
 
 ### GET
 
@@ -1125,7 +1129,7 @@ Retrieve a single supplier for a specified account
 
 + Response 200 (text/csv)
 
-## Labor Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
+## Labor Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit,updatedDateTimeFrom,updatedDateTimeTo}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1134,6 +1138,8 @@ Retrieve a single supplier for a specified account
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + updatedDateTimeFrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by updated date time, starting from.
+    + updatedDateTimeTo: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the updated date time, until.
 
 ### GET
 
@@ -1149,7 +1155,7 @@ Retrieve a single supplier for a specified account
 + Response 201 (application/json)
     + Attributes (Work Order Labor Transaction)
 
-## Purchase Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby}]
+## Purchase Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,updatedDateTimeFrom,updatedDateTimeTo}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1157,6 +1163,8 @@ Retrieve a single supplier for a specified account
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + updatedDateTimeFrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by updated date time, starting from.
+    + updatedDateTimeTo: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the updated date time, until.
 
 ### GET
 
@@ -1215,7 +1223,7 @@ Retrieve a single supplier for a specified account
 
 + Response 204
 
-## Service Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit}]
+## Service Transaction Collection [/accounts/{accountId}/workorders/{workOrderId}/transactions{?page,pagesize,orderby,includeAudit,updatedDateTimeFrom,updatedDateTimeTo}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1224,6 +1232,8 @@ Retrieve a single supplier for a specified account
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + updatedDateTimeFrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by updated date time, starting from.
+    + updatedDateTimeTo: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the updated date time, until.
 
 ### GET
 
@@ -1261,7 +1271,7 @@ Retrieve a single supplier for a specified account
 
 + Response 204
 
-## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby,includeAudit}]
+## Attachment Collection [/accounts/{accountId}/workorders/{workOrderId}/attachments{?page,pagesize,orderby,includeAudit,updatedDateTimeFrom,updatedDateTimeTo}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1270,6 +1280,8 @@ Retrieve a single supplier for a specified account
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+    + updatedDateTimeFrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by updated date time, starting from.
+    + updatedDateTimeTo: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the updated date time, until.
 
 ### GET
 
