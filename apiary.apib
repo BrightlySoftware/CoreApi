@@ -1091,7 +1091,7 @@ Retrieve a single supplier for a specified account
 
 # Group Work Orders
 
-## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,project,requestdatefrom,requestdateto,requestedby,status,worktype,businessasset,pmschedule,includedescendants,includeAudit}]
+## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,project,requestdatefrom,requestdateto,requestedby,status,worktype,businessasset,pmschedule,includedescendants,ids,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1127,6 +1127,7 @@ Retrieve a single supplier for a specified account
     + businessasset: 1 (number, optional) - {ARRAY} {LONG} Filter by the business asset assigned to the work order.
     + pmschedule: 1 (number, optional) - {ARRAY} {LONG} Filter by the PmSchedule associated with the work order.
     + includedescendants: false (boolean, optional) - Flag to include workorders assigned to descendants of the specified business assets.
+    + ids: 1 (number, optional) - {ARRAY} {INT} Filter by work order IDs
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api.
 
 ### GET
