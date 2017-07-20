@@ -325,7 +325,7 @@ Retrieve all Business Asset Attribute Types for a specified Business Asset Categ
 # Group Calendar Events
 Calendar event endpoints.
 
-## Calendar Events Collection [/accounts/{accountId}/calendarEvents{?page,pagesize,orderby,scheduledStartDateFrom,scheduledStartDateTo,scheduledEndDateFrom,scheduledEndDateTo,workType,assignees,businessAsset,includeDescendants,priority,purpose,status}]
+## Calendar Events Collection [/accounts/{accountId}/calendarEvents{?page,pagesize,orderby,scheduledStartDateFrom,scheduledStartDateTo,scheduledEndDateFrom,scheduledEndDateTo}]
 Retieve all Calendar Events for a specified Account
 
 ### GET
@@ -339,58 +339,6 @@ Retieve all Calendar Events for a specified Account
     + scheduledStartDateTo: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
     + scheduledEndDateFrom: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
     + scheduledEndDateTo: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
-    + workType: Evaluations (string, optional) - {ARRAY} A string describing the work types to include in the resulting collection.
-    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by the user assigned to the work order.
-    + businessAsset: 1 (number, optional) - {ARRAY} {LONG} Filter by the business asset assigned to the work order.
-    + includeDescendants: true (boolean, optional) - Flag to include projections assigned to descendants of the specified business assets.
-    + priority: Low (enum[string], optional) - Filter by the priority of work orders.
-        + Members
-            + Low (string)
-            + Medium (string)
-            + High (string)
-            + Emergency (string)
-    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
-    + status: NewRequest (enum[string], optional) - Filter by the work order status.  Acceptable values: NewRequest, WorkInProgress, Complete, Void.
-        + Members
-            + NewRequest (string)
-            + WorkInProgress (string)
-            + Complete (string)
-            + Void (string)
-            + OnHold (string)
-
-+ Response 200 (application/json)
-    + Attributes (Base Collection Response)
-        + data (required, array[Calendar Event]) - The Calendar Event collection
-
-# Group Calendar Projections
-Calendar projection endpoints.
-
-## Calendar Projection Collection [/accounts/{accountId}/calendarProjections{?page,pagesize,orderby,scheduledStartDateFrom,scheduledStartDateTo,dueDateFrom,dueDateTo,workType,pmScheduleId,assignees,businessAsset,includeDescendants,priority,purpose}]
-Retieve all Calendar Projections for a specified Account
-
-### GET
-
-+ Parameters
-    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
-    + page: 1 (number, optional) - {INT} The page to request from the collection.
-    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
-    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    + scheduledStartDateFrom: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
-    + scheduledStartDateTo: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
-    + dueDateFrom: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
-    + dueDateTo: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
-    + workType: Evaluations (string, optional) - {ARRAY} A string describing the work types to include in the resulting collection.
-    + pmScheduleId: 1 (number, optional) - {ARRAY} An ID of the Preventive Maintenance Schedule by which to filter the collection.
-    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by the user assigned to the work order.
-    + businessAsset: 1 (number, optional) - {ARRAY} {LONG} Filter by the business asset assigned to the work order.
-    + includeDescendants: true (boolean, optional) - Flag to include projections assigned to descendants of the specified business assets.
-    + priority: Low (enum[string], optional) - Filter by the priority of work orders.
-        + Members
-            + Low (string)
-            + Medium (string)
-            + High (string)
-            + Emergency (string)
-    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
 
 + Response 200 (application/json)
     + Attributes (Base Collection Response)
@@ -1091,7 +1039,7 @@ Retrieve a single supplier for a specified account
 
 # Group Work Orders
 
-## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,project,requestdatefrom,requestdateto,requestedby,status,worktype,businessasset,pmschedule,includedescendants,ids,includeAudit}]
+## Work Order Collection [/accounts/{accountId}/workorders{?page,pagesize,orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,project,requestdatefrom,requestdateto,requestedby,status,worktype,businessasset,pmschedule,includedescendants,includeAudit}]
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -1127,7 +1075,6 @@ Retrieve a single supplier for a specified account
     + businessasset: 1 (number, optional) - {ARRAY} {LONG} Filter by the business asset assigned to the work order.
     + pmschedule: 1 (number, optional) - {ARRAY} {LONG} Filter by the PmSchedule associated with the work order.
     + includedescendants: false (boolean, optional) - Flag to include workorders assigned to descendants of the specified business assets.
-    + ids: 1 (number, optional) - {ARRAY} {INT} Filter by work order IDs
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api.
 
 ### GET
@@ -1820,7 +1767,6 @@ Represents a Calendar Event object
 + `purpose` (Purpose, optional) - The purpose assigned to the work order.
 + `assignees` (array[Base User Object], optional) - The users assigned to work on this work order.
 + `businessAsset` (Business Asset, optional) - The business asset assigned to the work order.
-+ `workType` (Work Type, optional) - The work type assigned to the work order.
 
 ## Quantity (object)
 Represents a basic quantity type.
