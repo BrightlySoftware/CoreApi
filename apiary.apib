@@ -1099,6 +1099,7 @@ Retrieve a single supplier for a specified account
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - A free form filter mechanism.
+    + includeDisplayIds: true (boolean, optional) - If true, the `q` filter will also attempt to search for a work order with a display ID matching what is provided for `q`
     + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
     + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
     + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
