@@ -1677,7 +1677,7 @@ Represents the vital statistics for the API.
 + `applicationdbvitalCheck`: true (boolean, required) - Vital check to ensure the data store is online.
 + `cachevitalcheck`: true (boolean, required) - Vital check to ensure the cache store is online.
 
-## Business Asset Lite (object)
+## Business Asset Base (object)
 Represents a business asset with base properties.
 
 ### Properties
@@ -1697,7 +1697,7 @@ Represents a business asset with its available properties on a POST request.
 + `description`: The big government campus (string, optional) - The description of the asset
 + `notes`: Some notes would go here (string, optional) - Notes about the asset
 + `isActive`: true (boolean, required) - Indicates if the asset is active
-+ `parent` (Business Asset Lite, optional) - Describes the parent asset
++ `parent` (Business Asset Base, optional) - Describes the parent asset
 + `businessAssetType` (Business Asset Type Update, required) - Describes the type of the asset.
 + `isWorkOrderAsset` (boolean, optional) - Indicates if the asset is for work orders.
 + `isInventoryStorageArea` (boolean, optional) - Indicates if the asset is for inventory purposes.
@@ -1718,6 +1718,13 @@ Represents a full business asset.
 + `ancestorIdPath`: Sample (string, required) - Provides the ancestor IDs starting at root to the current parent node.
 + `ancestorNamePath`: Sample (string, required) - Description
 + `hasChildren`: true (boolean, required) - Description
+
+## Business Asset Lite (Business Asset Base)
+Represents a business asset with base properties plus additional properties
+
+### Properties
++ `AncestorIdPath`: /5/22/8 (string, required) - The ancestor id path
++ `AncestorNamePath`: |Site1|Area4|Building3 (string, optional) - The ancestor name path
 
 ## Business Asset Attribute Create (object)
 Represents a business asset attribute with its available properties on a POST request.
@@ -1803,6 +1810,53 @@ A business asset category. Used to classify a business asset type and apply base
 + `name`: Other (string, required) - The name of the category
 + `description`: Other (string, optional) - The description of the category
 + `businessAssetAttributeTypeCount`: 4 (number, optional) - The number of attribute types associated with this business asset category
+
+# Group Floor Plans
+
+## Floor Plan Create (object)
+Represents a Floor Plan object
+
+### Properties
++ `fileId`: 1 (number, required) - {INT} The ID of the file record
++ `name`: 2nd Floor (string, required) - The name of the floor plan
++ `fileViewToken`: d2befebf-83f4-4b33-bc91-fc29845a4da4 (guid, required) - The file view token
++ `businessAsset`: building 1 (Business Asset, required) - The business asset object which must include the id
+
+## Floor Plan (Floor Plan Create)
+Represents a Floor Plan object
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the floor plan
++ `createdByUser` (Base User Object, optional) - Information about the user who created the record.
++ `createdByApiClient` (Base Client Object, optional) - Information about the client who created the record.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
++ `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
++ `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
+
+## Floor Plan Collection [/accounts/{accountId}/floorplans]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+
+### POST
++ Request
+    + Attributes (Floor Plan Create)
+
++ Response 201 (application/json)
+    + Attributes (Floor Plan)
+
+## Floor Plan Detail [/accounts/{accountId}/projects/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 10 (required, number) - {INT} ID of the floor plan in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+	
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Floor Plan)
 
 ## Calendar Event (object)
 Represents a Calendar Event object
@@ -2198,7 +2252,7 @@ Represents the object required to update PmSchedule Run Dates.
 + `lastRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern was executed in UTC.
 + `finalRunDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The last date and time the schedule recurrence pattern will be executed in UTC.
 
-## PmSchedule Business Asset (Business Asset Lite)
+## PmSchedule Business Asset (Business Asset Base)
 Represents a Business Asset associated with a PmSchedule
 
 ### Properties
@@ -2344,7 +2398,7 @@ Represents a shell of what a PM generated work order will look like at a point i
 + `dueDateTime`: `2015-01-01T12:00:00.123Z` (string, required) - {DATETIME} An optional ISO Date string to represent when the generated work order would be due to be completed.
 + `scheduledStartDate`: `2015-01-01T12:00:00.123Z` (string, required) - {DATETIME} An optional ISO Date string to represent the date when the work is to start for the work order to be generated.
 + `workOrderTemplate` (Work Order Template, required) - A required reference to the workorder template that will be associated to the generated work order
-+ `businessAsset` (Business Asset Lite, optional) - A reference to the Business Asset that will be associated with the generated work order.
++ `businessAsset` (Business Asset Base, optional) - A reference to the Business Asset that will be associated with the generated work order.
 
 ## Work Order Task Status (enum)
 + Incomplete (string)
