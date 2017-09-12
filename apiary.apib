@@ -1604,6 +1604,43 @@ Retrieve a single supplier for a specified account
 + Response 200 (application/json)
     + Attributes (Metadata)
 
+# Group Floor Plans
+
+## Floor Plan Collection [/accounts/{accountId}/floorplans{?page,pagesize,orderby,includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: AncestorIdPath asc (string, optional) - A string describing the ordering to perform on the collection.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + `data` (array[Floor Plan], required)
+
+### POST
+
++ Request
+    + Attributes (Floor Plan Create)
+
++ Response 201 (application/json)
+    + Attributes (Floor Plan)
+
+## Floor Plan Detail [/accounts/{accountId}/floorplans/{id}{?includeAudit}]
+
++ Parameters
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 10 (required, number) - {INT} ID of the floor plan in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Floor Plan)
+
 # Data Structures
 
 ## System Information (object)
@@ -1811,8 +1848,6 @@ A business asset category. Used to classify a business asset type and apply base
 + `description`: Other (string, optional) - The description of the category
 + `businessAssetAttributeTypeCount`: 4 (number, optional) - The number of attribute types associated with this business asset category
 
-# Group Floor Plans
-
 ## Floor Plan Create (object)
 Represents a Floor Plan object
 
@@ -1820,7 +1855,7 @@ Represents a Floor Plan object
 + `fileId`: 1 (number, required) - {INT} The ID of the file record
 + `name`: 2nd Floor (string, required) - The name of the floor plan
 + `fileViewToken`: d2befebf-83f4-4b33-bc91-fc29845a4da4 (guid, required) - The file view token
-+ `businessAsset`: building 1 (Business Asset, required) - The business asset object which must include the id
++ `businessAsset`: building 1 (Business Asset Lite, required) - The business asset object which must include the id
 
 ## Floor Plan (Floor Plan Create)
 Represents a Floor Plan object
@@ -1833,30 +1868,6 @@ Represents a Floor Plan object
 + `updatedByUser` (Base User Object, optional) - Information about the user who last modified the record.
 + `updatedByApiClient` (Base Client Object, optional) - Information about the client who last modified the record.
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
-
-## Floor Plan Collection [/accounts/{accountId}/floorplans]
-
-+ Parameters
-    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-
-### POST
-+ Request
-    + Attributes (Floor Plan Create)
-
-+ Response 201 (application/json)
-    + Attributes (Floor Plan)
-
-## Floor Plan Detail [/accounts/{accountId}/projects/{id}{?includeAudit}]
-
-+ Parameters
-    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 10 (required, number) - {INT} ID of the floor plan in the form of an integer
-    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
-	
-### GET
-
-+ Response 200 (application/json)
-    + Attributes (Floor Plan)
 
 ## Calendar Event (object)
 Represents a Calendar Event object
